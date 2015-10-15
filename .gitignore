@@ -1,0 +1,11 @@
+.DS_Store
+_minted-*.
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.out.pyg
+*.pdf
+*.run.xml
