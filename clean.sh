@@ -6,3 +6,4 @@ rm *.log
 rm *.out
 rm *.pdf
 rm *.run.xml
+rm *.toc
