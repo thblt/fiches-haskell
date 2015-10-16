@@ -3,9 +3,10 @@ if xelatex --shell-escape master
     then
     if biber master
         then
-        if xelatex -interaction=nonstopmode master
+        if xelatex --shell-escape -interaction=nonstopmode master
             then
-            xelatex -interaction=nonstopmode master
+            xelatex --shell-escape -interaction=nonstopmode master
         fi
     fi
 fi
+exit -1
