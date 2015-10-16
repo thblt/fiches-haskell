@@ -1,0 +1,18 @@
+\section{Évaluation paresseuse}
+\label{sec:lazyness}
+
+\begin{haskellcode}
+let a = [1..] -- a est la liste de l'ensemble des entiers positifs
+let b = map ((^^) 2) a
+\end{haskellcode}
+
+L'évaluation paresseuse a un prix, qui est une plus grande consommation de
+mémoire : au lieu d'évaluer \hs{2 + 2}, Haskell stocke un \enconcept{thunk}, c'est
+à dire en gros un calcul différé. Mais sur les gros traitements récursifs,
+l'accumulation de \concept[thunk]{thunks} peut entrainer rapidement un
+débordement de mémoire. La commande \cmd{seq} force l'évaluation et permet
+d'éviter un débordement de mémoire.
+
+\subsection[]{seq}
+
+Lorem!
