@@ -1,0 +1,36 @@
+\section{Définition de types}
+
+\subsection{Types personnalisés}
+
+On crée un type avec le mot-clé \hs{data}. Au plus simple, un type réunit plusieurs variables membres:
+
+\begin{haskellcode}
+ghci> data MonType = MonType String Integer
+ghci> let a = MonType "abc" 123
+\end{haskellcode}
+(La première occurence de MonType est le nom du type, la seconde est le nom du constructeur)
+
+\subsection{Synonymes de types}
+
+\hs{type} crée un synonyme d'un type existant. Les synonymes et le type auquel ils
+renvoient sont interchangeables.
+
+\begin{haskellcode}
+type ObjectId = Int16
+\end{haskellcode}
+
+Les synonymes créés avec \hs{type} servent principalement à clarifier le sens des champs dans les types utilisateur.
+
+\begin{haskellcode}
+type Authors = [String]
+type Title = String
+type ISBN = Int
+type Year = Int
+data Book2 = Authors Title Year ISBN
+\end{haskellcode}
+
+\subsection{Synonymes «forts»}
+
+\subsubsection{Maybe}
+
+\subsubsection{Either}
