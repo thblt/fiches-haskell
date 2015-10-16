@@ -1,5 +1,41 @@
 \section{ Modules}
+\label{sec:modules}
 
-\subsection{ Écrire un module}
+Haskell dispose d'un mécanisme d'importation de modules.
 
-\subsection{ Importation des modules}
+\subsection{Écrire un module}
+
+Un module a le même nom que le fichier .hs qui le contient, et ce nom commence
+par une majuscule \qsee{sec:naming-rules}. La déclaration de module a la syntaxe suivante:
+
+\begin{haskellcode}
+-- MyModule.hs
+module Mod
+    (
+      x,
+      y,
+      z
+    ) where
+-- code
+\end{haskellcode}
+
+Cette déclaration exporte les identifiants x, y et z du code qui la suit. On exporterait la totalité des noms en enlevant la parenthèse, et aucun en la laissant vide.
+\subsection{Importation de modules}
+
+\begin{hslisting*}
+\begin{haskellcode}
+-- Commande                          Importé
+import Mod                        -- x, y, z, Mod.x, Mod.y, Mod.z
+import Mod ()                     -- (Nothing!)
+import Mod (x,y)                  -- x, y, Mod.x, Mod.y
+import qualified Mod              -- Mod.x, Mod.y, Mod.z
+import qualified Mod (x,y)        -- Mod.x, Mod.y
+import Mod hiding (x,y)           -- z, Mod.z
+import qualified Mod hiding (x,y) -- Mod.z
+import Mod as Foo                 -- x, y, z, Foo.x, Foo.y, Foo.z
+import Mod as Foo (x,y)           -- x, y, Foo.x, Foo.y
+import qualified Mod as Foo       -- Foo.x, Foo.y, Foo.z
+import qualified Mod as Foo (x,y) -- Foo.x, Foo.y
+\end{haskellcode}
+\caption*{D'après \cite{Hudak2000}}
+\end{hslisting*}
