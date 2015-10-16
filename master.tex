@@ -1,24 +1,45 @@
-\documentclass[a5paper,french]{article}
+\documentclass[final,a5paper,french]{article}
 
+%%%%%%%%%%%%%
+%% GENERAL %%
+%%%%%%%%%%%%%
+% Essentials
 \usepackage[]{polyglossia}
 \setdefaultlanguage{french}
 \setotherlanguages{english}
 \usepackage[margin=1cm, bmargin=2cm]{geometry}
+
+% Packages
+\usepackage{caption}
 \usepackage{framed}
-\usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{makeidx}
+\usepackage{newfloat}
 \usepackage[table]{xcolor}
 
-% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND TYPOGRAPHY %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fontspec}
-%\setmainfont{Palatino}
+% \setmainfont{Palatino}
 \setsansfont{Avenir Next Condensed}
 \setmonofont{InconsolataForPowerline-g}
 
-% Tables
+%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY %%
+%%%%%%%%%%%%%%%%%%
+\usepackage[%
+    style=authoryear,%
+    hyperref=true,%
+    maxnames=1%
+    ]{biblatex}
+\addbibresource{fiches.bib}
+
+%%%%%%%%%%%%
+%% TABLES %%
+%%%%%%%%%%%%
 \usepackage{adjustbox}
-\usepackage{array}
+\usepackage{booktabs}
 \usepackage{tabularx}
 
 \newcolumntype{R}[2]{%
@@ -29,7 +50,9 @@
 \newcommand*\rot{\multicolumn{1}{R{90}{1em}}}
 \newcommand*\roth{\multicolumn{1}{R{45}{1em}}}
 
-% === Minted ===
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SYNTAX HIGHLIGHTING %%
+%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[cache=false]{minted}
 \usemintedstyle{colorful}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
@@ -41,70 +64,62 @@
 \patchcmd{\minted@colorbg}{\noindent}{\medskip\noindent}{}{}
 \apptocmd{\endminted@colorbg}{\par\medskip}{}{}
 \makeatother
-% \usepackage{listings}
-% \lstset{
-%   frame=none,
-%   xleftmargin=2pt,
-%   stepnumber=1,
-%   numbers=left,
-%   numbersep=5pt,
-%   numberstyle=\ttfamily\tiny\color[gray]{0.3},
-%   belowcaptionskip=\bigskipamount,
-%   captionpos=b,
-%   escapeinside={*'}{'*},
-%   language=haskell,
-%   tabsize=2,
-%   emphstyle={\bf},
-%   commentstyle=\it,
-%   stringstyle=\mdseries\rmfamily,
-%   showspaces=false,
-%   keywordstyle=\bfseries\rmfamily,
-%   columns=flexible,
-%   basicstyle=\small\sffamily,
-%   showstringspaces=false,
-%   morecomment=[l]\%,
+
+\DeclareFloatingEnvironment[fileext=code,placement={!ht},name=Listing]{hslisting}
+%\captionsetup[hslisting]{labelfont=bf}
+
+%%%%%%%%%%%%%%%%
+%% SECTIONING %%
+%%%%%%%%%%%%%%%%
+\usepackage{tikz}\usetikzlibrary{shapes.misc}
+\usepackage[]{titlesec}
+
+%% SECTIONS
+% \newcommand\titlebar{%
+% % Modified from: https://tex.stackexchange.com/questions/34288/how-to-place-a-shaded-box-around-a-section-label-and-name
+% \tikz[baseline] {
+%     \fill [cyan!25] (0ex,-1ex) rectangle (\textwidth,2.5ex);
+%     \node [
+%         fill=cyan!60!white,
+%         anchor= base west,
+%         rectangle,
+%         minimum height = 3.5ex,
+%         minimum width = 3.5ex,
+%         ] at (0cm,0) {\sffamily\textbf{\thesection}};
+% }%
 % }
-% Bibliography
-\usepackage[
-    backend=biber,%
-    style=authoryear,%
-    maxnames=1%
-    ]{biblatex}
-\addbibresource{fiches.bib}
-
-% Sectioning and TOC
-\usepackage[explicit]{titlesec}
-\usepackage{titletoc}
-\definecolor{shadecolor}{rgb}{0.95,0.95,0.95}
-
-\titleformat{\section}[frame]
-{\setlength\fboxrule{2.25pt}}
+\titleformat{\section}[hang]
 {}
-{5mm}
-{%
-\begin{shaded}%
-    \arabic{section}%
-\end{shaded}%
-\Large\sffamily\filcenter\MakeUppercase{#1}}
-
+{\arabic{section}}
+{0em}
+{\sffamily\Huge}
+[]
 \newcommand{\sectionbreak}{\clearpage}
+
+%% SUBSECTIONS
 
 \titleformat{\subsection}[hang]
 {\center}
 {}%{\arabic{subsection}.}%Label
 {.5em}%Sep
-{\large\sffamily\textbf{#1}}%before-code
+{\large\sffamily\textbf}%before-code
 [\hrule]%after-code
 
+%% SUBSUBSECTIONS
 \titleformat{\subsubsection}[runin]
 {}
 {}%Label
 {.5em}%Sep
-{#1}%before-code
+{}%before-code
 %[]%after-code
 
-%Placeholders
-% \newcommand\code[1]{\texttt{#1}}
+%%%%%%%%%%%%%%%%%%
+%% PLACEHOLDERS %%
+%%%%%%%%%%%%%%%%%%
+
+% Placeholders are semantic commands which deserve a better implementation,
+% but should be available from the start.
+
 \newcommand{\cmd}[2][]{#2}
 \newcommand{\concept}[2][]{#2}
 \newcommand{\enconcept}[2][]{\en{#2}}
@@ -112,41 +127,21 @@
 \newcommand{\hsTC}[2][]{\texttt{#2}}
 \newcommand{\coche}{\rule{.5em}{.5em}}
 
-% Shorthands
-\newcommand\hs[1]{\mintinline{haskell}{#1}}
-\newcommand\en[1]{\textit{\begin{english}#1\end{english}}}
+%%%%%%%%%%%%%%%%
+%% SHORTHANDS %%
+%%%%%%%%%%%%%%%%
 
-\newenvironment{tableau}{\begin{table}[h]\small\sffamily}{\end{table}}
+\newcommand*\cf[1]{\ref{#1}.\ \textit{\nameref{#1}}}
+\newcommand*\qsee[1]{\textsf{($\to$\ref{#1}})}
 
+\newcommand*\hs[1]{\small\mintinline{haskell}{#1}}
+\newcommand*\en[1]{\textit{\begin{english}#1\end{english}}}
 
+\newenvironment{tableau}{\begin{table}[h]\small\sffamily\rowcolors{2}{gray!25}{white}}{\end{table}}
 
-
-
-\usepackage{tikz}\usetikzlibrary{shapes.misc}
-\newcommand\titlebar{%
-\tikz[baseline,trim left=3.1cm,trim right=3cm] {
-    \fill [cyan!25] (2.5cm,-1ex) rectangle (\textwidth+3.1cm,2.5ex);
-    \node [
-        fill=cyan!60!white,
-        anchor= base east,
-        rounded rectangle,
-        minimum height=3.5ex] at (3cm,0) {
-        \textbf{\arabic{chapter}.\thesection.}
-    };
-}%
-}
-\titleformat{\section}{\Huge}{\titlebar #1}{0.1cm}{}
 
 \begin{document}
 
-\input{fiches/_everything}
-
-\appendix
-
-\printbibliography
-
-\section{Index}
-
-\printindex
+\input{fiches/_everything.tex}
 
 \end{document}
