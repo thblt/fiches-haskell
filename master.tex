@@ -31,7 +31,8 @@
 \usepackage[%
     style=authoryear,%
     hyperref=true,%
-    maxnames=1%
+    maxcitenames=1,%
+    maxbibnames=99
     ]{biblatex}
 \addbibresource{fiches.bib}
 
@@ -143,5 +144,7 @@
 \begin{document}
 
 \input{fiches/_everything.tex}
+
+\printbibliography
 
 \end{document}
