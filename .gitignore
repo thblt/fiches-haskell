@@ -7,5 +7,4 @@ _*
 *.log
 *.out
 *.out.pyg
-*.pdf
 *.run.xml
