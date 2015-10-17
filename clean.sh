@@ -1,9 +1,10 @@
-rm *.aux
-rm *.bbl
-rm *.bcf
-rm *.blg
-rm *.log
-rm *.out
-rm *.pdf
-rm *.run.xml
-rm *.toc
+rm -rf *.aux \
+*.bbl \
+*.bcf \
+*.blg \
+*.log \
+*.out \
+*.pdf \
+*.run.xml \
+*.toc \
+_minted-master
