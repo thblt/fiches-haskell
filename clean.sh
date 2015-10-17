@@ -4,7 +4,6 @@ rm -rf *.aux \
 *.blg \
 *.log \
 *.out \
-*.pdf \
 *.run.xml \
 *.toc \
 _minted-master
