@@ -32,14 +32,15 @@
     style=authoryear,%
     hyperref=true,%
     maxcitenames=1,%
-    maxbibnames=99
+    maxbibnames=99,
+    parentracker=true
     ]{biblatex}
 \addbibresource{fiches.bib}
 
 %%%%%%%%%%%%
 %% TABLES %%
 %%%%%%%%%%%%
-\usepackage{adjustbox}
+\usepackage[export]{adjustbox}
 \usepackage{booktabs}
 \usepackage{tabularx}
 
@@ -73,8 +74,10 @@
 %%%%%%%%%%%%%%%%
 %% SECTIONING %%
 %%%%%%%%%%%%%%%%
-\usepackage{tikz}\usetikzlibrary{shapes.misc}
+%\usepackage{tikz}\usetikzlibrary{shapes.misc}
 \usepackage[]{titlesec}
+
+\definecolor{titlecolor}{rgb}{0.5,0.5,1}
 
 %% SECTIONS
 % \newcommand\titlebar{%
@@ -91,10 +94,10 @@
 % }%
 % }
 \titleformat{\section}[hang]
-{}
-{\arabic{section}}
-{0em}
 {\sffamily\Huge}
+{\colorbox{titlecolor}{\textbf{\arabic{section}}}}
+{.5em}
+{\uppercase}
 []
 \newcommand{\sectionbreak}{\clearpage}
 
@@ -104,15 +107,15 @@
 {\center}
 {}%{\arabic{subsection}.}%Label
 {.5em}%Sep
-{\large\sffamily\textbf}%before-code
+{\large\sffamily}%before-code
 [\hrule]%after-code
 
 %% SUBSUBSECTIONS
 \titleformat{\subsubsection}[runin]
 {}
-{}%Label
+{\rule{1ex}{1ex}}%Label
 {.5em}%Sep
-{}%before-code
+{\sffamily\textbf}%before-code
 %[]%after-code
 
 %%%%%%%%%%%%%%%%%%
@@ -129,6 +132,17 @@
 \newcommand{\hsTC}[2][]{\texttt{#2}}
 \newcommand{\coche}{\rule{.5em}{.5em}}
 
+%%%%%%%%%%%
+%% BOXES %%
+%%%%%%%%%%%
+
+\newenvironment{boxed}{\begin{framed}}{\end{framed}}
+\newenvironment{iconbox}[1]{%
+    \begin{boxed}\noindent%
+    \parbox{1cm}{\includegraphics[height=1cm,valign=t]{#1}}\hfill\begin{minipage}{\textwidth-1cm-.5em}}{\end{minipage}
+\end{boxed}}
+\newenvironment{infobox}{\begin{iconbox}{./images/info.pdf}}{\end{iconbox}}
+
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
 %%%%%%%%%%%%%%%%
@@ -140,7 +154,6 @@
 \newcommand*\en[1]{\textit{\begin{english}#1\end{english}}}
 
 \newenvironment{tableau}{\begin{table}[h]\small\sffamily\rowcolors{2}{gray!25}{white}}{\end{table}}
-
 
 \begin{document}
 
