@@ -94,25 +94,11 @@
 
 \definecolor{titlecolor}{rgb}{0.5,0.5,1}
 
-%% SECTIONS
-% \newcommand\titlebar{%
-% % Modified from: https://tex.stackexchange.com/questions/34288/how-to-place-a-shaded-box-around-a-section-label-and-name
-% \tikz[baseline] {
-%     \fill [cyan!25] (0ex,-1ex) rectangle (\textwidth,2.5ex);
-%     \node [
-%         fill=cyan!60!white,
-%         anchor= base west,
-%         rectangle,
-%         minimum height = 3.5ex,
-%         minimum width = 3.5ex,
-%         ] at (0cm,0) {\sffamily\textbf{\thesection}};
-% }%
-% }
 \titleformat{\section}[hang]
 {\sffamily\Huge}
-{{\arabic{section}}}
+{\arabic{section}}
 {.5em}
-{\uppercase\bfseries}
+{\bfseries\uppercase}
 []
 \newcommand{\sectionbreak}{\clearpage}
 
