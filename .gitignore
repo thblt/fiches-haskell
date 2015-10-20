@@ -4,7 +4,9 @@ _*
 *.bbl
 *.bcf
 *.blg
+*.fls
 *.log
+*.toc
 *.out
 *.out.pyg
 *.run.xml
