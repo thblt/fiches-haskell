@@ -43,6 +43,15 @@
     ]{biblatex}
 \addbibresource{fiches.bib}
 
+% URLs go on a separate line.
+\DeclareFieldFormat{url}{\newline\mkbibacro{URL}\addcolon\space\url{#1}}
+\newbibmacro*{url+urldate}{%
+ \printfield[url]{url}%
+ \iffieldundef{urlyear}
+ {}
+ {\setunit*{\addspace}%
+ \printtext[urldate]{\printurldate}}}
+
 %%%%%%%%%%%%
 %% TABLES %%
 %%%%%%%%%%%%
