@@ -1,0 +1,75 @@
+\section{Définition de types}
+\label{sec:defining-types}
+
+\subsection{Types personnalisés}
+
+On crée un type avec le mot-clé \hs{data}. Au plus simple, un type réunit plusieurs variables membres:
+
+\begin{haskellcode}
+ghci> data MonType = MonType String Integer
+ghci> let a = MonType "abc" 123
+\end{haskellcode}
+(La première occurence de MonType est le nom du type, la seconde est le nom du constructeur)
+
+\subsubsection{Accesseurs explicites (\emph{record syntax})}
+
+Un accesseur explicite définit automatiquement une fonction qui prend un objet du  nouveau type en paramètre
+et renvoie la valeur
+
+\begin{haskellcode}
+data Book = Book {
+    bookISBN :: Int,         -- bookISBN :: Book -> Int
+    bookAuthors :: [String], -- bookAuthors :: Book -> [String]
+    bookTitle :: String      -- bookTitle :: Book -> String
+    }
+\end{haskellcode}
+
+\subsubsection{Types algébriques}
+
+Un type algébrique présente une alternative, en offrant plusieurs constructeurs. Le plus répandu est \hsT{Maybe}:
+
+\begin{haskellcode}
+data Maybe a = Nothing | Just a
+\end{haskellcode}
+
+\begin{infobox}
+\emph{Tous} les types définis avec \hs{data} sont algébriques, même s'ils n'offrent qu'un seul constructeur \parencite{OSullivan2008}.
+\end{infobox}
+
+\subsubsection{Types récursifs}
+
+Le type liste natif est défini récursivement. On peut le réimplémenter comme suit:
+
+\begin{haskellcode}
+data List a = Empty | Cons a (MyList a)
+\end{haskellcode}
+
+\subsection{Synonymes de types}
+
+\hs{type} crée un synonyme d'un type existant. Les synonymes et le type auquel ils
+renvoient sont interchangeables.
+
+\begin{haskellcode}
+type ObjectId = Int16
+\end{haskellcode}
+
+Les synonymes créés avec \hs{type} peuvent servir:
+
+\begin{itemize}
+    \item À clarifier le sens des champs dans les types personnalisés sans accesseurs (\hs{type ISBN = Int} pour un type \hsT{Book}, par exemple).
+    \item Comme notation abrégée pour des types complexes fréquemment utilisés.
+\end{itemize}
+
+\begin{haskellcode}
+type Authors = [String]
+type Title = String
+type ISBN = Int
+type Year = Int
+data Book2 = Authors Title Year ISBN
+\end{haskellcode}
+
+\subsection{Synonymes «forts»}
+
+\subsubsection{Maybe}
+
+\subsubsection{Either}

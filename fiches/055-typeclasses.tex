@@ -1,0 +1,14 @@
+\section{ Classes de type (\enconcept{type classes})}
+\label{sec:typeclasses}
+
+Les classes de type ne sont pas des classes au sens que ce terme possède en POO.
+Elles sont plus proches de ce qu'on nomme des interfaces : elles décrivent des fonctions
+pour lesquelles un type qui appartient à la classe fournit une implémentation.
+
+\begin{haskellcode}
+class EvalToBool a where
+    toBool :: a -> Bool
+
+instance EvalToBool Integer where
+    toBool x = x /= 0
+\end{haskellcode}
