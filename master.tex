@@ -11,6 +11,7 @@
 
 % Packages
 \usepackage{caption}
+\usepackage{etoolbox}
 \usepackage{framed}
 \usepackage{hyperref}
 \usepackage{makeidx}
@@ -136,12 +137,23 @@
 %% BOXES %%
 %%%%%%%%%%%
 
-\newenvironment{boxed}{\begin{framed}}{\end{framed}}
-\newenvironment{iconbox}[1]{%
-    \begin{boxed}\noindent%
-    \parbox{1cm}{\includegraphics[height=1cm,valign=t]{#1}}\hfill\begin{minipage}{\textwidth-1cm-.5em}}{\end{minipage}
-\end{boxed}}
-\newenvironment{infobox}{\begin{iconbox}{./images/info.pdf}}{\end{iconbox}}
+\newenvironment{boxed}{\begin{framed}\noindent\begin{minipage}[t][][t]{\textwidth}}{\end{minipage}\end{framed}}
+%\newenvironment{boxed}{\begin{framed}}{\end{framed}}
+\newenvironment{iconbox}[2]{%
+    \begin{boxed}%
+        \noindent%
+        \begin{minipage}[t][][c]{1cm}\noindent\includegraphics[height=1cm,width=1cm]{#1}\end{minipage}%
+            \hfill%
+            \begin{minipage}[t][][c]{\textwidth-1cm-\FrameSep}%
+                \ifx&#2&\else%
+                \textbf{#2}\par\medskip%
+                \fi%
+}{%
+        \end{minipage}%
+    \end{boxed}}
+
+\newenvironment{infobox}[1]{\begin{iconbox}{./images/info.pdf}{#1}}{\end{iconbox}}
+\newenvironment{infobox*}{\begin{iconbox}{./images/info.pdf}{}}{\end{iconbox}}
 
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
