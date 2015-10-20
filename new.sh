@@ -12,6 +12,6 @@ if [ -e $fn ]; then
     exit -1
 fi
 echo $fn
-echo "\\section{$3}\n\\label{sec:$2}\n" > $fn
+echo "\\section{$3}\n\\label{$2}\n" > $fn
 git add $fn
 $EDITOR $fn
