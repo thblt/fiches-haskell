@@ -3,11 +3,11 @@
 out="fiches/_everything.tex"
 
 if [ -z $1 ]; then
-    ls fiches/[0-9]*.tex | xargs -I X echo "\input{X}" > $out
+    ls fiches/[0-9]*.tex | xargs -I X echo "\input{X}\ " > $out
 else
     rm $out
     for i in $@; do
-        ls fiches/`printf %03d $i`*.tex | xargs -I X echo "\input{X}" >> $out
+        ls fiches/`printf %03d $i`*.tex | xargs -I X echo "\input{X}\ " >> $out
     done
 fi
 
