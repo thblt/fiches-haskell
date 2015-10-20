@@ -23,8 +23,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fontspec}
 %\setmainfont{Palatino}
-\setsansfont{Open Sans}
+\setsansfont[
+    UprightFont=*Light,
+    ItalicFont=*LightItalic,
+    BoldFont=*Bold,
+    ]{OpenSans-Condensed}
 \setmonofont{InconsolataForPowerline-g}
+% \newfontfamily{\}{NeoSans}
 
 %%%%%%%%%%%%%%%%%%
 %% BIBLIOGRAPHY %%
@@ -96,9 +101,9 @@
 % }
 \titleformat{\section}[hang]
 {\sffamily\Huge}
-{\colorbox{titlecolor}{\textbf{\arabic{section}}}}
+{{\arabic{section}}}
 {.5em}
-{\uppercase}
+{\uppercase\bfseries}
 []
 \newcommand{\sectionbreak}{\clearpage}
 
