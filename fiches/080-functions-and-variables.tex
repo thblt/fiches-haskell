@@ -1,13 +1,58 @@
 \section{Fonctions et variables}
-\label{sec:functions-and-variables}
+\label{functions-and-variables}
 
-Les variables sont immutables, ce qui, combiné avec les principe de transparence référentielle \qsee{sec:referential-transparency}, d'évaluation paresseuse \qsee{sec:lazyness} et d'application partielle \qsee{sec:partial-application}, fait qu'il n'existe aucune différence 
+Les variables sont immutables, ce qui, combiné avec les principe de transparence référentielle \qsee{referential-transparency}, d'évaluation paresseuse \qsee{lazyness} et d'application partielle \qsee{partial-application}, permet de voir qu'il n'existe aucune différence stricte entre une fonction et une variable.
 
 \begin{haskellcode}
 a = 3.14
 c = a ** 2
 b x = x * a
 \end{haskellcode}
+
+\subsection{Signature de type}
+
+\subsubsection{Pour une variable,}
+
+la signature de type est très simple, et peut en général être omise, l'inférence automatique suffisant en général.
+
+\begin{haskellcode}
+a :: Int
+a = 3
+\end{haskellcode}
+
+\subsubsection{Pour une fonction,}
+
+la signature a la forme \hs{f :: a -> b}, ce qui signifie que la fonction prend un paramètre de type \hsT{a} et renvoie une valeur de type \hsT{b}.
+
+\begin{haskellcode}
+f :: [Integer] -> Integer
+\end{haskellcode}
+
+f prend un tableau d'entiers et renvoie un entier.
+
+\begin{haskellcode}
+g :: Integer -> Integer -> Integer
+\end{haskellcode}
+
+g prend deux entiers et renvoie un entier (plus précisément, g prend un entier et renvoie une fonction qui prend un entier et renvoie un entier \qsee{partial-application}).
+
+\begin{haskellcode}
+h :: [a] -> Integer
+\end{haskellcode}
+
+h prend un tableau d'un type quelconque a \qsee{polymorphism} et renvoie un entier
+
+\begin{haskellcode}
+i :: [a] -> a
+\end{haskellcode}
+
+i prend un tableau d'un type quelconque a et renvoie un a
+
+\begin{haskellcode}
+j :: (Eq a) => [a] -> a
+\end{haskellcode}
+
+j prend un tableau d'un type quelconque a instance de la classe de type \qsee{typeclasses} \hsTC{Eq} et renvoie une valeur de type \hsT{a}
 
 \subsection{Portée des variables et variables locales}
 

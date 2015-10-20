@@ -1,5 +1,5 @@
 \section{Évaluation paresseuse}
-\label{sec:lazyness}
+\label{lazyness}
 
 \begin{haskellcode}
 let a = [1..] -- a est la liste de l'ensemble des entiers positifs
@@ -13,10 +13,8 @@ l'accumulation de \concept[thunk]{thunks} peut entrainer rapidement un
 débordement de mémoire. La commande \cmd{seq} force l'évaluation et permet
 d'éviter un débordement de mémoire.
 
-\begin{infobox}{L'évaluation paresseuse obéit à des règles strictes}%
-Il est possible de déterminer avec précision \emph{si} une expression va être évaluée, et si oui \emph{quand}. C'est parce qu'il est garanti qu'une expression dont le résultat n'est pas utilisé ne sera pas évaluée qu'on peut, par exemple, programmer des opérateurs logiques court-circuitants directement en Haskell, ce qui est impossible dans la plupart des langages impératifs, où passer un paramètre à une fonction implique l'évaluation du paramètre.
+\begin{infobox}[L'évaluation paresseuse obéit à des règles strictes]%
+Il est possible de déterminer avec précision \emph{si} une expression va être évaluée, et si oui \emph{quand}. C'est parce qu'il est garanti qu'une expression dont le résultat n'est pas utilisé ne sera pas évaluée qu'on peut, par exemple, programmer des opérateurs logiques court-circuitants directement en Haskell, ou manipuler des suites infinies.
 \end{infobox}
 
 \subsection[]{seq}
-
-Lorem!
