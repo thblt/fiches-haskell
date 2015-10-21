@@ -178,10 +178,6 @@
 
 \newenvironment{refblock}{\begin{iconblock}{\totalheightof{X}}{./images/ref.pdf}}{\end{iconblock}}
 
-
-%\newenvironment{boxed}{\begin{framed}}{\end{framed}}
-
-
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
 %%%%%%%%%%%%%%%%
@@ -190,7 +186,9 @@
             \node[shape=circle,fill=Black,inner sep=1pt] (char) {\textcolor{White}{#1}};}}
 \newcommand*\cf[1]{\ref{#1}.\ \textit{\nameref{#1}}}
 % \newcommand*\qsee[1]{\textsf{($\to$\ref{#1}})}
+\usepackage{nameref}
 \newcommand*\qsee[1]{\circled{\sffamily\footnotesize\bfseries\ref{#1}}}
+\newcommand*\fsee[1]{\sffamily\ref{#1} : \bfseries\nameref{#1}}
 
 \newcommand*\hs[1]{\small\mintinline[bgcolor=bg]{haskell}{#1}\normalsize}
 \newcommand*\en[1]{\textit{\begin{english}#1\end{english}}}
