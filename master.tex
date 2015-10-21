@@ -14,6 +14,7 @@
 \usepackage{caption}
 \usepackage{csquotes}
 \usepackage{etoolbox}
+\usepackage[inline]{enumitem}
 \usepackage{framed}
 \usepackage{hyperref}
 \usepackage{makeidx}
@@ -32,7 +33,11 @@
     BoldFont=*Bold,
     ]{OpenSans-Condensed}
 \setmonofont{InconsolataForPowerline-g}
-% \newfontfamily{\}{NeoSans}
+
+% Lists
+
+\newlist{ilenum}{enumerate*}{1}
+\setlist[ilenum]{label=\arabic*,afterlabel=)\ }
 
 %%%%%%%%%%%%%%
 %% HEADINGS %%
