@@ -85,10 +85,10 @@
 %% SYNTAX HIGHLIGHTING %%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % \usepackage[cache=false]{minted}
-\usepackage{minted}
+\usepackage[]{minted}
 \usemintedstyle{colorful}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
-\newminted{haskell}{bgcolor=bg,linenos=false,fontsize=\small}
+\newminted{haskell}{bgcolor=bg,linenos=false,fontsize=\small, breaklines=true}
 % The four lines below from a StackExchange question
 % Fixes a bug in minted that suppresses space above&below
 % a code block when using a background color.
@@ -195,7 +195,7 @@
 \newcommand*\qsee[1]{\circled{\sffamily\footnotesize\bfseries\ref{#1}}}
 \newcommand*\fsee[1]{\sffamily\ref{#1} : \bfseries\nameref{#1}}
 
-\newcommand*\hs[1]{\small\mintinline[bgcolor=bg]{haskell}{#1}\normalsize}
+\newcommand*\hs[1]{\small\mintinline[breaklines=true]{haskell}{#1}\normalsize}
 \newcommand*\en[1]{\textit{\begin{english}#1\end{english}}}
 
 \newenvironment{tableau}{\begin{table}[h]\small\sffamily\rowcolors{2}{gray!25}{white}}{\end{table}}
