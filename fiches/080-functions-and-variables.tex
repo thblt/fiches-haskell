@@ -5,6 +5,7 @@ Haskell n'a pas de notion de variable au sens qu'a ce terme en programmation pro
 
 En combinant ceci avec les principe de transparence référentielle \qsee{referential-transparency}, d'évaluation paresseuse \qsee{lazyness} et d'application partielle \qsee{partial-application}, on voit facilement qu'il n'existe aucune différence stricte entre une fonction et une variable, donc qu'il n'existe pas de variables. Par exemple:
 
+
 \begin{haskellcode}
 a = 3 * 2
 times3 x = 3 * x
@@ -14,50 +15,32 @@ c = 6
 
 Ici, \hsFn{times3} est une fonction, \hsFn{a}, \hsFn{b} et \hsFn{c} des variables. Dans la mesure où la valeur d'aucune n'est évaluée tant qu'elle n'est pas utilisée, la variable \hsFn{a} a strictement la même valeur que \hsFn{b}, qui n'est pas 6, mais le calcul différé (le \enconcept{thunk}) \hs{3 * 2}.
 
-\begin{infobox}
-\hs{times3 x = 3 * x} peut s'écrire plus simplement \hs{times3 = (*) 3} \qsee{partial-application}.
-\end{infobox}
+\begin{warnbox}
+Cette identité n'est vraie que des fonctions pures. Les fonctions impures, comme par exemple \hsFn{getLine}, peuvent évidemment renvoyer un résultat différent à chaque invocation. Voir \fsee{io}.
+\end{warnbox}
+
+La suite de cette fiche ne s'intéresse donc qu'aux fonctions, puisque les «variables» n'en sont qu'un cas particulier.
 
 \subsection{Signature de type}
+\label{type-signatures}
 
-la signature a la forme \hs{f :: a -> b}, ce qui signifie que la fonction prend un paramètre de type \hsT{a} et renvoie une valeur de type \hsT{b}. (Le type d'une «variable» est simplement \hs{nom :: Type})
+La signature a la forme \hs{f :: a -> b}, ce qui signifie que la fonction prend un paramètre de type \hsT{a} et renvoie une valeur de type \hsT{b}.
 
 Les fonctions d'ordre supérieur utilisent les parenthèses pour indiquer qu'elles prennent une autre fonction en paramètre. Par exemple, le type \hs{map :: (a -> b) -> [a] -> [b]} se lit : \hsFn{map} prend comme premier paramètre une fonction quelconque \hs{x :: a -> b}.
 
-\begin{haskellcode}
-f :: [Int] -> Integer
-\end{haskellcode}
-
-f prend un tableau d'entiers et renvoie un entier.
-
-\begin{haskellcode}
-g :: Int -> Integer -> Integer
-\end{haskellcode}
-
-g prend deux entiers et renvoie un entier (plus précisément, g prend un entier et renvoie une fonction qui prend un entier et renvoie un entier \qsee{partial-application}).
-
-\begin{haskellcode}
-h :: [a] -> Int
-\end{haskellcode}
-
-h prend un tableau d'un type quelconque a \qsee{polymorphism} et renvoie un entier
-
-\begin{haskellcode}
-i :: [a] -> a
-\end{haskellcode}
-
-i prend un tableau d'un type quelconque a et renvoie un a
-
-\begin{haskellcode}
-j :: (Eq a) => [a] -> a
-\end{haskellcode}
-
-j prend un tableau d'un type quelconque a instance de la classe de type \qsee{typeclasses} \hsTC{Eq} et renvoie une valeur de type \hsT{a}
-
-\subsection{Portée des variables et variables locales}
-
-La
+Une variable ou une fonction sans paramètres a pour type \hs{nom :: Type}.
 
 \subsection{Fonctions préfixes et infixes}
+\label{infix-functions}
+\label{prefix-functions}
 
-\subsection{Fonctions pures et impures}
+Une fonction est dite \concept{préfixe} si son nom est placé avant ses arguments, et \concept{infixe} si son nom est placé entre ses arguments. \hsFn{map} est une fonction préfixe, \hsFn{+} est infixe. La distinction est syntaxique, et se fait au niveau des caractères qui constituent le nom de la fonction.
+
+\subsubsection[Fonctions infixes]{Une fonction infixe} a un nom composé uniquement de symboles non alphanumériques: \hsFn{+}, \hsFn{*} ou \hsFn{>>=} sont infixes.
+
+On peut utiliser une fonction infixe comme préfixe en entourant son nom de parenthèses : \hs{(+) 1 1}.
+
+\subsubsection[Fonctions préfixes]{Une fonction préfixe} a un nom composé
+de caractères alphanumériques. \hsFn{map}, \hsFn{elem} ou \hsFn{foldr} sont préfixes.
+
+On peut utiliser une fonction préfixe comme infixe en entourant son nom de \enconcept{backticks} : \hs{1 `elem` [1..10]}.
