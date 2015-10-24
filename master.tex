@@ -198,12 +198,10 @@
 % Some more commands
 
 \newenvironment{halfwidth}{%
-    \begin{minipage}[t][][l]{\textwidth/2-.5em}%
+    \noindent\begin{minipage}[t][][l]{\textwidth/2-.5em}%
 }{%
     \end{minipage}%
 }
-
-\newcommand\sidebyside[2]{\noindent\begin{halfwidth}#1\end{halfwidth}\hfill\begin{halfwidth}#2\end{halfwidth}}
 
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
