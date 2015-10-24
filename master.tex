@@ -96,6 +96,10 @@
 \patchcmd{\minted@colorbg}{\noindent}{\medskip\noindent}{}{}
 \apptocmd{\endminted@colorbg}{\par\medskip}{}{}
 \makeatother
+% This from the minted documentation: prevents polyglossia with French from
+% adding adds undesirable extra spaces in code.
+\BeforeBeginEnvironment{minted}{\begin{english}}
+\AfterEndEnvironment{minted}{\end{english}}
 
 \DeclareFloatingEnvironment[fileext=code,placement={!ht},name=Listing]{hslisting}
 %\captionsetup[hslisting]{labelfont=bf}
@@ -179,6 +183,8 @@
 % User environements
 
 \newenvironment{infobox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/info.pdf}{#1}}{\end{iconbox}\end{framed}}
+\newenvironment{warnbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/warn.pdf}{#1}}{\end{iconbox}\end{framed}}
+\newenvironment{compatbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/compat.pdf}{#1}}{\end{iconbox}\end{framed}}
 \newenvironment{refbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/ref.pdf}{#1}}{\end{iconbox}\end{framed}}
 
 \newenvironment{refblock}{\begin{iconblock}{\totalheightof{X}}{./images/ref.pdf}}{\end{iconblock}}
