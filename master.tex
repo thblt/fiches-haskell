@@ -9,7 +9,7 @@
 \setotherlanguages{english}
 \usepackage[margin=1cm]{geometry}
 
-% Packages
+% Common packages
 \usepackage{amsmath}
 \usepackage{calc}
 \usepackage{caption}
@@ -32,11 +32,13 @@
     UprightFont=*Light,
     ItalicFont=*LightItalic,
     BoldFont=*Bold,
+    Scale=MatchUppercase
     ]{OpenSans-Condensed}
-\setmonofont{InconsolataForPowerline-g}
+\setmonofont[Scale=MatchLowercase]{InconsolataForPowerline-g}
 
-% Lists
-
+%%%%%%%%%%%
+%% LISTS %%
+%%%%%%%%%%%
 \newlist{ilenum}{enumerate*}{1}
 \setlist[ilenum]{label=\arabic*,afterlabel=)\ }
 
@@ -103,7 +105,7 @@
 \AfterEndEnvironment{minted}{\end{english}}
 
 \DeclareFloatingEnvironment[fileext=code,placement={!ht},name=Listing]{hslisting}
-%\captionsetup[hslisting]{labelfont=bf}
+%\captionsetup[hslisting]{labelfont=\sffamily}
 
 %%%%%%%%%%%%%%%%
 %% SECTIONING %%
@@ -127,7 +129,7 @@
 {\center}
 {}%{\arabic{subsection}.}%Label
 {.5em}%Sep
-{\large\sffamily}%before-code
+{\large\sffamily\uppercase}%before-code
 [\hrule]%after-code
 
 %% SUBSUBSECTIONS
@@ -205,7 +207,7 @@
 \newcommand*\qsee[1]{\circled{\sffamily\footnotesize\bfseries\ref{#1}}}
 \newcommand*\fsee[1]{\sffamily\ref{#1} : \bfseries\nameref{#1}}
 
-\newcommand*\hs[1]{\small\mintinline[breaklines=true]{haskell}{#1}\normalsize}
+\newcommand*\hs[1]{\mintinline[breaklines=true]{haskell}{#1}}
 \newcommand*\en[1]{\textit{\begin{english}#1\end{english}}}
 
 \newenvironment{tableau}{\begin{table}[h]\small\sffamily\rowcolors{2}{gray!25}{white}}{\end{table}}
