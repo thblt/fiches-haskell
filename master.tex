@@ -195,6 +195,16 @@
 \newenvironment{compatblock}{\begin{iconblock}{\totalheightof{X}}{./images/compat.pdf}}{\end{iconblock}}
 \newenvironment{refblock}{\begin{iconblock}{\totalheightof{X}}{./images/ref.pdf}}{\end{iconblock}}
 
+% Some more commands
+
+\newenvironment{halfwidth}{%
+    \begin{minipage}[t][][l]{\textwidth/2-.5em}%
+}{%
+    \end{minipage}%
+}
+
+\newcommand\sidebyside[2]{\noindent\begin{halfwidth}#1\end{halfwidth}\hfill\begin{halfwidth}#2\end{halfwidth}}
+
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
 %%%%%%%%%%%%%%%%
