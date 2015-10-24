@@ -32,7 +32,7 @@
     UprightFont=*Light,
     ItalicFont=*LightItalic,
     BoldFont=*Bold,
-    Scale=MatchUppercase
+    Scale=MatchLowercase
     ]{OpenSans-Condensed}
 \setmonofont[Scale=MatchLowercase]{InconsolataForPowerline-g}
 
@@ -113,8 +113,8 @@
 %\usepackage{tikz}\usetikzlibrary{shapes.misc}
 \usepackage[]{titlesec}
 
-\definecolor{titlecolor}{rgb}{0.5,0.5,1}
 
+%% SECTIONS
 \titleformat{\section}[hang]
 {\sffamily\Huge}
 {\arabic{section}}
@@ -135,9 +135,9 @@
 %% SUBSUBSECTIONS
 \titleformat{\subsubsection}[runin]
 {}
-{\rule{1ex}{1ex}}%Label
-{.5em}%Sep
-{\sffamily\textbf}%before-code
+{}%Label
+{0em}%Sep
+{\rule{1ex}{1ex}\hspace{.5em}\sffamily\textbf}%before-code
 %[]%after-code
 
 %%%%%%%%%%%%%%%%%%
