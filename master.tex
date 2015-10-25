@@ -1,4 +1,4 @@
-\documentclass[final,a5paper,french]{article}
+\documentclass[draft,a5paper,french]{article}
 
 %%%%%%%%%%%%%
 %% GENERAL %%
@@ -113,7 +113,16 @@
 %\usepackage{tikz}\usetikzlibrary{shapes.misc}
 \usepackage[]{titlesec}
 
-
+%% PARTS
+\titleformat{\part}[block]
+{\hspace{2cm}\sffamily\fontsize{50}{1.2}\selectfont}
+{\makebox[2cm][r]{\Roman{part}.\ }}
+{0cm}
+{\bfseries\uppercase}
+[]
+\titlespacing*{\part}{0cm}{4cm}{0cm}[0cm]
+\titleclass{\part}{top}
+\assignpagestyle{\part}{empty}
 %% SECTIONS
 \titleformat{\section}[hang]
 {\sffamily\Huge}
@@ -122,6 +131,7 @@
 {\bfseries\uppercase}
 []
 \newcommand{\sectionbreak}{\clearpage}
+% \titleclass{\section}{top}
 
 %% SUBSECTIONS
 
@@ -139,6 +149,14 @@
 {0em}%Sep
 {\rule{1ex}{1ex}\hspace{.5em}\sffamily\textbf}%before-code
 %[]%after-code
+
+% Part introduction
+\newenvironment{introduction}{%
+    \vspace{1cm}%
+    \par\null\hfill\begin{minipage}{\textwidth-4cm-1ex}%
+}{%
+    \end{minipage}%
+}
 
 %%%%%%%%%%%%%%%%%%
 %% PLACEHOLDERS %%
