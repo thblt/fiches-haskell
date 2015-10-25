@@ -1,17 +1,25 @@
 #!/bin/sh
 
-if [ "$3" == "" ]; then
-    echo "Usage: $0 num id Titre"
+root=./fiches
+
+if [ "$4" == "" ]; then
+    echo "Usage: $0 chapter number id Title"
     exit -1;
 fi
 
-fn="fiches/"`printf "%03d" $1`"-$2.tex"
+path=`find $root -type d -name $(printf "%02d" $1)*`
+if [ -z $path ]; then
+    echo "No such chapter: $1."
+    exit -1
+fi
+
+fn="$path/"`printf "%03d" $2`"-$3.tex"
 
 if [ -e $fn ]; then
     echo "File exists: $fn"
     exit -1
 fi
-echo $fn
-echo "\\section{$3}\n\\label{$2}\n" > $fn
+
+echo "\\section{$4}\n\\label{$3}\n" > $fn
 git add $fn
 $EDITOR $fn
