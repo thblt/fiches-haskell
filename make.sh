@@ -1,11 +1,15 @@
 #!/bin/sh
 
 out="fiches/_everything.tex"
+rm $out
 
 # We add a "\ " after each \input, so that TeX opens a new page even if the
 # previous file ends in a \[sub[sub]]section with no contents.
 if [ -z $1 ]; then
-    ls fiches/**/[0-9]*.tex | xargs -I X printf "\\\\input{X}\\\\ \n\n" > $out
+    for path in ./fiches/[0-9]*; do
+        printf "\input{$path/part.tex}\\ \n\n" >> $out
+        ls $path/[0-9]*.tex | xargs -I X printf "\\\\input{X}\\\\ \n\n" >> $out
+    done
 else
     rm $out
     for i in $@; do
