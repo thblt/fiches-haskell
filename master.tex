@@ -102,7 +102,7 @@
 \apptocmd{\endminted@colorbg}{\par\medskip}{}{}
 \makeatother
 % This from the minted documentation: prevents polyglossia with French from
-% adding adds undesirable extra spaces in code.
+% adding undesirable extra spaces in code.
 \BeforeBeginEnvironment{minted}{\begin{english}}
 \AfterEndEnvironment{minted}{\end{english}}
 
@@ -149,7 +149,7 @@
 {}
 {}%Label
 {0em}%Sep
-{\rule{1ex}{1ex}\hspace{.5em}\sffamily\textbf}%before-code
+{\hspace{-2ex}\rule{1ex}{1ex}\hspace{.5em}\sffamily\textbf}%before-code
 %[]%after-code
 
 % Part introduction
