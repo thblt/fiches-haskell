@@ -1,5 +1,49 @@
-\section{Filtrage par motif et gardes}
-\label{pattern-matching-and-guards}
+\section{Paramètres, motifs et gardes}
+\label{function-parameters}
+
+\subsection{Passage de paramètres}
+
+\todo{}
+
+\subsubsection{Déconstruction de types composites.}
+
+«Déconstruire» un argument d'une fonction permet d'obtenir directement les arguments du constructeur. Par exemple, la fonction suivante déconstruit un constructeur de paire (tuple de deux éléments) pour en renvoyer le premier:
+
+\begin{haskellcode}
+toggle :: (a, b) -> a
+toggle (x, y) = (y, x)
+\end{haskellcode}
+
+Un paramètre non utilisé peut être remplacé par un \hs{_}:
+
+\begin{haskellcode}
+duplFirst :: (a, b) -> (a, a)
+duplFirst (x, _) = (x, x)
+\end{haskellcode}
+
+On n'a pas besoin du second membre de la paire: on la décompose donc en évitant de nommer cet élément.
+
+De la même façon, si le paramètre est un \hsT{Maybe}, on peut récupérer directement sa valeur en déconstruisant \hsC{Just}:
+
+\begin{haskellcode}
+double :: Maybe Int -> Int
+double (Just x) = x * 2
+\end{haskellcode}
+
+\subsubsection{Motifs nommés.}
+\label{as-patterns}
+
+On peut avoir besoin de déconstruire un paramètre selon un motif en conservant le paramètre entier. Les motifs nommés permettent d'éviter des suites déconstruction-reconstruction redondantes.
+
+La fonction \hsFn{suffixes} \parencite[103]{OSullivan2008} renvoie tous les suffixes d'une liste. Elle peut s'écrire:
+
+\begin{haskellcode}
+suffixes :: [a] -> [[a]]
+suffixes xs@(_:xs') = xs : suffixes xs'
+suffixes _ = []
+\end{haskellcode}
+
+\subsection{Filtrage par motif et gardes}
 
 Le filtrage par motifs et l'emploi de gardes permettent de proposer différentes implémentations d'une même fonction selon les paramètres qui y sont passés, de façon similaire à l'emploi de cas en notation mathématique :
 
@@ -33,33 +77,57 @@ maybeIntToStr Nothing  = "NaN"
 \begin{haskellcode}
 mySum :: (Num a) => [a] -> a
 mySum (x:xs) = x + mySum xs
-mySum []     = 0 -- [] est le constructeur de liste vide,
-                 -- pas une valeur littérale !
+mySum []     = 0
+\end{haskellcode}
+
+\subsubsection{Par valeur littérale.}
+
+Le filtrage par valeur littérale est le plus simple. Il choisit une implémentation si un paramètre a une valeur déterminée.
+
+\begin{haskellcode}
+compte :: String -> String -> Int -> String
+compte singulier pluriel 0 = "Aucun(e) " ++ singulier
+compte singulier pluriel 1 = "Un(e) " ++ singulier
+compte singulier pluriel quantite = show quantite ++ " " ++  pluriel
 \end{haskellcode}
 
 \begin{warnbox}
-L'implémentation de \hsFn{mySum} n'est pas optimale: il vaudrait mieux utiliser \hsFn{foldr} \qsee{foldr}.
-\end{warnbox}
+Une valeur littérale \emph{doit} être littérale et ne peut pas, pour des raisons syntaxiques, être une variable. Ce code est erroné:
 
-\subsubsection{Par valeur littérale.}
+\begin{haskellcode*}{linenos=true}
+ultimate = "the Ultimate Question of Life, the Universe, and Everything"
+
+answer :: String -> Int
+answer ultimate = 42
+answer _ = 0
+\end{haskellcode*}
+
+\hsFn{ultimate} ligne 4 n'est \emph{pas} la variable qui a été définie ligne 1, mais une variable locale qui capture n'importe quel paramètre passé à la fonction et qui masque la variable globale \hsFn{ultimate}. Les lignes 4--5 ne fonctionneront pas comme on pourrait s'y attendre: elles sont strictement équivalentes à la ligne unique \hs{answer _ = 42}.
+
+Pour employer des constantes nommées, on peut utiliser un préprocesseur \qsee{preprocessor} ou un type algébrique \qsee{algebraic-types}.
+\end{warnbox}
 
 \subsubsection{Paramètres ignorés.}
 
 Certaines implémentations d'une fonction peuvent ne pas faire usage de tous les paramètres. On ignore un paramètre dans la définition avec le symbole \hs{_}:
 
-\begin{hslisting}
+La fonction \hsFn{compte} ci-dessus pourrait s'écrire:
+
 \begin{haskellcode}
-timesX :: (Num a) => a -> [a] -> [a]
-timesX a (x:xs) = a * x:timesX a xs
-timesX _ []     = []
+compte :: String -> String -> Int -> String
+compte singulier _ 0 = "Aucun(e) " ++ singulier
+compte singulier _ 1 = "Un(e) " ++ singulier
+compte _ pluriel quantite = show quantite ++ " " ++  pluriel
 \end{haskellcode}
-\caption {La dernière ligne définit le comportement de \hs{timesX} face à une liste vide. Dans ce cas, le multiplicateur n'est pas utilisé.}
-\end{hslisting}
+
+\hs{_} n'est pas un nom de variable mais la mention explicite que le paramètre ne sera pas utilisé.
 
 \subsection{Gardes}
 \label{guards}
 
-Un garde est une expression de type \hsT{Bool}. Si l'expression s'évalue à \hs{True}, l'implémentation qui suit est utilisée. Les gardes permettent d'éviter les constructions conditionnelles avec \hs{if} \qsee{if-then-else}. Leur syntaxe est:
+Un garde est une expression de type \hsT{Bool}. Si l'expression s'évalue à \hs{True}, l'implémentation qui suit est utilisée. L'usage de gardes permet souvent d'éviter les constructions conditionnelles avec \hs{if} \qsee{if-then-else}.
+
+Leur syntaxe est:
 
 \begin{haskellcode}
 func args | garde = impl
@@ -72,7 +140,7 @@ isEven x | x `mod` 2 == 0 = True
 isEven _ = False
 \end{haskellcode}
 
-ou encore:
+La partie à gauche du garde peut être omise si elle est identique à celle qui précède (c'est-à-dire si l'éventuel motif est le même):
 
 \begin{haskellcode}
 isEven x | x `mod` 2 == 0 = True
@@ -83,6 +151,14 @@ isEven x | x `mod` 2 == 0 = True
 \hsFn{otherwise} est une constante définie dans le Prélude. Sa valeur est simplement \hs{True}.
 \end{infobox}
 
-\begin{compatbox}
-La syntaxe \hs{f a | garde1, garde2, etc = impl} est une nouveauté de Haskell 2010.
-\end{compatbox}
+\subsection{«\enconcept{Pattern guards}»}
+
+\preTwentyTen{PatternGuards}
+
+\begin{haskellcode}
+gardes :: Int -> String
+gardes a | odd a, a `mod` 5 == 0 = "Impair et/ou multiple de 5"
+         | even a = "Pair mais pas multiple de 5"
+\end{haskellcode}
+
+\todo{}
