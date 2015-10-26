@@ -7,7 +7,10 @@ rm $out
 # previous file ends in a \[sub[sub]]section with no contents.
 if [ -z $1 ]; then
     for path in ./fiches/[0-9]*; do
-        printf "\input{$path/part.tex}\\ \n\n" >> $out
+        heading=$path/part.tex
+        if [ -e $heading ]; then
+            printf "\input{$heading}\\ \n\n" >> $out
+        fi
         ls $path/[0-9]*.tex | xargs -I X printf "\\\\input{X}\\\\ \n\n" >> $out
     done
 else
