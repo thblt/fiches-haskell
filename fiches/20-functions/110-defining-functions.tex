@@ -14,47 +14,6 @@ Une fonction infixe se définit en entourant son nom de parenthèses, comme pour
 (+*) a b = a + b + a * b
 \end{haskellcode}
 
-
-\subsection{Paramètres}
-
-\subsubsection{Déconstruction de types composites.}
-
-«Déconstruire» un argument d'une fonction permet d'obtenir directement les arguments du constructeur. Par exemple, la fonction suivante déconstruit un constructeur de paire (tuple de deux éléments) pour en renvoyer le premier:
-
-\begin{haskellcode}
-toggle :: (a, b) -> a
-toggle (x, y) = (y, x)
-\end{haskellcode}
-
-Un paramètre non utilisé peut être remplacé par un \hs{_}:
-
-\begin{haskellcode}
-duplFirst :: (a, b) -> (a, a)
-duplFirst (x, _) = (x, x)
-\end{haskellcode}
-
-On n'a pas besoin du second membre de la paire: on la décompose donc en évitant de nommer cet élément.
-
-De la même façon, si le paramètre est un \hsT{Maybe}, on peut récupérer directement sa valeur en déconstruisant \hsC{Just}:
-
-\begin{haskellcode}
-double :: Maybe Int -> Int
-double (Just x) = x * 2
-\end{haskellcode}
-
-\subsubsection{Motifs nommés.}
-\label{as-patterns}
-
-On peut avoir besoin de déconstruire un paramètre selon un motif en conservant le paramètre entier. Les motifs nommés permettent d'éviter des suites déconstruction-reconstruction redondantes.
-
-La fonction \hsFn{suffixes} \parencite[103]{OSullivan2008} renvoie tous les suffixes d'une liste. Elle peut s'écrire:
-
-\begin{haskellcode}
-suffixes :: [a] -> [[a]]
-suffixes xs@(_:xs') = xs : suffixes xs'
-suffixes _ = []
-\end{haskellcode}
-
 \subsection{Fonctions locales}
 
 On peut définir des fonctions dont la visibilité est limitée à une fonction. C'est utile pour définir des constantes, ou fournir des fonctions utilitaires qui n'ont pas besoin d'être disponibles au niveau du module. Haskell propose deux syntaxes: \hs{let}, qui place les variables locales \emph{avant} le code de la fonction, et \hs{where},  qui les positionne \emph{après}.

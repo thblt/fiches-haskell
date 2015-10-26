@@ -5,7 +5,6 @@ Haskell n'a pas de notion de variable au sens qu'a ce terme en programmation pro
 
 En combinant ceci avec les principe de transparence référentielle \qsee{referential-transparency}, d'évaluation paresseuse \qsee{lazyness} et d'application partielle \qsee{partial-application}, on voit facilement qu'il n'existe aucune différence stricte entre une fonction et une variable, donc qu'il n'existe pas de variables. Par exemple:
 
-
 \begin{haskellcode}
 a = 3 * 2
 times3 x = 3 * x
@@ -24,7 +23,9 @@ La suite de cette fiche ne s'intéresse donc qu'aux fonctions, puisque les «var
 \subsection{Signature de type}
 \label{type-signatures}
 
-La signature a la forme \hs{f :: a -> b}, ce qui signifie que la fonction prend un paramètre de type \hsT{a} et renvoie une valeur de type \hsT{b}.
+La signature a la forme \hs{f :: TypeA -> TypeRet}, ce qui signifie que la fonction prend un paramètre de type \hsT{TypeA} et renvoie une valeur de type \hsT{TypeRet}.
+
+Une fonction définie avec plusieurs paramètres a pour signature \hs{f :: TypeA -> TypeB -> TypeC -> TypeRet}. Cette syntaxe est explicitée fiche \fsee{partial-application-and-currying}.
 
 Les fonctions d'ordre supérieur utilisent les parenthèses pour indiquer qu'elles prennent une autre fonction en paramètre. Par exemple, le type \hs{map :: (a -> b) -> [a] -> [b]} se lit : \hsFn{map} prend comme premier paramètre une fonction quelconque \hs{x :: a -> b}.
 
@@ -43,4 +44,4 @@ On peut utiliser une fonction infixe comme préfixe en entourant son nom de pare
 \subsubsection[Fonctions préfixes]{Une fonction préfixe} a un nom composé
 de caractères alphanumériques. \hsFn{map}, \hsFn{elem} ou \hsFn{foldr} sont préfixes.
 
-On peut utiliser une fonction préfixe comme infixe en entourant son nom de \enconcept{backticks} : \hs{1 `elem` [1..10]}.
+On peut utiliser une fonction préfixe comme infixe en entourant son nom de \enconcept{backticks}: \hs{1 `elem` [1..10]}.
