@@ -1,4 +1,4 @@
-\documentclass[draft,a5paper,french]{article}
+\documentclass[final,a5paper,french]{article}
 
 %%%%%%%%%%%%%
 %% GENERAL %%
@@ -175,6 +175,8 @@
 \newcommand{\hsFn}[2][]{\texttt{#2}} % Haskell Function (or variable)
 \newcommand{\Y}{\rule{.5em}{.5em}}
 
+\newcommand*\preTwentyTen[1]{\begin{framed}\sffamily Haskell 2010 or \texttt{#1} extension.\end{framed}}
+
 %%%%%%%%%%%%%%%%%%%%%%
 %% BOXES AND BLOCKS %%
 %%%%%%%%%%%%%%%%%%%%%%
@@ -244,5 +246,6 @@
 \input{fiches/_everything.tex}
 
 \printbibliography
+\tableofcontents
 
 \end{document}
