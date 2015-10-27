@@ -10,3 +10,4 @@ _*
 *.out
 *.out.pyg
 *.run.xml
+*.synctex.gz
