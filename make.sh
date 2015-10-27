@@ -26,7 +26,7 @@ if xelatex --shell-escape master
         then
         if xelatex --shell-escape -interaction=nonstopmode master
             then
-            xelatex --shell-escape -interaction=nonstopmode master
+            xelatex --shell-escape --synctex=1 -interaction=nonstopmode master
         fi
     fi
 fi
