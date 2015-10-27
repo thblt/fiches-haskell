@@ -3,7 +3,8 @@ rm -rf *.aux \
 *.bcf \
 *.blg \
 *.log \
+_minted-master \
 *.out \
 *.run.xml \
-*.toc \
-_minted-master
+*.synctex.gz \
+*.toc
