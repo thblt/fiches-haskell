@@ -20,14 +20,4 @@ else
     done
 fi
 
-if xelatex --shell-escape master
-    then
-    if biber master
-        then
-        if xelatex --shell-escape -interaction=nonstopmode master
-            then
-            xelatex --shell-escape --synctex=1 -interaction=nonstopmode master
-        fi
-    fi
-fi
-exit -1
+latexmk --pdf -pdflatex="xelatex --shell-escape --synctex=1 %O  %S" master.tex
