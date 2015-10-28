@@ -4,10 +4,15 @@ _*
 *.bbl
 *.bcf
 *.blg
+*.fdb_latexmk
 *.fls
+*.glg
+*.glo
+*.gls
 *.log
 *.toc
 *.out
 *.out.pyg
 *.run.xml
 *.synctex.gz
+*.xdy

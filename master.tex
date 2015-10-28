@@ -165,10 +165,10 @@
 %%%%%%%%%%%%%%
 
 \usepackage[toc, xindy, nonumberlist]{glossaries}
-\makeglossaries
 \defglsentryfmt[main]{\glsgenentryfmt\ifglsused{\glslabel}{}{\textbf *}}
 \renewcommand*{\glstextformat}[1]{\ifglsused{\glslabel}{#1}{\textbf{#1}}}
-
+\makeglossaries
+\input{glossary.tex}
 %%%%%%%%%%%%%%%%%%
 %% PLACEHOLDERS %%
 %%%%%%%%%%%%%%%%%%
@@ -261,7 +261,6 @@
 
 \printbibliography
 
-\input{glossary.tex}
 \glossarystyle{index}
 \printglossaries
 
