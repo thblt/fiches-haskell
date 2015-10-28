@@ -2,6 +2,7 @@ rm -rf *.aux \
 *.bbl \
 *.bcf \
 *.blg \
+*.fdb_latexmk \
 *.gls \
 *.glsdefs \
 *.glo \
