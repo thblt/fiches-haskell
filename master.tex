@@ -179,13 +179,14 @@
 \newcommand{\cmd}[2][]{#2}
 \newcommand{\concept}[2][]{#2}
 \newcommand{\enconcept}[2][]{\en{#2}}
-\newcommand{\hsT}[2][]{\texttt{#2}}  % Haskell Type
 \newcommand{\hsC}[2][]{\texttt{#2}}  % Haskell Constructor
+\newcommand{\hsFn}[2][]{\texttt{#2}} % Haskell Function (or variable)
+\newcommand{\hsKw}[2][]{\texttt{#2}} % Haskell Keyword
+\newcommand{\hsM}[2][]{\texttt{#2}}  % Haskell Monad
+\newcommand{\hsMod}[2][]{\texttt{#2}} % Haskell Module
+\newcommand{\hsT}[2][]{\texttt{#2}}  % Haskell Type
 \newcommand{\hsTC}[2][]{\texttt{#2}} % Haskell Type Class
 \newcommand{\hsTP}[2][]{\texttt{#2}} % Haskell Type Parameter
-\newcommand{\hsFn}[2][]{\texttt{#2}} % Haskell Function (or variable)
-\newcommand{\hsM}[2][]{\texttt{#2}} % Haskell Monad
-\newcommand{\hsMod}[2][]{\texttt{#2}} % Haskell Module
 \newcommand{\Y}{\rule{.5em}{.5em}}
 
 \newcommand*\preTwentyTen[1]{\begin{framed}\sffamily Haskell 2010 or \texttt{#1} extension.\end{framed}}
@@ -244,10 +245,9 @@
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,fill=Black,inner sep=1pt] (char) {\textcolor{White}{#1}};}}
 \newcommand*\cf[1]{\ref{#1}.\ \textit{\nameref{#1}}}
-% \newcommand*\qsee[1]{\textsf{($\to$\ref{#1}})}
 
 \usepackage{nameref}
-\newcommand*\qsee[1]{\circled{\sffamily\footnotesize\bfseries\ref{#1}}}
+\newcommand*\qsee[2][]{\textbf{#1} \circled{\sffamily\footnotesize\bfseries\ref{#2}}}
 \newcommand*\fsee[1]{\ref{#1}: \textsf{\bfseries\nameref{#1}}}
 
 \newcommand*\hs[1]{\mintinline[breaklines=true]{haskell}{#1}}
@@ -261,7 +261,7 @@
 
 \printbibliography
 
-\glossarystyle{index}
+\glossarystyle{altlist}
 \printglossaries
 
 \tableofcontents
