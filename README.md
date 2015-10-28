@@ -28,9 +28,7 @@ Les outils nécessaires sont ceux d'une distribution TeX standard:
 Les familles de caractère suivantes sont utilisées:
 
  - [Open Sans Condensed](https://www.google.com/fonts/specimen/Open+Sans+Condensed)
- - [Inconsolata-g for Powerline](https://github.com/powerline/fonts/tree/master/Inconsolata-g)
-
-Inconsolata-g for Powerline peut être remplacée par [Inconsolata-g](http://leonardo-m.livejournal.com/77079.html) ou [Inconsolata](http://www.levien.com/type/myfonts/inconsolata.html). Pour remplacer les polices, il suffit d'éditer `master.tex` et de remplacer le nom de famille dans `\setmainfont`, `\setsansfont` ou `\setmonofont`.
+ - [Source Code Pro](https://adobe-fonts.github.io/source-code-pro/)
 
 Pour compiler, il suffit d'exécuter `make.sh`, fourni à la racine du dépôt.
 
