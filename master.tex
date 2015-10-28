@@ -21,6 +21,7 @@
 \usepackage{hyperref}
 \usepackage{makeidx}
 \usepackage{newfloat}
+\usepackage{soul}
 \usepackage{todonotes}
 \presetkeys{todonotes}{inline}{}
 
@@ -169,6 +170,7 @@
 \renewcommand*{\glstextformat}[1]{\ifglsused{\glslabel}{#1}{\textbf{#1}}}
 \makeglossaries
 \input{glossary.tex}
+
 %%%%%%%%%%%%%%%%%%
 %% PLACEHOLDERS %%
 %%%%%%%%%%%%%%%%%%
@@ -241,13 +243,11 @@
 %%%%%%%%%%%%%%%%
 %% SHORTHANDS %%
 %%%%%%%%%%%%%%%%
-\usepackage{tikz}
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,fill=Black,inner sep=1pt] (char) {\textcolor{White}{#1}};}}
-\newcommand*\cf[1]{\ref{#1}.\ \textit{\nameref{#1}}}
 
 \usepackage{nameref}
-\newcommand*\qsee[2][]{\textbf{#1} \circled{\sffamily\footnotesize\bfseries\ref{#2}}}
+\newcommand\qsee[2]{#1\textsuperscript{\ref{#2}}}
+%\circled{\sffamily\footnotesize\bfseries\ref{#2}}}
+
 \newcommand*\fsee[1]{\ref{#1}: \textsf{\bfseries\nameref{#1}}}
 
 \newcommand*\hs[1]{\mintinline[breaklines=true]{haskell}{#1}}
