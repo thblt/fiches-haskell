@@ -5,8 +5,7 @@ Haskell dispose d'un mécanisme d'importation de modules.
 
 \subsection{Écrire un module}
 
-Un module a le même nom que le fichier .hs qui le contient, et ce nom commence
-par une majuscule \qsee{identifiers}. La déclaration de module a la syntaxe suivante:
+Un module a le même nom que le fichier .hs qui le contient, et \qsee{ce nom commence par une majuscule}{identifiers}. La déclaration de module a la syntaxe suivante:
 
 \begin{haskellcode}
 -- MyModule.hs
@@ -24,6 +23,7 @@ Cette déclaration exporte les identifiants x, y et z du code qui la suit. On ex
 \todo{Exporter un type sans constructeurs + lien depuis defining-types. Handle est un bon exemple de pourquoi. Aussi RWH 159}
 
 \subsection{Importation de modules}
+\label{import}
 
 \begin{hslisting*}
 \begin{haskellcode}

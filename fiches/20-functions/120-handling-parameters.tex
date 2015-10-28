@@ -66,7 +66,7 @@ Le filtrage par motif et les gardes permettent de définir plusieurs cas qui se 
 
 Le filtrage par motifs permet de filtrer selon un constructeur ou selon une valeur arbitraire.
 
-\subsubsection{Par constructeur.} Le filtrage par constructeurs permet de sélectionner quel constructeur d'un type algébrique \qsee{algebraic-types} correspond à quelle implémentation.
+\subsubsection{Par constructeur.} Le filtrage par constructeurs permet de sélectionner quel constructeur d'un \qsee{type algébrique}{algebraic-types} correspond à quelle implémentation.
 
 \begin{haskellcode}
 maybeIntToStr :: Maybe Int -> String
@@ -104,7 +104,7 @@ answer _ = 0
 
 \hsFn{ultimate} ligne 4 n'est \emph{pas} la variable qui a été définie ligne 1, mais une variable locale qui capture n'importe quel paramètre passé à la fonction et qui masque la variable globale \hsFn{ultimate}. Les lignes 4--5 ne fonctionneront pas comme on pourrait s'y attendre: elles sont strictement équivalentes à la ligne unique \hs{answer _ = 42}.
 
-Pour employer des constantes nommées, on peut utiliser un préprocesseur \qsee{preprocessor} ou un type algébrique \qsee{algebraic-types}.
+Pour employer des constantes nommées, on peut utiliser un  \qsee{préprocesseur}{preprocessor} ou les remplacer par un \qsee{type algébrique}{algebraic-types}.
 \end{warnbox}
 
 \subsubsection{Paramètres ignorés.}
@@ -125,7 +125,7 @@ compte _ pluriel quantite = show quantite ++ " " ++  pluriel
 \subsection{Gardes}
 \label{guards}
 
-Un garde est une expression de type \hsT{Bool}. Si l'expression s'évalue à \hs{True}, l'implémentation qui suit est utilisée. L'usage de gardes permet souvent d'éviter les constructions conditionnelles avec \hs{if} \qsee{if-then-else}.
+Un garde est une expression de type \hsT{Bool}. Si l'expression s'évalue à \hs{True}, l'implémentation qui suit est utilisée.
 
 Leur syntaxe est:
 
@@ -148,12 +148,18 @@ isEven x | x `mod` 2 == 0 = True
 \end{haskellcode}
 
 \begin{infobox}
-\hsFn{otherwise} est une constante définie dans le Prélude. Sa valeur est simplement \hs{True}.
+\hsFn{otherwise} est une constante définie dans le Prélude. Sa valeur est simplement \hsC{True}.
+
+\begin{warnblock}
+\hsFn{otherwise} est simplement définie comme \hs{otherwise = True}. Son emploi est donc limité aux gardes.
+\end{warnblock}
 \end{infobox}
 
 \subsection{«\enconcept{Pattern guards}»}
 
 \preTwentyTen{PatternGuards}
+
+Haskell 2010 étend la syntaxe des gardes \todo{Cette section}
 
 \begin{haskellcode}
 gardes :: Int -> String
