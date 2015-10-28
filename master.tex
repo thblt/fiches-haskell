@@ -131,7 +131,7 @@
 {\arabic{section}}
 {.5em}
 {\bfseries\uppercase}
-[]
+[\glsresetall]
 \newcommand{\sectionbreak}{\clearpage}
 % \titleclass{\section}{top}
 
@@ -159,6 +159,15 @@
 }{%
     \end{minipage}%
 }
+
+%%%%%%%%%%%%%%
+%% GLOSSARY %%
+%%%%%%%%%%%%%%
+
+\usepackage[toc, xindy, nonumberlist]{glossaries}
+\makeglossaries
+\defglsentryfmt[main]{\glsgenentryfmt\ifglsused{\glslabel}{}{\textbf *}}
+\renewcommand*{\glstextformat}[1]{\ifglsused{\glslabel}{#1}{\textbf{#1}}}
 
 %%%%%%%%%%%%%%%%%%
 %% PLACEHOLDERS %%
@@ -251,6 +260,11 @@
 \input{fiches/_everything.tex}
 
 \printbibliography
+
+\input{glossary.tex}
+\glossarystyle{index}
+\printglossaries
+
 \tableofcontents
 
 \end{document}

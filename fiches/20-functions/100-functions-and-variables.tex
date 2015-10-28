@@ -12,7 +12,7 @@ b = times3 2
 c = 6
 \end{haskellcode}
 
-Ici, \hsFn{times3} est une fonction, \hsFn{a}, \hsFn{b} et \hsFn{c} des variables. Dans la mesure où la valeur d'aucune n'est évaluée tant qu'elle n'est pas utilisée, la variable \hsFn{a} a strictement la même valeur que \hsFn{b}, qui n'est pas 6, mais le calcul différé (le \enconcept{thunk}) \hs{3 * 2}.
+Ici, \hsFn{times3} est une fonction, \hsFn{a}, \hsFn{b} et \hsFn{c} des variables. Dans la mesure où la valeur d'aucune n'est évaluée tant qu'elle n'est pas utilisée, la variable \hsFn{a} a strictement la même valeur que \hsFn{b}, qui n'est pas 6, mais le \gls{thunk} \hs{3 * 2}.
 
 \begin{warnbox}
 Cette identité n'est vraie que des fonctions pures. Les fonctions impures, comme par exemple \hsFn{getLine}, peuvent évidemment renvoyer un résultat différent à chaque invocation. Voir \fsee{io}.
