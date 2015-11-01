@@ -1,4 +1,4 @@
-\documentclass[final,a5paper,french]{article}
+\documentclass[final,a4paper,landscape,french]{article}
 
 %%%%%%%%%%%%%
 %% GENERAL %%
@@ -7,7 +7,7 @@
 \usepackage[]{polyglossia}
 \setdefaultlanguage{french}
 \setotherlanguages{english}
-\usepackage[margin=1cm]{geometry}
+\usepackage[margin=1cm, rmargin=15.85cm]{geometry}
 \usepackage[table,svgnames]{xcolor}
 
 % Common packages
@@ -23,7 +23,7 @@
 \usepackage{newfloat}
 \usepackage{soul}
 \usepackage{todonotes}
-\presetkeys{todonotes}{inline}{}
+%\presetkeys{todonotes}{}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FONTS AND TYPOGRAPHY %%
@@ -43,7 +43,7 @@
 %% LISTS %%
 %%%%%%%%%%%
 \newlist{ilenum}{enumerate*}{1}
-\setlist[ilenum]{label=\arabic*,afterlabel=)\ }
+\setlist[ilenum]{label=\alph*,afterlabel=)\ }
 
 %%%%%%%%%%%%%%
 %% HEADINGS %%
@@ -222,15 +222,17 @@
 
 % User environements
 
-\newenvironment{infobox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/info.pdf}{#1}}{\end{iconbox}\end{framed}}
-\newenvironment{warnbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/warn.pdf}{#1}}{\end{iconbox}\end{framed}}
 \newenvironment{compatbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/compat.pdf}{#1}}{\end{iconbox}\end{framed}}
+\newenvironment{infobox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/info.pdf}{#1}}{\end{iconbox}\end{framed}}
+\newenvironment{mathbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/math.pdf}{#1}}{\end{iconbox}\end{framed}}
+\newenvironment{warnbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/warn.pdf}{#1}}{\end{iconbox}\end{framed}}
 \newenvironment{refbox}[1][]{\begin{framed}\begin{iconbox}{\boxiconwidth}{./images/ref.pdf}{#1}}{\end{iconbox}\end{framed}}
 
-\newenvironment{infoblock}{\begin{iconblock}{\totalheightof{X}}{./images/info.pdf}}{\end{iconblock}}
-\newenvironment{warnblock}{\begin{iconblock}{\totalheightof{X}}{./images/warn.pdf}}{\end{iconblock}}
 \newenvironment{compatblock}{\begin{iconblock}{\totalheightof{X}}{./images/compat.pdf}}{\end{iconblock}}
+\newenvironment{infoblock}{\begin{iconblock}{\totalheightof{X}}{./images/info.pdf}}{\end{iconblock}}
+\newenvironment{mathblock}{\begin{iconblock}{\totalheightof{X}}{./images/math.pdf}}{\end{iconblock}}
 \newenvironment{refblock}{\begin{iconblock}{\totalheightof{X}}{./images/ref.pdf}}{\end{iconblock}}
+\newenvironment{warnblock}{\begin{iconblock}{\totalheightof{X}}{./images/warn.pdf}}{\end{iconblock}}
 
 % Some more commands
 
