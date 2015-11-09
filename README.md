@@ -10,48 +10,30 @@ Ces fiches tentent donc une présentation plus systématique, mais sans prétent
 
 Ce travail est à peine entamé. À terme, il devrait offrir un aperçu complet du langage, et de quelques une des extensions de [GHC](https://www.haskell.org/ghc/).
 
-# Plan des fiches
-
-<section id="toc">
-(Je n'ai pas encore écrit le script qui remplacera ce texte par le plan extrait du code LaTeX :-) )
-</section>
-
 # Compiler les fiches
 
-**Note :** Cette section est utile uniquement pour qui voudrait modifier les fiches. Pour les consulter, le PDF est disponible dans le dépôt.
+Les fichiers finals sont générés avec Hakyll. Les anciennes versions des fiches utilisaient une série de scripts shells pour produire un unique PDF avec LaTeX : ce comportement sera intégré à terme à la version Hakyll.
 
-Les outils nécessaires sont ceux d'une distribution TeX standard:
-
- - XeLaTeX
- - Biber
-
-Les familles de caractère suivantes sont utilisées:
-
- - [Open Sans Condensed](https://www.google.com/fonts/specimen/Open+Sans+Condensed)
- - [Source Code Pro](https://adobe-fonts.github.io/source-code-pro/)
-
-Pour compiler, il suffit d'exécuter `make.sh`, fourni à la racine du dépôt.
-
-Compilation manuelle : il suffit d'exécuter dans l'ordre les commandes de make.sh. La plus importante est la première, qui génère `fiches/_everything.tex`. Le fichier contient simplement une série de commandes `\input`, une par fichier dans `/fiches/`
+~~~bash
+$ ghc --make site
+$ ./site build
+~~~
 
 ## Scripts fournis
 
 On trouvera quelques scripts à la racine du dépôt.
 
- - `new.sh` génère une nouvelle fiche. Il prend trois paramètres : le numéro de la fiche, un identifiant qui servira au nom de fichier et au label, et un titre, crée un nouveau fichier `fiches/$num-$id.tex` contenant:
+ - `new.sh` génère une nouvelle fiche. Il prend trois paramètres : le numéro de la fiche, un identifiant qui servira au nom de fichier et au label, et un titre, crée un nouveau fichier `fiches/$num-$id.md` contenant:
 
  ~~~latex
- \section{$title}
- \label{$id}
+ ---
+ title: (titre)
+ id: (étiquette)
  ~~~
 
  et ouvre ce fichier dans l'éditeur standard.
 
  - `reorder.sh` renumérote les fichiers de 10 en 10, à partir de 10. Il garantit ainsi que le numéro du fichier = le numéro de la fiche * 10.
-
- - `make.sh` «automatise» la compilation. Il prend en argument les numéros de fichiers à compiler, ou aucun pour compiler l'ensemble. Par exemple `./make.sh 50 100` compilera (dans l'état actuel du dépôt) uniquement *Lambdas* et *Récursivité*. Attention, ces fiches seront alors numérotées 1 et 2. `make.sh` avec arguments est réservé à la résolution de problèmes avec LaTeX. Il peut aussi introduire des erreurs de référence.
-
- - `clean.sh` supprime les fichiers intermédiaires de LaTeX.
 
 # Licence
 
