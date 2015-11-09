@@ -1,6 +1,6 @@
 #!/bin/sh
 
-root=./fiches
+root=./contents
 
 if [ "$4" == "" ]; then
     echo "Usage: $0 chapter number id Title"
@@ -13,13 +13,13 @@ if [ -z $path ]; then
     exit -1
 fi
 
-fn="$path/"`printf "%03d" $2`"-$3.tex"
+fn="$path/"`printf "%03d" $2`"-$3.md"
 
 if [ -e $fn ]; then
     echo "File exists: $fn"
     exit -1
 fi
 
-echo "\\section{$4}\n\\label{$3}\n" > $fn
+echo "---\ntitle: $4\nid: $3\n---\n" > $fn
 git add $fn
 $EDITOR $fn
