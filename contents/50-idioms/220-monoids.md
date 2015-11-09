@@ -1,0 +1,5 @@
+---
+title: Monoïdes
+---
+\label{monoids}
+

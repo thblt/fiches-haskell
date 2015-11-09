@@ -1,0 +1,22 @@
+\define{qsee}{[#1](\##2)}
+\define{hs}{`#1`{.haskell}}
+
+\define{haskell}{~~~ {.haskell}}
+\define{haskellN}{~~~ {.haskell .numberLines}}
+\define{ghci}{\haskell}
+\define{eof}{~~~}
+
+\define{box}{<div class="box #1">}
+\define{endbox}{</div>}
+
+\define{hsC}{\hs{#1}}
+\define{hsFn}{\hs{#1}}
+\define{hsKw}{\hs{#1}}
+\define{hsM}{\hs{#1}}
+\define{hsMod}{\hs{#1}}
+\define{hsT}{\hs{#1}}
+\define{hsTC}{\hs{#1}}
+\define{hsTP}{\hs{#1}}
+
+\define{rot}{#1}
+\define{Y}{•}

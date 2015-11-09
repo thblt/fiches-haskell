@@ -9,10 +9,14 @@ _*
 *.glg
 *.glo
 *.gls
+*.hi
 *.log
 *.toc
+*.o
 *.out
 *.out.pyg
 *.run.xml
 *.synctex.gz
 *.xdy
+*.sass_cache
+site
