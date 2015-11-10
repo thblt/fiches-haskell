@@ -25,10 +25,11 @@ On trouvera quelques scripts à la racine du dépôt.
 
  - `new.sh` génère une nouvelle fiche. Il prend trois paramètres : le numéro de la fiche, un identifiant qui servira au nom de fichier et au label, et un titre, crée un nouveau fichier `fiches/$num-$id.md` contenant:
 
- ~~~latex
+ ~~~
  ---
  title: (titre)
  id: (étiquette)
+ ---
  ~~~
 
  et ouvre ce fichier dans l'éditeur standard.

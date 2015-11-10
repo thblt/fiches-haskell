@@ -20,3 +20,8 @@
 
 \define{rot}{#1}
 \define{Y}{•}
+
+\define{gls}{#1}
+\define{glspl}{#1}
+\define{Gls}{#1}
+\define{Glspl}{#1}

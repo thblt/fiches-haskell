@@ -19,7 +19,10 @@ nav {
     section {
         padding: 2em;
         &.l0 {
-            padding: 2em 20%;
+            padding: 2em;
+						.body {
+								margin: 0 20%;
+						}
         }
         &.l1 {
             background: white;
