@@ -1,41 +1,70 @@
 nav {
-    
-    // background-color: $pageBgColor;
-    // // background-color: #ccc;
-    // margin: 0 0 2em;
-    // border-radius: 1em;
-    // box-shadow: 0 0 5px 0px #aaa inset;
-    // padding: 1em;
-    img {
-        width: 100%;
-        margin-bottom: 1em;
-    }
-    a {
-        display: block;
-        color: black;
-        text-decoration: none;
-        font-family: $blockTitleFont;
-        font-weight: bold;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-    & #toc > ul {
-        & > li > a {
-            text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 1em 0 0.5em;
-            color: rgba(0,0,0,.001);
-            font-size: 1.5em;
-            text-shadow: 1px 1px rgba(255,255,255,.5), -1px -1px rgba(0,0,0,.5);
-        }
-        & > ul > li {
-            padding: 0.25em 0;
-            > a {
 
-                // margin-left: 3ex;
-            }
-        }
-    }
+		// background-color: $pageBgColor;
+		// // background-color: #ccc;
+		// margin: 0 0 2em;
+		// border-radius: 1em;
+		// box-shadow: 0 0 5px 0px #aaa inset;
+		// padding: 1em;
+		img {
+				width: 100%;
+				margin-bottom: 1em;
+		}
+
+		#global > ul {
+				display : block;
+				background: $darkGrey;
+				width: 100%;
+				box-shadow: 0 0 5px 5px $midDarken inset;
+				border-radius : 1em;
+				text-align: center;
+				border: thin solid black;
+				li {
+						display: inline-block;
+						padding: .25em 1em;
+						&.active {
+								background: $bgColor;	
+								border-radius : 1em;
+								a {
+										color: black;
+										font-weight: bold;
+								}
+						}
+						a {
+								font-family: $inlineTitleFont;
+								color: $lightGrey;
+								font-size : small;
+								text-decoration: none;
+						}
+				}
+		}
+
+		#toc > ul {
+				a {
+						display: block;
+						color: black;
+						text-decoration: none;
+						font-family: $blockTitleFont;
+						font-weight: bold;
+						&:hover {
+								text-decoration: underline;
+						}
+				}
+				& > li > a {
+						text-align: center;
+						font-weight: bold;
+						text-transform: uppercase;
+						margin: 1em 0 0.5em;
+						color: rgba(0,0,0,.001);
+						font-size: 1.5em;
+						text-shadow: 1px 1px rgba(255,255,255,.5), -1px -1px rgba(0,0,0,.5);
+				}
+				& > ul > li {
+						padding: 0.25em 0;
+						> a {
+
+								// margin-left: 3ex;
+						}
+				}
+		}
 }
