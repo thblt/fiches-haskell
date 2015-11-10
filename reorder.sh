@@ -3,7 +3,7 @@
 git_move() {
     if [ "$1" != "$2" ]; then
         echo "MOVE $1 -> $2";
-        # git mv $1 $2
+        git mv $1 $2
     else
         :
         # echo "NOOP $1 == $2";
