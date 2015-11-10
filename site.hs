@@ -25,7 +25,7 @@ main = hakyll $ do
             >>= loadAndApplyTemplate "theme/tpl/item.html" defaultContext
             >>= relativizeUrls
 
-    create ["archive.html"] $ do
+    create ["index.html"] $ do
         route idRoute
         compile $ do
             posts <- loadAll "contents/**.md"
