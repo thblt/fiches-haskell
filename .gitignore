@@ -19,6 +19,8 @@ _site
 *.run.xml
 *.swp
 *.synctex.gz
+*.un~
 *.xdy
+.cabal-sandbox
 .sass-cache
 site
