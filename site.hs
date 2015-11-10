@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Data.Functor ((<$>))
-import Data.List (isPrefixOf)
-import qualified Data.Map as M
-import qualified Data.Set as S
-import Data.Maybe (fromMaybe)
-import Data.Monoid (mappend, mconcat, mempty)
-import Data.Text (pack, unpack, replace, empty)
-import Text.Pandoc.Options
+-- import Data.Functor ((<$>))
+-- import Data.List (isPrefixOf)
+-- import qualified Data.Map as M
+-- import qualified Data.Set as S
+-- import Data.Maybe (fromMaybe)
+-- import Data.Monoid (mappend, mconcat, mempty)
+-- import Data.Text (pack, unpack, replace, empty)
+-- import Text.Pandoc.Options
 
 import Hakyll
 

@@ -1,0 +1,32 @@
+@import "gridle/gridle";
+@import "compass/reset";
+@import "compass";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,400italic,700,700italic&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext);
+
+// Configuration
+$lightGrey: #eee;
+$midGrey: #ddd;
+$darkGrey: #777;
+$bgColor: #eee;
+$textColor: #000;
+$pageBgColor: #fff;
+$textFont: "Roboto Slab";
+$blockTitleFont: "Open Sans Condensed";
+$inlineTitleFont: "Open Sans";
+$figureFont: "Open Sans";
+$codeFont: "Source Code Pro";
+
+$midDarken: rgba(0,0,0,.3);
+
+// Boxes
+$mathBoxColor: $pageBgColor;
+$infoBoxColor: #ffffee;
+$lawBoxColor: $pageBgColor;
+$warnBoxColor: #ffeedd;
+
+@include gridle_setup( ( context : 10, gutter-width : 20px, direction : ltr, ) );
+@include gridle_register_state( mobile , ( max-width : 400px ) );

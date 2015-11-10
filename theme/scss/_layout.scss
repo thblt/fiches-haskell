@@ -1,0 +1,31 @@
+body {
+
+    // counter-reset: sectLev0;
+    background: $bgColor;
+    color: $textColor;
+    font-family: $textFont;
+    margin: 1em;
+}
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+nav {
+    @include gridle(2);
+}
+#contents {
+    @include gridle(8);
+
+    section {
+        padding: 2em;
+        &.l0 {
+            padding: 2em 20%;
+        }
+        &.l1 {
+            background: white;
+            margin: 0 0 2em;
+            box-shadow: 0 2px 2px 0 #ccc;
+            border: thin solid #ddd;
+        }
+    }
+}
