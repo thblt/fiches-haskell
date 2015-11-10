@@ -1,5 +1,6 @@
+_cache
+_site
 .DS_Store
-_*
 *.aux
 *.bbl
 *.bcf
@@ -16,7 +17,8 @@ _*
 *.out
 *.out.pyg
 *.run.xml
+*.swp
 *.synctex.gz
 *.xdy
-*.sass_cache
+.sass-cache
 site

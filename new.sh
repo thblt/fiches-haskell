@@ -23,3 +23,4 @@ fi
 echo "---\ntitle: $4\nid: $3\n---\n" > $fn
 git add $fn
 $EDITOR $fn
+~ñ
