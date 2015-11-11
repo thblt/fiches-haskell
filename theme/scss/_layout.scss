@@ -1,6 +1,4 @@
 body {
-
-    // counter-reset: sectLev0;
     background: $bgColor;
     color: $textColor;
     font-family: $textFont;
@@ -11,9 +9,11 @@ body {
     margin: 0 auto;
 }
 nav {
+	position: static;
     @include gridle(2);
 }
 #contents {
+	/*@include gridle_push(2);*/
     @include gridle(8);
 
     section {
@@ -21,7 +21,7 @@ nav {
         &.l0 {
             padding: 2em;
 						.body {
-								margin: 0 20%;
+							margin: 0 20%;
 						}
         }
         &.l1 {
