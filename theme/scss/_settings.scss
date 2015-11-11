@@ -20,6 +20,7 @@ $inlineTitleFont: "Open Sans";
 $figureFont: "Open Sans";
 $codeFont: "Source Code Pro";
 
+$lightDarken: rgba(0,0,0,.1);
 $midDarken: rgba(0,0,0,.3);
 $midLighten: rgba(255,255,255,.3);
 
@@ -27,7 +28,7 @@ $midLighten: rgba(255,255,255,.3);
 $mathBoxColor: $pageBgColor;
 $infoBoxColor: #ffffee;
 $lawBoxColor: $pageBgColor;
-$warnBoxColor: #ffeedd;
+$warnBoxColor: #ff9933;
 
 @include gridle_setup( ( context : 10, gutter-width : 20px, direction : ltr, ) );
 @include gridle_register_state( mobile , ( max-width : 400px ) );
