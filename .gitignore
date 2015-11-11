@@ -20,6 +20,7 @@
 *.xdy
 .DS_Store
 .cabal-sandbox
+cabal.sandbox.config
 .sass-cache
 _cache
 _site
