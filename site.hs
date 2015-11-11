@@ -4,6 +4,7 @@ module Main where
 import Data.Default (def)
 import Control.Monad (liftM)
 import Data.Monoid (mappend, mconcat, mempty)
+import Text.Pandoc.Options
 
 import Hakyll
 
@@ -62,7 +63,12 @@ main = hakyll $ do
 customCompiler = 
   getResourceBody
   >>= (withItemBody $ unixFilter "gpp" ["-T", "--include", "html.gpp"])
-  >>= renderPandoc
+  >>= renderPandocWith defaultHakyllReaderOptions customPandocWriterOptions
+
+customPandocWriterOptions :: WriterOptions
+customPandocWriterOptions = defaultHakyllWriterOptions {
+  writerEmailObfuscation = NoObfuscation    
+}
 
 -- bibtexCompiler = do 
 --   csl <- load "theme/iso690-author-date-fr.csl"
