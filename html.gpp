@@ -1,5 +1,5 @@
 \define{qsee}{[#1](\##2)}
-\define{hs}{`#1`{.haskell .inline}}
+\define{hs}{```#1```{.haskell}}
 
 \define{haskell}{~~~ {.haskell}}
 \define{haskellN}{~~~ {.haskell .numberLines}}
