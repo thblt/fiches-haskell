@@ -1,5 +1,5 @@
 ---
 title: Cabal
+id: cabal
 ---
-\label{cabal}
 

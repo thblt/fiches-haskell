@@ -1,10 +1,11 @@
 ---
 title:  Classes de type
+id: typeclasses
 ---
-\label{typeclasses}
 
 Les classes de type ne sont pas des classes au sens que ce terme possède en POO.
 Elles sont plus proches de ce qu'on nomme des interfaces : elles décrivent des fonctions pour lesquelles un type qui appartient à la classe fournit une implémentation.
+
 
 # Dérivation automatique
 
@@ -13,6 +14,10 @@ Les types crées avec \hsKw{data} et \hsKw{newtype} peuvent dériver automatique
 ## Avec \hsKw{data}
 
 # Dérivation manuelle
+
+\box{law}
+À certaines classes de type sont associées des lois (lois des \qsee{foncteurs}{Functor}, lois \qsee{monades}{Monad}, *etc.*) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+\endbox
 
 \haskell
 class EvalToBool a where

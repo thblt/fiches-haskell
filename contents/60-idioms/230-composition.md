@@ -1,4 +1,4 @@
 ---
-title:  Composition
+title: Composition
+id: composition
 ---
-\label{composition}

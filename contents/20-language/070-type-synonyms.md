@@ -1,7 +1,7 @@
 ---
 title: Synonymes de types
+id: type-synonyms
 ---
-\label{type-synonyms}
 
 Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.
 

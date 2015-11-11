@@ -1,6 +1,6 @@
 ---
 title: Introduction
-label: introduction
+id: intro
 ---
 
 # Conventions

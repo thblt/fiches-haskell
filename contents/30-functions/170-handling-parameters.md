@@ -1,7 +1,7 @@
 ---
 title: Paramètres, motifs et gardes
+id: handlingParameters
 ---
-\label{handling-parameters}
 
 # Passage de paramètres
 
@@ -68,7 +68,9 @@ Le filtrage par motif et les gardes permettent de définir plusieurs cas qui se 
 
 Le filtrage par motifs permet de filtrer selon un constructeur ou selon une valeur arbitraire.
 
-## Par constructeur. Le filtrage par constructeurs permet de sélectionner quel constructeur d'un \qsee{type algébrique}{algebraic-types} correspond à quelle implémentation.
+## Par constructeur.
+
+Le filtrage par constructeurs permet de sélectionner quel constructeur d'un \qsee{type algébrique}{algebraic-types} correspond à quelle implémentation.
 
 \haskell
 maybeIntToStr :: Maybe Int -> String
@@ -97,7 +99,7 @@ compte singulier pluriel quantite = show quantite ++ " " ++  pluriel
 Une valeur littérale *doit* être littérale et ne peut pas, pour des raisons syntaxiques, être une variable. Ce code est erroné:
 
 \haskellN
-ultimate = "the Ultimate Question of Life, the Universe, and Everything"
+ultimate = "The Ultimate Question"
 
 answer :: String -> Int
 answer ultimate = 42

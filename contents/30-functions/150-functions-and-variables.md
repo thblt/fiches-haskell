@@ -1,7 +1,7 @@
 ---
 title: Fonctions et variables
+id: functions-and-variables
 ---
-\label{functions-and-variables}
 
 Haskell n'a pas de notion de variable au sens qu'a ce terme en programmation procédurale. Il est possible d'assigner une expression ou une valeur à un nom, avec la syntaxe \hs{nom = expression}, mais \hsFn{nom} est immuable, et est donc plus proche d'une constante (c'est une variable au sens mathématique du terme).
 

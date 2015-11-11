@@ -1,7 +1,7 @@
 ---
 title: Le Prélude
+id: prelude
 ---
-\label{prelude}
 
 Le Prélude (\hsMod{Prelude}) est la librairie fondamentale d'Haskell. Contrairement aux autres modules, il est importé implicitement (cette importation peut néanmoins être contrôlée avec une \qsee{clause \hsKw{import}}{import} explicite).
 

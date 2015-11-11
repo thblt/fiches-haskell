@@ -1,6 +1,6 @@
 ---
 title: Définition de types
-id: defining-types
+id: definingTypes
 ---
 \label{kw:data}
 

@@ -1,7 +1,7 @@
 ---
 title: Foncteurs applicatifs
+id: Applicative
 ---
-\label{applicative_functors}
 
 Il s'agit d'une \qsee{classe de type}{typeclasses}, définie comme suit:
 

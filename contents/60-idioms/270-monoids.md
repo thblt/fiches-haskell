@@ -1,5 +1,5 @@
 ---
 title: Monoïdes
+id: Monoid
 ---
-\label{monoids}
 

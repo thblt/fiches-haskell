@@ -1,7 +1,7 @@
 ---
 title: Application partielle et currying 
+id: partialApplicationAndCurrying
 ---
-\label{partial-application-and-currying}
 
 Une fonction, quel que soit le nombre de paramètres avec lequel elle a été déclarée,
 ne prend qu'un seul paramètre et renvoie une autre fonction. Le type de \hs{+},

@@ -1,7 +1,7 @@
 ---
 title:  Modules
+id: modules
 ---
-\label{modules}
 
 Haskell dispose d'un mécanisme d'importation de modules.
 
@@ -27,10 +27,10 @@ Cette déclaration exporte les identifiants x, y et z du code qui la suit. On ex
 # Importation de modules
 \label{import}
 
-\haskell
+\haskellN
 -- Commande                          Importé
 import Mod                        -- x, y, z, Mod.x, Mod.y, Mod.z
-import Mod ()                     -- (Nothing!)
+import Mod ()                     -- Uniquement les instances, voir ci-dessous. 
 import Mod (x,y)                  -- x, y, Mod.x, Mod.y
 import qualified Mod              -- Mod.x, Mod.y, Mod.z
 import qualified Mod (x,y)        -- Mod.x, Mod.y
@@ -42,3 +42,8 @@ import qualified Mod as Foo       -- Foo.x, Foo.y, Foo.z
 import qualified Mod as Foo (x,y) -- Foo.x, Foo.y
 \eof
 \caption*{D'après \cite{Hudak2000}}
+
+Même sans importer aucun nom (c'est le cas de \hs{import Mod ()}), tout \hsKw{import} importe les instances de classes de types définies dans le module importé.
+
+
+est un cas particulier: contrairement aux apparences, il a bien une utilité, qui est d'importer les instances de \fsee{classes de type}{typeclasses} définies dans \hsM{Mod}.

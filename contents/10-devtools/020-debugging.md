@@ -1,5 +1,5 @@
 ---
 title: Debuggers
+id: debugging
 ---
-\label{debugging}
 

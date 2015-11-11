@@ -1,7 +1,7 @@
 ---
 title: Gestion des erreurs
+id: errorHandling
 ---
-\label{error-handling}
 
 # Les types \hsT{Maybe} et \hsT{Either}
 

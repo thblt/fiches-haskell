@@ -1,7 +1,7 @@
 ---
 title: Évaluation paresseuse
+id: lazyness
 ---
-\label{lazyness}
 
 \haskell
 let a = [1..] -- a est la liste de l'ensemble des entiers positifs

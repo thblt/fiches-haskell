@@ -1,7 +1,7 @@
 ---
 title: Définition de fonctions
+id: definingFunctions
 ---
-\label{defining-functions}
 
 Une fonction se définit de la façon suivante:
 

@@ -1,7 +1,7 @@
 ---
 title: Monades
+id: Monad
 ---
-\label{monads}
 
 \todo {Déf propre, exemples, >>, >>=}
 \todo{Return}

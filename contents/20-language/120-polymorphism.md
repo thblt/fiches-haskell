@@ -1,7 +1,7 @@
 ---
 title:  Polymorphisme
+id: polymorphism
 ---
-\label{polymorphism}
 
 # Polymorphisme paramétrique
 

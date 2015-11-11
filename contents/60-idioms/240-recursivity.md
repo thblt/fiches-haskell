@@ -1,7 +1,7 @@
 ---
 title: Récursivité
+id: recursivity
 ---
-\label{recursivity}
 
 # Récursivité en queue
 

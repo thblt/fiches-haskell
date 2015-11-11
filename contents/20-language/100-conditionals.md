@@ -1,7 +1,7 @@
 ---
 title: Structures conditionnelles
+id: conditionals
 ---
-\label{conditionals}
 
 Haskell connaît deux structures conditionnelles: les tests binaires avec \hs{if}, et les cas de \hs{case}.
 
