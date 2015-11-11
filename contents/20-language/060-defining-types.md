@@ -66,7 +66,7 @@ tlp = Book {
 Il définit automatiquement une fonction accesseur pour chacun de ses champs. Le type \hsT{Book} ci-dessus fournit ainsi trois fonctions \hs{bookYear :: Book -> Int}, \hs{bookAuthors :: Book -> [String]} et \hs{bookTitle :: Book -> String}:
 
 \ghci
-λ> bookYear tlp
+\prompt bookYear tlp
 1921
 \eof
 

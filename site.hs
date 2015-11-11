@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
+import Data.Default (def)
+import Control.Monad (liftM)
 import Data.Monoid (mappend, mconcat, mempty)
 
 import Hakyll
@@ -8,14 +10,7 @@ import Hakyll
 main :: IO ()
 main = hakyll $ do
     match "contents/**.md" $
-        compile $
-            getResourceBody
-            >>= (withItemBody $ unixFilter "gpp" ["-T", "--include", "html.gpp"])
-            >>= renderPandoc
-            >>= return . fmap demoteHeaders
-            >>= return . fmap demoteHeaders
-            >>= loadAndApplyTemplate "theme/tpl/item.html" defaultContext
-            >>= relativizeUrls
+        compile $ customCompiler
 
     create ["index.html"] $ do
         route idRoute
@@ -30,11 +25,14 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "theme/tpl/default.html" archiveCtx
                 >>= relativizeUrls
 
+    match "bibliography.bib" $ compile biblioCompiler
+
+    match  "theme/iso690-author-date-fr.csl" $ compile cslCompiler
 
     match "contents_extras/**" $ do
         route   $ gsubRoute "contents_extras/" (const "") `composeRoutes`
             setExtension "html"
-        compile $ pandocCompiler
+        compile $ customCompiler
             >>= loadAndApplyTemplate "theme/tpl/page.html" defaultContext
             >>= loadAndApplyTemplate "theme/tpl/default.html" defaultContext
             >>= relativizeUrls
@@ -55,3 +53,20 @@ main = hakyll $ do
         compile copyFileCompiler
 
     match "theme/tpl/*" $ compile templateCompiler
+
+customCompiler = 
+  getResourceBody
+  >>= (withItemBody $ unixFilter "gpp" ["-T", "--include", "html.gpp"])
+  >>= renderPandoc
+  >>= return . fmap demoteHeaders
+  >>= return . fmap demoteHeaders
+  >>= loadAndApplyTemplate "theme/tpl/item.html" defaultContext
+  >>= relativizeUrls
+
+-- bibtexCompiler = do 
+--   csl <- load "theme/iso690-author-date-fr.csl"
+--   bib <- load "bibliography.bib"
+--   getResourceBody
+--   >>= readPandocBiblio def csl bib
+--   >>= return . writePandoc
+-- 

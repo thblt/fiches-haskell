@@ -1,11 +1,21 @@
 #contents {
-    table.sourceCode {
+		code {
+			font-family: $codeFont;
+			background: $lightDarken;
+			border-radius : .125em;
+			padding : 0 .25em;
+		}
+    pre, div.sourceCode, table.sourceCode {
+				code {
+					background: none;
+					padding: 0;
+				}
         tbody tr, tr, tbody td, tbody tr td, td {
             border: none;
         }
         td.lineNumbers {
             width: 3ex;
-            color: $midGrey;
+            color: $midDarken;
         }
     }
 
