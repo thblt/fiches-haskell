@@ -4,9 +4,11 @@
 \define{haskell}{~~~ {.haskell}}
 \define{haskellN}{~~~ {.haskell .numberLines}}
 \define{ghci}{\haskell}
+\define{prompt}{ghci> }
 \define{eof}{~~~}
 
 \define{box}{<div class="box #1">}
+\define{boxtitle}{<div class="title">#1</div>}
 \define{endbox}{</div>}
 
 \define{hsC}{\hs{#1}}

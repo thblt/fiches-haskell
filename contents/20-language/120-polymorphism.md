@@ -12,11 +12,11 @@ N'importe quelle \qsee{fonction}{functions-and-variables} ou  \qsee{type}{defini
 Le type \hsT{Maybe}, qui représente une valeur possible, est un exemple de type polymorphique. Il a deux constructeurs : \hs{Nothing} et \hs{Just a}. \hs{Nothing} ne prend pas de paramètre, et représente l'absence de valeur. \hs{Just a} prend un paramètre du type quelconque \hsTP{a}.
 
 \ghci
-λ>:type Just 3
+\prompt:type Just 3
 Just 3 :: Num a => Maybe a
-λ>:type Just "Une chaîne"
+\prompt:type Just "Une chaîne"
 Just "Une chaîne" :: Maybe [Char]
-λ>:type Nothing
+\prompt:type Nothing
 Nothing :: Maybe a
 \eof
 
@@ -30,7 +30,7 @@ third (_:_:x:_) = Just x
 third _ = Nothing
 \eof
 
-\box{info}[«Théorèmes gratuits»]
+\box{info}\boxtitle{«Théorèmes gratuits»}
 
 Comme une fonction polymorphique n'a pas accès au type réel de son paramètre, on peut déduire (au sens strict) ce qu'elle peut faire à sa seule signature.
 
@@ -39,7 +39,7 @@ La fonction \hs{head :: [a] -> a} n'a pas accès au type \hsTP{a}, et par consé
 La fonction \hs{fst :: (a, b) -> a} ne peut *rien* faire d'autre que renvoyer le premier élément de la paire qui lui est passée, et ignorer le second.
 
 \box{ref}
-\textcite{Wadler1989} explicite le soubassement logico-mathématique de ce principe et montre des applications à des cas beaucoup plus complexes que ces quelque exemples.
+[@Wadler1989, pp. 33-35, 38-39 and *passim*] explicite le soubassement logico-mathématique de ce principe et montre des applications à des cas beaucoup plus complexes que ces quelque exemples.
 \endbox
 
 \endbox
