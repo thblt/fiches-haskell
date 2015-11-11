@@ -10,7 +10,11 @@ import Hakyll
 main :: IO ()
 main = hakyll $ do
     match "contents/**.md" $
-        compile $ customCompiler
+      compile $ customCompiler
+        >>= return . fmap demoteHeaders
+        >>= return . fmap demoteHeaders
+        >>= loadAndApplyTemplate "theme/tpl/item.html" defaultContext
+        >>= relativizeUrls
 
     create ["index.html"] $ do
         route idRoute
@@ -33,6 +37,7 @@ main = hakyll $ do
         route   $ gsubRoute "contents_extras/" (const "") `composeRoutes`
             setExtension "html"
         compile $ customCompiler
+            >>= return . fmap (demoteHeaders . demoteHeaders)
             >>= loadAndApplyTemplate "theme/tpl/page.html" defaultContext
             >>= loadAndApplyTemplate "theme/tpl/default.html" defaultContext
             >>= relativizeUrls
@@ -58,10 +63,6 @@ customCompiler =
   getResourceBody
   >>= (withItemBody $ unixFilter "gpp" ["-T", "--include", "html.gpp"])
   >>= renderPandoc
-  >>= return . fmap demoteHeaders
-  >>= return . fmap demoteHeaders
-  >>= loadAndApplyTemplate "theme/tpl/item.html" defaultContext
-  >>= relativizeUrls
 
 -- bibtexCompiler = do 
 --   csl <- load "theme/iso690-author-date-fr.csl"
