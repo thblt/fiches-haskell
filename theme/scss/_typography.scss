@@ -46,6 +46,13 @@
 						font-weight: bold;
 						text-transform: uppercase;
 						margin-bottom: 1em;
+						a {
+								text-decoration: none;
+								color: black;
+								&:hover {
+										text-decoration: underline;
+								}
+						}
 				}
 				h3 {
 						font-family: $blockTitleFont;
@@ -61,8 +68,10 @@
 						font-family: $inlineTitleFont;
 						display: inline-block;
 						font-weight: bold;
+						white-space: pre;
+						margin-right: 1em;
 						&:before {
-								display: inline-block;
+								display:inline-block;
 								margin-left: -2ex;
 								height: 1ex;
 								width: 1ex;
@@ -73,6 +82,12 @@
 						}
 						& + p {
 								display: inline;
+								&:after // Force a line break in case a new h4 immediatly follows.
+								{
+										display:block;
+										height: 0;
+										content: "";
+								}
 						}
 				}
 				p,

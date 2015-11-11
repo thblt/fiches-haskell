@@ -1,37 +1,40 @@
 #contents {
-		code {
-			font-family: $codeFont;
-			background: $lightDarken;
-			border-radius : .125em;
-			padding : 0 .25em;
+		code, pre, .sourceCode {
+				font-family: $codeFont !important;
 		}
-    pre, div.sourceCode, table.sourceCode {
+		code {
+				background: $lightDarken;
+				border-radius : .125em;
+				padding : 0 .25em;
+		}
+		pre, div.sourceCode, table.sourceCode {
 				code {
-					background: none;
-					padding: 0;
+						background: none;
+						padding: 0;
 				}
-        tbody tr, tr, tbody td, tbody tr td, td {
-            border: none;
-        }
-        td.lineNumbers {
-            width: 3ex;
-            color: $midDarken;
-        }
-    }
+		}
 
-    .sourceCode {
-        span.kw { color: #007020; font-weight: bold; }
-        span.dt { color: #902000; }
-        span.dv { color: #40a070; }
-        span.bn { color: #40a070; }
-        span.fl { color: #40a070; }
-        span.ch { color: #4070a0; }
-        span.st { color: #4070a0; }
-        span.co { color: #60a0b0; font-style: italic; }
-        span.ot { color: #007020; }
-        span.al { color: red; font-weight: bold; }
-        span.fu { color: #06287e; }
-        span.re { }
-        span.er { color: red; font-weight: bold; }
-    }
+		code, pre, div.sourceCode, table.sourceCode, h4 .sourceCode {
+				tbody tr, tr, tbody td, tbody tr td, td {
+						border: none;
+				}
+				td.lineNumbers {
+						width: 3ex;
+						color: $midDarken;
+				}
+				font-weight: normal; // Reset style in headers
+				span.kw { color: #007020; font-weight: bold; }
+				span.dt { color: #902000; }
+				span.dv { color: #40a070; }
+				span.bn { color: #40a070; }
+				span.fl { color: #40a070; }
+				span.ch { color: #4070a0; }
+				span.st { color: #4070a0; }
+				span.co { color: #60a0b0; font-style: italic; }
+				span.ot { color: #007020; }
+				span.al { color: red; font-weight: bold; }
+				span.fu { color: #06287e; }
+				span.re { }
+				span.er { color: red; font-weight: bold; }
+		}
 }
