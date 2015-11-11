@@ -17,7 +17,7 @@ Attention, c'est encore un travail en cours, et à ce jour seules les fiches les
 
 ## Auteur et mainteneur.
 
-[Thibault Polge](https://thb.lt) ([thibault@thb.lt](mailto:thibault@thb.lt)).
+[Thibault Polge](https://thb.lt) ([thibault@@thb.lt](mailto:thibault@@thb.lt)).
 
 ## Outils.
 
