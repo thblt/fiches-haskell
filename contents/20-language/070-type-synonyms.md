@@ -50,10 +50,10 @@ newtype MyType = MyType Int
  - n'autorise qu'un seul constructeur,
  - ne conserve pas les informations du type après la compilation. Dans le programme compilé, \hsT{MyType} ci-dessus est traité comme un simple \hsT{Int}:
 
-
-
 ## Usages de \hsKw{newtype}.
 
-Par exemple: une librairie multiplateforme fournit un accès à une ressource quelconque. Sous un des systèmes cibles, cette ressource est identifiée par un \hsT{Int64}, sous un autre, par un \hsT{String}. En utilisant \hs{newtype}, on peut masquer le type sous-jacent. On pourrait parvenir au même résultat avec un type algébrique dont on exporterait pas le constructeur\todo{\\qsee}, mais serait plus coûteux en terme de performance et d'usage mémoire.
+ * Permet de masquer le type sous-jacent sans la perte de performances liée à l'usage de \hs{data}.
+
+ * Permet, sans perte de performances, de fournir des instances différentes d'un unique \qsee{classe de type}{typeclasses} pour un type.
 
 \todo{$\neq$ data/newtype - question de la performance RWH 157 + conséquences sur les motifs RWH 158}

@@ -12,10 +12,9 @@ class Functor f where
 
 La métaphore la plus répandue pour décrire un foncteur consiste à le comparer à une boîte qui contient une valeur. La métaphore est un peu courte: 
 
-
 \box{law}
-\haskell
-fmap id == id
-fmap (f . g)  ==  fmap f . fmap g
-\eof
+
+ 1. \hs{fmap id === id}. Mapper `id` sur un foncteur renvoie le même foncteur. Autrement dit, `fmap` ne peut pas introduire d'autres modifications dans le foncteur que l'application de la fonction. 
+
+ 2. \hs{fmap (f . g)  ==  fmap f . fmap g}
 \endbox
