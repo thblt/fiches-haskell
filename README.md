@@ -41,6 +41,7 @@ On trouvera quelques scripts à la racine du dépôt.
 Sur le serveur, la recompilation automatique après un `git push` est automatisée avec un petit script sur le hook `post-receive`. Le monde de Cabal étant un monde assez tortueux, ce script est donc loin d'être assez mûr pour un usage sérieux. Je ne le mets pas sur le dépôt pour l'instant, mais en gros il fonctionne comme ça:
 
 - Les push se font sur un dépôt nu (ie, sans copie de travail). La copie de travail est dans `/var/www`.
+
 - `post-receive` fait un `pull --force` dans le dépôt de travail, et tente de lancer `cabal run clean` puis `cabal run build`. En général, il y arrive, mais il ne faut pas trop compter dessus non plus.
 
 Le principal problème est que dans la mesure où l'utilisateur actif est `www-data` (le serveur git est sur https), il n'a pas de `$HOME`, ce qui ne plait pas du tout du tout à cabal. Pour l'instant, je feinte sauvagement en faisant un `export HOME` au tout début du script, ce qui n'est pas démesurément propre. Évidemment, il serait aussi possible de tout installer globalement (l'environnement de compilation est dans une *sandbox* cabal) mais c'est encore pire, d'autant plus sur un serveur. Ça marche tant que tous les sites Hakyll utilisent la même version de Hakyll, et tous les programmes Haskell les mêmes versions de tous les paquets, ce qui est une façon de dire que ça ne marchera pas longtemps du tout.
