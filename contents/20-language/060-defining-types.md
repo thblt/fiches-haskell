@@ -1,8 +1,7 @@
 ---
 title: Définition de types
-id: definingTypes
+id: kw:data
 ---
-\label{kw:data}
 
 La définition de nouveaux types se fait avec le mot-clé \hsKw{data}.
 
@@ -30,8 +29,7 @@ Dans cette syntaxe, les arguments du constructeur sont positionnels et doivent �
 Il est légal et très courant, quand un type ne fournit qu'un seul constructeur, de donner à ce constructeur le nom du type. On aurait alors \hs{data Book = Book String [String] Int}. L'exemple précédent les distingue par souci de clarté, mais n'est pas vraiment idiomatique.
 \endbox
 
-# Alternative entre constructeurs
-\label{algebraic-types}
+# Alternative entre constructeurs {#algebraic-types}
 
 Un type algébrique présente une alternative en offrant plusieurs constructeurs.
 

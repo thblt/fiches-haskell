@@ -22,6 +22,10 @@ module Mod
 
 Cette déclaration exporte les identifiants x, y et z du code qui la suit. On exporterait la totalité des noms en enlevant la parenthèse, et aucun en la laissant vide.
 
+\box{info}
+Ce n'est pas une erreur de syntaxe que de ne pas respecter la règle nom du module = nom du fichier. Mais un tel module ne serait pas importable.
+\endbox
+
 \todo{Exporter un type sans constructeurs + lien depuis defining-types. Handle est un bon exemple de pourquoi. Aussi RWH 159}
 
 # Importation de modules
