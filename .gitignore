@@ -1,4 +1,5 @@
 *.aux
+#*
 *.bbl
 *.bcf
 *.blg
@@ -18,11 +19,10 @@
 *.toc
 *.un~
 *.xdy
+.*
 .DS_Store
-.cabal-sandbox
-cabal.sandbox.config
-.sass-cache
 _cache
 _site
+cabal.sandbox.config
 dist
 site
