@@ -9,14 +9,23 @@ Elles sont plus proches de ce qu'on nomme des interfaces : elles décrivent des 
 
 # Dérivation automatique
 
-Les types crées avec \hsKw{data} et \hsKw{newtype} peuvent dériver automatiquement certains \qsee{classes de type}{typeclasses}.
+Les types crées avec \hsKw{data} et \hsKw{newtype} peuvent dériver automatiquement certains \qsee{classes de type}{typeclasses} avec le mot clé \hsKw{deriving}:
+
+\haskell
+data Something = Something Integer Integer deriving (Show)
+\eof
+
+
 
 ## Avec \hsKw{data}
 
 # Dérivation manuelle
 
-\box{law}
-À certaines classes de type sont associées des lois (lois des \qsee{foncteurs}{Functor}, lois \qsee{monades}{Monad}, *etc.*) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+\box{warn}
+À certaines classes de type sont associées des lois (lois des \qsee{foncteurs}{Functor}, des \qsee{monades}{Monad}, *etc.*) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+
+Autrement dit, le système des classes de types est en partie formel, en partie contractuel. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.
+
 \endbox
 
 \haskell
