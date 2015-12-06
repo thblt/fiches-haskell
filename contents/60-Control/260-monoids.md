@@ -1,5 +1,0 @@
----
-title: Monoïdes
-id: Monoid
----
-
