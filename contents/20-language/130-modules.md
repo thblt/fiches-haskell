@@ -23,10 +23,10 @@ module Mod
 Cette déclaration exporte les identifiants x, y et z du code qui la suit. On exporterait la totalité des noms en enlevant la parenthèse, et aucun en la laissant vide.
 
 \box{info}
-Ce n'est pas une erreur de syntaxe que de ne pas respecter la règle nom du module = nom du fichier. Mais un tel module ne serait pas importable.
+Ce n'est pas une erreur de syntaxe que de ne pas respecter la règle nom du module = nom du fichier. Un tel module ne serait simplement pas importable, puisque le compilateur ne saurait pas où le trouver.
 \endbox
 
-\todo{Exporter un type sans constructeurs + lien depuis defining-types. Handle est un bon exemple de pourquoi. Aussi RWH 159}
+@TODO exporter un type mais pas ses constructeurs.
 
 # Importation de modules
 \label{import}
@@ -49,5 +49,6 @@ import qualified Mod as Foo (x,y) -- Foo.x, Foo.y
 
 Même sans importer aucun nom (c'est le cas de \hs{import Mod ()}), tout \hsKw{import} importe les instances de classes de types définies dans le module importé.
 
+# Modules et instances
 
-est un cas particulier: contrairement aux apparences, il a bien une utilité, qui est d'importer les instances de \fsee{classes de type}{typeclasses} définies dans \hsM{Mod}.
+Les instances de classes de types définies dans un module sont toujours exportées et importées, quels que soient les noms explicitement importés ou exportés, et même s'il n'y en a aucun.
