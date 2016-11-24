@@ -15,6 +15,7 @@ Les types crées avec \hsKw{data} et \hsKw{newtype} peuvent dériver automatique
 data Something = Something Integer Integer deriving (Show)
 \eof
 
+La dérivation automatique est implémentée au niveau du compilateur.
 
 
 ## Avec \hsKw{data}
