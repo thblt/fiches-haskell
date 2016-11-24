@@ -11,7 +11,6 @@ Une information, pour préciser un point ou préciser un point ou renvoyer vers 
 
 \box{warn}
 Un avertissement généralement important.
-Ces boîtes 
 \endbox
 
 \box{math}
