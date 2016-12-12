@@ -1,5 +1,0 @@
----
-title: Debuggers
-id: debugging
----
-

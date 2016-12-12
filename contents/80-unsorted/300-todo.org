@@ -1,0 +1,14 @@
+À intégrer, en vrac:
+
+-  Idiome : Point-free style (RWH 120)
+-  Lexique : Liste de paires = association list (RWH 121)
+-  Extensions :
+
+   -  TypeSynonymInstances
+   -  OverlappingInstances
+
+-  monomorphisme (RWH 163, Haskell 98 4.5.5)
+-  IO
+-  Qu'est ce qu'une action (RWH 167, 184)
+-  Buffering (RWH 189)
+-  Data.ByteString, Data.ByteString.Lazy

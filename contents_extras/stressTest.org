@@ -1,0 +1,254 @@
+* Testing Haskell code in titles \hs{if a then 2 else 3}
+  :PROPERTIES:
+  :CUSTOM_ID: testing-haskell-code-in-titles
+  :END:
+
+** Testing Haskell code in titles \hs{if a then 2 else 3}
+   :PROPERTIES:
+   :CUSTOM_ID: testing-haskell-code-in-titles-1
+   :END:
+
+*** Testing Haskell code in titles \hs{if a then 2 else 3}
+    :PROPERTIES:
+    :CUSTOM_ID: testing-haskell-code-in-titles-2
+    :END:
+
+**** Testing Haskell code in titles \hs{if a then 2 else 3}
+     :PROPERTIES:
+     :CUSTOM_ID: testing-haskell-code-in-titles-3
+     :END:
+
+* Testing inline and block code
+  :PROPERTIES:
+  :CUSTOM_ID: testing-inline-and-block-code
+  :END:
+
+Here's some inline code \hs{data Book = Book Int String [String]} !
+
+\hs{data Book = Book { bookTitle :: String, bookAuthors :: [String], bookYear :: Int}}
+
+Testing Haskell code in titles \hs{if a then 2 else 3}
+
+* Haskell code blocks
+  :PROPERTIES:
+  :CUSTOM_ID: haskell-code-blocks
+  :END:
+
+\haskellN
+main :: IO () main = hakyll $ do match "contents/**.md" $ compile $
+customCompiler >>= return . fmap demoteHeaders >>= return . fmap
+demoteHeaders >>= loadAndApplyTemplate "theme/tpl/item.html"
+defaultContext >>= relativizeUrls
+
+#+BEGIN_EXAMPLE
+    create ["index.html"] $ do
+        route idRoute
+        compile $ do
+            posts <- loadAll "contents/**.md"
+            let archiveCtx =
+                    listField "posts" defaultContext (return posts) `mappend`
+                    defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "theme/tpl/cards.html" archiveCtx
+                >>= loadAndApplyTemplate "theme/tpl/default.html" archiveCtx
+                >>= relativizeUrls
+#+END_EXAMPLE
+
+\eof
+
+\haskell
+main :: IO () main = hakyll $ do match "contents/**.md" $ compile $
+customCompiler >>= return . fmap demoteHeaders >>= return . fmap
+demoteHeaders >>= loadAndApplyTemplate "theme/tpl/item.html"
+defaultContext >>= relativizeUrls
+
+#+BEGIN_EXAMPLE
+    create ["index.html"] $ do
+        route idRoute
+        compile $ do
+            posts <- loadAll "contents/**.md"
+            let archiveCtx =
+                    listField "posts" defaultContext (return posts) `mappend`
+                    defaultContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "theme/tpl/cards.html" archiveCtx
+                >>= loadAndApplyTemplate "theme/tpl/default.html" archiveCtx
+                >>= relativizeUrls
+#+END_EXAMPLE
+
+\eof
+
+* COde in boxes
+  :PROPERTIES:
+  :CUSTOM_ID: code-in-boxes
+  :END:
+
+\box{info}
+
+Here's some inline code \hs{data Book = Book Int String [String]} !
+
+\hs{fmap} !!!
+
+\endbox
+
+* The infamous inline titles problem
+  :PROPERTIES:
+  :CUSTOM_ID: the-infamous-inline-titles-problem
+  :END:
+
+** Title 1
+   :PROPERTIES:
+   :CUSTOM_ID: title-1
+   :END:
+
+Some text
+
+** Title 2
+   :PROPERTIES:
+   :CUSTOM_ID: title-2
+   :END:
+
+Some text
+
+** Title 3
+   :PROPERTIES:
+   :CUSTOM_ID: title-3
+   :END:
+
+Some text
+
+** Inlining titles only
+   :PROPERTIES:
+   :CUSTOM_ID: inlining-titles-only
+   :END:
+
+** Inlining titles only
+   :PROPERTIES:
+   :CUSTOM_ID: inlining-titles-only-1
+   :END:
+
+** Inlining titles only
+   :PROPERTIES:
+   :CUSTOM_ID: inlining-titles-only-2
+   :END:
+
+this will probably fail, and is not a problem.
+
+** The infamous justification bug
+   :PROPERTIES:
+   :CUSTOM_ID: the-infamous-justification-bug
+   :END:
+
+** Some line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer longer longer line of
+text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer longer longer longer
+line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer longer longer longer
+longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph
+
+** Some longer longer longer longer longer longer longer longer longer
+longer longer line of text
+   :PROPERTIES:
+   :CUSTOM_ID: some-longer-longer-longer-longer-longer-longer-longer-longer-longer-longer-longer-line-of-text
+   :END:
+
+Some relatively long content
+
+Some extra content in a new paragraph

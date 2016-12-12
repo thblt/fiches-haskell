@@ -1,0 +1,20 @@
+* Fonctions d'entrée
+  :PROPERTIES:
+  :CUSTOM_ID: fonctions-dentrée
+  :END:
+
+| \hsMod{Prelude}   | =h*=   | Fonctions                         | Description                    |
+|-------------------+--------+-----------------------------------+--------------------------------|
+| \Y                | \Y     | \hsFn{getChar :: IO Char}         | Lit un caractère.              |
+| \Y                | \Y     | \hsFn{getLine :: IO String}       | Lit une ligne.                 |
+| \Y                | \Y     | \hsFn{getContents :: IO String}   | Lit le contenu d'un fichier.   |
+
+* Fonctions de sortie
+  :PROPERTIES:
+  :CUSTOM_ID: fonctions-de-sortie
+  :END:
+
+* Manipulation de fichiers ou de répertoires
+  :PROPERTIES:
+  :CUSTOM_ID: manipulation-de-fichiers-ou-de-répertoires
+  :END:

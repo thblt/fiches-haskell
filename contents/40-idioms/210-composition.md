@@ -1,4 +1,0 @@
----
-title: Composition
-id: composition
----

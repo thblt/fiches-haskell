@@ -1,0 +1,9 @@
+* Les types \hsT{Maybe} et \hsT{Either}
+  :PROPERTIES:
+  :CUSTOM_ID: les-types-et
+  :END:
+
+* Exceptions
+  :PROPERTIES:
+  :CUSTOM_ID: exceptions
+  :END:

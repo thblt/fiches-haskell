@@ -1,0 +1,65 @@
+* Le projet
+  :PROPERTIES:
+  :CUSTOM_ID: le-projet
+  :END:
+
+Le projet de ce site est de proposer une présentation aussi systématique
+et compacte que possible du langage Haskell, en français. Il est
+construit comme une série de «fiches», grossièrement regroupées en
+catégories.
+
+\box{warn} Attention, c'est encore un travail en cours, et à ce jour
+seules les fiches les plus élémentaires sont écrites. \endbox
+
+* Crédits
+  :PROPERTIES:
+  :CUSTOM_ID: crédits
+  :END:
+
+** Auteur et mainteneur.
+   :PROPERTIES:
+   :CUSTOM_ID: auteur-et-mainteneur.
+   :END:
+
+[[https://thb.lt][Thibault Polge]]
+([thibault@@thb.lt](mailto:thibault@@thb.lt)).
+
+** Outils.
+   :PROPERTIES:
+   :CUSTOM_ID: outils.
+   :END:
+
+Ce site est généré avec [[http://jaspervdj.be/hakyll/][Hakyll]], une
+librairie de génération de sites statiques écrite en Haskell.
+
+Le thème est compilé avec [[http://sass-lang.com/][Sass]] et
+[[http://compass-style.org/][Compass]] et utilise
+[[http://gridle.org/][Gridle]].
+
+** Éléments graphiques et polices.
+   :PROPERTIES:
+   :CUSTOM_ID: éléments-graphiques-et-polices.
+   :END:
+
+Le corps du texte est composé avec la
+[[https://www.google.com/fonts/specimen/Roboto+Slab][Roboto Slab]] de
+Christian Robertson, les titres avec la
+[[https://www.google.com/fonts/specimen/Open+Sans+Condensed][Open Sans
+Condensed]] et la
+[[https://www.google.com/fonts/specimen/Open+Sans][Open Sans]] de Steve
+Matteson.
+
+Les icônes des différentes boîtes proviennent de différentes séries
+compilées sur IcoMoon
+
+* Licence
+  :PROPERTIES:
+  :CUSTOM_ID: licence
+  :END:
+
+[[http://creativecommons.org/licenses/by-nc-sa/2.0/fr/][[[https://i.creativecommons.org/l/by-nc-sa/2.0/fr/80x15.png]]]]
+Pour l'instant, ce travail est mis à disposition sous la (relativement
+restrictive)
+[[https://creativecommons.org/licenses/by-nc-sa/2.0/fr/][Licence
+Creative Commons Attribution - Pas d'Utilisation Commerciale - Partage
+dans les Mêmes Conditions 2.0 France]].
