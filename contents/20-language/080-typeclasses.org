@@ -1,45 +1,54 @@
+---
+title: "Classes de type"
+id: typeclasses
+---
+
+
 Les classes de type ne sont pas des classes au sens que ce terme possède
 en POO. Elles sont plus proches de ce qu'on nomme des interfaces : elles
 décrivent des fonctions pour lesquelles un type qui appartient à la
 classe fournit une implémentation.
 
+* Créer une classe de type
+
+#+begin_src haskell
+  class Parsable a where
+    parse :: String -> a
+#+end_src
+
+Une implémentation par défaut peut être fournie.  La classe de type =Eq= par exemple est définie comme:
+
+#+begin_src haskell
+  class Eq a where
+    (==), (/=) :: a -> a -> Bool
+    x /= y     =  not (x == y)
+    x == y     =  not (x /= y)
+#+end_src
+
+* Dériver une classe de type
+
+#+begin_src haskell
+  data CanardLapin = { canard :: Bool, lapin :: Bool }
+
+  instance Show CanardLapin where
+    show (CanardLapin True False) = "Seulement un canard"
+    show (CanardLapin False True) = "Seulement un lapin"
+    show _ = "Un canard lapin!"
+#+end_src
+
+
+#+begin_warn
+À certaines classes de type sont associées des lois (lois des [[#Functor][foncteurs]], des [[#Monad][monades]], /etc./) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+
+Autrement dit, le système des classes de types est en partie formel, en partie contractuel. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.  Il est aussi possible, dans une certaine mesure, d'automatiser la vérification de conformité.
+#+end_warn
+
 * Dérivation automatique
-  :PROPERTIES:
-  :CUSTOM_ID: dérivation-automatique
-  :END:
 
-Les types crées avec \hsKw{data} et \hsKw{newtype} peuvent dériver
-automatiquement certains \qsee{classes de type}{typeclasses} avec le mot
-clé \hsKw{deriving}:
+Les types crées avec ~data~ et ~newtype~ peuvent dériver automatiquement certaines classes avec le mot clé ~deriving~:
 
-\haskell
-data Something = Something Integer Integer deriving (Show) \eof
+#+begin_example haskell
+data Something = Something Integer Integer deriving (Show)
+#+end_example haskell
 
 La dérivation automatique est implémentée au niveau du compilateur.
-
-** Avec \hsKw{data}
-   :PROPERTIES:
-   :CUSTOM_ID: avec
-   :END:
-
-* Dérivation manuelle
-  :PROPERTIES:
-  :CUSTOM_ID: dérivation-manuelle
-  :END:
-
-\box{warn} À certaines classes de type sont associées des lois (lois des
-\qsee{foncteurs}{Functor}, des \qsee{monades}{Monad}, /etc./) que le
-compilateur ne peut pas nécessairement contrôler. Il est donc possible
-de construire des instances pathologiques de classes de type sans
-recevoir d'avertissement du compilateur.
-
-Autrement dit, le système des classes de types est en partie formel, en
-partie contractuel. Il convient de vérifier les dimensions
-contractuelles dans la documentation de la classe de type.
-
-\endbox
-
-\haskell
-class EvalToBool a where toBool :: a -> Bool
-
-instance EvalToBool Integer where toBool x = x /= 0 \eof
