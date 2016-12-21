@@ -1,4 +1,28 @@
-\haskell
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#begin_src haskell
 class Monoid a where mempty :: a -- \^ Identity of 'mappend' mappend ::
 a -> a -> a -- \^ An associative operation mconcat :: [a] -> a
 
@@ -11,4 +35,4 @@ a -> a -> a -- \^ An associative operation mconcat :: [a] -> a
         mconcat = foldr mappend mempty
 #+END_EXAMPLE
 
-\eof
+#end_src

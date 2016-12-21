@@ -1,7 +1,31 @@
-Le Prélude (\hsMod{Prelude}) est la librairie fondamentale d'Haskell.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Le Prélude (~Prelude~) est la librairie fondamentale d'Haskell.
 Contrairement aux autres modules, il est importé implicitement (cette
 importation peut néanmoins être contrôlée avec une
-\qsee{clause \hsKw{import}}{import} explicite).
+[[#import][clause ~import~]] explicite).
 
 L'implémentation de référence \parencite[\nopp I, 9]{Haskell2010} est
 écrite en Haskell.
@@ -16,7 +40,7 @@ principe d'évaluation paresseuse:
 \begin{itemize}
 \item Les opérateurs booléens court-circuitants :
 \end{itemize}
-\haskellN
+#begin_src haskell
 module Prelude ( module PreludeList, module PreludeText, module
 PreludeIO, Bool(False, True), Maybe(Nothing, Just), Either(Left, Right),
 Ordering(LT, EQ, GT), Char, String, Int, Integer, Float, Double,
@@ -55,6 +79,6 @@ etc. -- Trivial type: ()(()) -- Functions: (->)
     seq, ($!)
 #+END_EXAMPLE
 
-) where \eof
+) where #end_src
 Noms exportés par le Prélude d'Haskell 2010
 \parencite[\nopp I, 9]{Haskell2010}

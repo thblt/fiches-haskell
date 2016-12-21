@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * Passage de paramètres
   :PROPERTIES:
   :CUSTOM_ID: passage-de-paramètres
@@ -15,22 +39,22 @@ les arguments du constructeur. Par exemple, la fonction suivante
 déconstruit un constructeur de paire (tuple de deux éléments) pour en
 renvoyer le premier:
 
-\haskell
-toggle :: (a, b) -> a toggle (x, y) = (y, x) \eof
+#begin_src haskell
+toggle :: (a, b) -> a toggle (x, y) = (y, x) #end_src
 
-Un paramètre non utilisé peut être remplacé par un \hs{_}:
+Un paramètre non utilisé peut être remplacé par un ~_~:
 
-\haskell
-duplFirst :: (a, b) -> (a, a) duplFirst (x, \_) = (x, x) \eof
+#begin_src haskell
+duplFirst :: (a, b) -> (a, a) duplFirst (x, \_) = (x, x) #end_src
 
 On n'a pas besoin du second membre de la paire: on la décompose donc en
 évitant de nommer cet élément.
 
-De la même façon, si le paramètre est un \hsT{Maybe}, on peut récupérer
-directement sa valeur en déconstruisant \hsC{Just}:
+De la même façon, si le paramètre est un ~Maybe~, on peut récupérer
+directement sa valeur en déconstruisant ~Just~:
 
-\haskell
-double :: Maybe Int -> Int double (Just x) = x * 2 \eof
+#begin_src haskell
+double :: Maybe Int -> Int double (Just x) = x * 2 #end_src
 
 ** Motifs nommés.
    :PROPERTIES:
@@ -43,12 +67,12 @@ On peut avoir besoin de déconstruire un paramètre selon un motif en
 conservant le paramètre entier. Les motifs nommés permettent d'éviter
 des suites déconstruction-reconstruction redondantes.
 
-La fonction \hsFn{suffixes} \parencite[103]{OSullivan2008} renvoie tous
+La fonction ~suffixes~ \parencite[103]{OSullivan2008} renvoie tous
 les suffixes d'une liste. Elle peut s'écrire:
 
-\haskell
-suffixes :: [a] -> [[a]] suffixes xs@(/:xs') = xs : suffixes xs'
-suffixes / = [] \eof
+#begin_src haskell
+suffixes :: [a] -> [[a]] suffixes xs(/:xs') = xs : suffixes xs'
+suffixes / = [] #end_src
 
 * Filtrage par motif et gardes
   :PROPERTIES:
@@ -72,13 +96,13 @@ Le filtrage par motifs permet de choisir une implémentation selon le
 type et dans une certaine mesure la valeur des paramètres, les gardes
 selon une expression arbitraire.
 
-\box{info} Le filtrage par motif et les gardes permettent de définir
+#begin_info Le filtrage par motif et les gardes permettent de définir
 plusieurs cas qui se recouvrent. Par exemple, une fonction peut fournir
 une implémentation pour n'importe quelle liste, et une autre pour
 n'importe quelle liste /non vide/. Haskell utilise toujours la première
 implémentation qui s'applique aux paramètres, dans l'ordre de
 déclaration : il faut donc déclarer les moins générales en premier.
-\endbox
+#end_
 
 * Filtrage par motifs
   :PROPERTIES:
@@ -96,16 +120,16 @@ une valeur arbitraire.
    :END:
 
 Le filtrage par constructeurs permet de sélectionner quel constructeur
-d'un \qsee{type algébrique}{algebraic-types} correspond à quelle
+d'un [[#algebraic-types][type algébrique]] correspond à quelle
 implémentation.
 
-\haskell
+#begin_src haskell
 maybeIntToStr :: Maybe Int -> String maybeIntToStr (Just a) = show a
-maybeIntToStr Nothing = "NaN" \eof
+maybeIntToStr Nothing = "NaN" #end_src
 
-\haskell
+#begin_src haskell
 mySum :: (Num a) => [a] -> a mySum (x:xs) = x + mySum xs mySum [] = 0
-\eof
+#end_src
 
 ** Par valeur littérale.
    :PROPERTIES:
@@ -115,29 +139,29 @@ mySum :: (Num a) => [a] -> a mySum (x:xs) = x + mySum xs mySum [] = 0
 Le filtrage par valeur littérale est le plus simple. Il choisit une
 implémentation si un paramètre a une valeur déterminée.
 
-\haskell
+#begin_src haskell
 compte :: String -> String -> Int -> String compte singulier pluriel 0 =
 "Aucun(e) " ++ singulier compte singulier pluriel 1 = "Un(e) " ++
 singulier compte singulier pluriel quantite = show quantite ++ " " ++
-pluriel \eof
+pluriel #end_src
 
-\box{warn} Une valeur littérale /doit/ être littérale et ne peut pas,
+#begin_warn Une valeur littérale /doit/ être littérale et ne peut pas,
 pour des raisons syntaxiques, être une variable. Ce code est erroné:
 
-\haskellN
+#begin_src haskell
 ultimate = "The Ultimate Question"
 
-answer :: String -> Int answer ultimate = 42 answer \_ = 0 \eof
+answer :: String -> Int answer ultimate = 42 answer \_ = 0 #end_src
 
-\hsFn{ultimate} ligne 4 n'est /pas/ la variable qui a été définie ligne
+~ultimate~ ligne 4 n'est /pas/ la variable qui a été définie ligne
 1, mais une variable locale qui capture n'importe quel paramètre passé à
-la fonction et qui masque la variable globale \hsFn{ultimate}. Les
+la fonction et qui masque la variable globale ~ultimate~. Les
 lignes 4--5 ne fonctionneront pas comme on pourrait s'y attendre: elles
-sont strictement équivalentes à la ligne unique \hs{answer _ = 42}.
+sont strictement équivalentes à la ligne unique ~answer _ = 42~.
 
 Pour employer des constantes nommées, on peut utiliser un
-\qsee{préprocesseur}{preprocessor} ou les remplacer par un
-\qsee{type algébrique}{algebraic-types}. \endbox
+[[#preprocessor][préprocesseur]] ou les remplacer par un
+[[#algebraic-types][type algébrique]]. #end_
 
 ** Paramètres ignorés.
    :PROPERTIES:
@@ -146,16 +170,16 @@ Pour employer des constantes nommées, on peut utiliser un
 
 Certaines implémentations d'une fonction peuvent ne pas faire usage de
 tous les paramètres. On ignore un paramètre dans la définition avec le
-symbole \hs{_}:
+symbole ~_~:
 
-La fonction \hsFn{compte} ci-dessus pourrait s'écrire:
+La fonction ~compte~ ci-dessus pourrait s'écrire:
 
-\haskell
+#begin_src haskell
 compte :: String -> String -> Int -> String compte singulier \_ 0 =
 "Aucun(e) " ++ singulier compte singulier \_ 1 = "Un(e) " ++ singulier
-compte \_ pluriel quantite = show quantite ++ " " ++ pluriel \eof
+compte \_ pluriel quantite = show quantite ++ " " ++ pluriel #end_src
 
-\hs{_} n'est pas un nom de variable mais la mention explicite que le
+~_~ n'est pas un nom de variable mais la mention explicite que le
 paramètre ne sera pas utilisé.
 
 * Gardes
@@ -165,35 +189,35 @@ paramètre ne sera pas utilisé.
 
 \label{guards}
 
-Un garde est une expression de type \hsT{Bool}. Si l'expression s'évalue
-à \hs{True}, l'implémentation qui suit est utilisée.
+Un garde est une expression de type ~Bool~. Si l'expression s'évalue
+à ~True~, l'implémentation qui suit est utilisée.
 
 Leur syntaxe est:
 
-\haskell
-func args | garde = impl \eof
+#begin_src haskell
+func args | garde = impl #end_src
 
 Par exemple, une fonction qui détermine si un nombre est pair, qui
 s'implémenterait naïvement sous la forme
-\hs{isEven x = if x `mod` 2 == 0 then True else False} peut s'écrire
+~isEven x = if x `mod` 2 == 0 then True else False~ peut s'écrire
 plus lisiblement:
 
-\haskell
-isEven x | x =mod= 2 == 0 = True isEven \_ = False \eof
+#begin_src haskell
+isEven x | x =mod= 2 == 0 = True isEven \_ = False #end_src
 
 La partie à gauche du garde peut être omise si elle est identique à
 celle qui précède (c'est-à-dire si l'éventuel motif est le même):
 
-\haskell
-isEven x | x =mod= 2 == 0 = True | otherwise = False \eof
+#begin_src haskell
+isEven x | x =mod= 2 == 0 = True | otherwise = False #end_src
 
-\box{info} \hsFn{otherwise} est une constante définie dans le Prélude.
-Sa valeur est simplement \hsC{True}.
+#begin_info ~otherwise~ est une constante définie dans le Prélude.
+Sa valeur est simplement ~True~.
 
 \begin{warnblock}
-\hsFn{otherwise} est simplement définie comme \hs{otherwise = True}. Son emploi est donc limité aux gardes.
+~otherwise~ est simplement définie comme ~otherwise = True~. Son emploi est donc limité aux gardes.
 \end{warnblock}
-\endbox
+#end_
 
 * «\enconcept{Pattern guards}»
   :PROPERTIES:
@@ -204,8 +228,8 @@ Sa valeur est simplement \hsC{True}.
 
 Haskell 2010 étend la syntaxe des gardes \todo{Cette section}
 
-\haskell
+#begin_src haskell
 gardes :: Int -> String gardes a | odd a, a =mod= 5 == 0 = "Impair et/ou
-multiple de 5" | even a = "Pair mais pas multiple de 5" \eof
+multiple de 5" | even a = "Pair mais pas multiple de 5" #end_src
 
 \todo{}

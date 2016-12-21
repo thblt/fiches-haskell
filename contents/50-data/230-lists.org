@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Cette fiche résume quelques unes des fonctions essentielles applicables
 à des listes.
 
@@ -6,67 +30,67 @@ Cette fiche résume quelques unes des fonctions essentielles applicables
   :CUSTOM_ID: fonctions-du-premier-ordre
   :END:
 
-** \hs{(++) :: [a] -> [a] -> [a]}
+** ~(++) :: [a] -> [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section
    :END:
 
-est l'opérateur de concaténation: \hs{"Hask" ++ "ell" == "Haskell"}.
+est l'opérateur de concaténation: ~"Hask" ++ "ell" == "Haskell"~.
 
-** \hs{take :: Int -> [a] -> [a]}
+** ~take :: Int -> [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section-1
    :END:
 
 renvoie les $n$ premiers éléments de la liste, ou la liste si sa taille
-est inférieure à $n$: \hs{take 3 [1..10] == [1,2,3]} ;
-\hs{take 100 [1,2] == [1,2]}
+est inférieure à $n$: ~take 3 [1..10] == [1,2,3]~ ;
+~take 100 [1,2] == [1,2]~
 
-** \hs{drop :: Int -> [a] -> [a]}
+** ~drop :: Int -> [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section-2
    :END:
 
 renvoie la liste moins les $n$ premiers éléments, ou la liste vide si sa
-taille est inférieure à $n$: \hs{drop 3 [1..6] == [4,5,6]} ;
-\hs{drop 100 [1,2] == []}
+taille est inférieure à $n$: ~drop 3 [1..6] == [4,5,6]~ ;
+~drop 100 [1,2] == []~
 
 * Fonctions d'ordre supérieur
   :PROPERTIES:
   :CUSTOM_ID: fonctions-dordre-supérieur
   :END:
 
-** \hs{takeWhile :: (a -> Bool) -> [a] -> [a]}
+** ~takeWhile :: (a -> Bool) -> [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section-3
    :END:
 
-est similaire à \hsFn{take}, mais renvoie la tête de la liste jusqu'à la
+est similaire à ~take~, mais renvoie la tête de la liste jusqu'à la
 dernière valeur pour laquelle la condition est vraie:
-\hs{takeWhile (<5) [1..8] == [1,2,3,4]}
+~takeWhile (<5) [1..8] == [1,2,3,4]~
 
-** \hs{dropWhile :: (a -> Bool) -> [a] -> [a]}
+** ~dropWhile :: (a -> Bool) -> [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section-4
    :END:
 
-est similaire à \hsFn{take}, mais renvoie la queue de la liste à partir
+est similaire à ~take~, mais renvoie la queue de la liste à partir
 de la première valeur pour laquelle la condition est fausse:
-\hs{dropWhile (<5) [1..8] == [5,6,7,8]}
+~dropWhile (<5) [1..8] == [5,6,7,8]~
 
-** \hs{map :: (a -> b) -> [a] -> [b]}
+** ~map :: (a -> b) -> [a] -> [b]~
    :PROPERTIES:
    :CUSTOM_ID: section-5
    :END:
 
 applique une fonction à chaque élément d'une liste:
-\hs{map (*2) [1,2,3] == [2,4,6]}.
+~map (*2) [1,2,3] == [2,4,6]~.
 
-\box{warn} \hsFn{map} existe pour des raisons historiques. Préférez-lui
-\qsee{\hsFn{fmap}}{fn:fmap}, qui s'applique à n'importe quel
-\qsee{foncteur}{Functor} et pas uniquement aux listes. \endbox
+#begin_warn ~map~ existe pour des raisons historiques. Préférez-lui
+[[#fn:fmap][~fmap~]], qui s'applique à n'importe quel
+[[#Functor][foncteur]] et pas uniquement aux listes. #end_
 
-** \hs{head :: [a] -> a}
+** ~head :: [a] -> a~
    :PROPERTIES:
    :CUSTOM_ID: section-6
    :END:
@@ -74,7 +98,7 @@ applique une fonction à chaque élément d'une liste:
 renvoie le premier élément de la liste, ou génère une exception si la
 liste est vide.
 
-** \hs{last :: [a] -> a}
+** ~last :: [a] -> a~
    :PROPERTIES:
    :CUSTOM_ID: section-7
    :END:
@@ -82,35 +106,35 @@ liste est vide.
 renvoie le dernier élément de la liste, ou génère une exception si la
 liste est vide.
 
-** \hs{tail :: [a] -> [a]}
+** ~tail :: [a] -> [a]~
    :PROPERTIES:
    :CUSTOM_ID: section-8
    :END:
 
 Lorem ipsum
 
-** \hs{zip :: [a] -> [b] -> [(a, b)]}
+** ~zip :: [a] -> [b] -> [(a, b)]~
    :PROPERTIES:
    :CUSTOM_ID: section-9
    :END:
 
 Lorem ipsum
 
-** \hs{zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]}
+** ~zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]~
    :PROPERTIES:
    :CUSTOM_ID: section-10
    :END:
 
 Lorem ipsum
 
-** \hs{zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]}
+** ~zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]~
    :PROPERTIES:
    :CUSTOM_ID: section-11
    :END:
 
 Lorem ipsum
 
-** \hs{zipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]}
+** ~zipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]~
    :PROPERTIES:
    :CUSTOM_ID: section-12
    :END:

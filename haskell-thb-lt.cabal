@@ -1,0 +1,20 @@
+name:               haskell-thb-lt
+version:            0.1.0.0
+build-type:         Simple
+cabal-version:      >= 1.10
+
+executable site
+  main-is:          site.hs
+  build-depends:    base == 4.*,
+                    containers,
+                    data-default,
+                    filepath,
+                    hakyll == 4.9.*,
+                    hakyll-sass == 0.2.2,
+                    hsass == 0.4.*,
+                    pandoc >= 1.14,
+                    time >= 1.4,
+                    -- Required for pandoc-citeproc
+                    aeson-pretty < 0.8
+  ghc-options:      -threaded
+  default-language: Haskell2010

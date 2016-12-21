@@ -1,0 +1,16 @@
+flags:
+  pandoc:
+    https: false
+extra-package-dbs: []
+packages:
+- '.'
+extra-deps:
+- aeson-pretty-0.7.2
+- hakyll-4.9.2.0
+- hakyll-sass-0.2.2
+- http-client-0.5.4
+- http-client-tls-0.3.3
+- http-conduit-2.2.3
+- pandoc-1.17.1
+- pandoc-citeproc-0.10
+resolver: lts-7.14

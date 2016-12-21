@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * Contraintes
   :PROPERTIES:
   :CUSTOM_ID: contraintes
@@ -8,9 +32,9 @@ importance.
 
 | Type d'identifiant   | Initiale haut de casse   | Initiale bas de casse   |
 |----------------------+--------------------------+-------------------------|
-| Variable             |                          | \Y                      |
+| Variable             |                          | •                      |
 |                      |                          | Fonction                |
-| Constructeur         | \Y                       |                         |
+| Constructeur         | •                       |                         |
 
 * Conventions
   :PROPERTIES:

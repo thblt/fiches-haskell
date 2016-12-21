@@ -1,9 +1,33 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Un foncteur applicatif est une structure intermédiaire entre un foncteur
 et une monade.
 
-Il s'agit d'une \qsee{classe de type}{typeclasses}, définie comme suit:
+Il s'agit d'une [[#typeclasses][classe de type]], définie comme suit:
 
-\haskell
+#begin_src haskell
 class Functor f => Applicative f where -- | Lift a value. pure :: a -> f
 a
 
@@ -22,4 +46,4 @@ a
     (<*) = liftA2 const
 #+END_EXAMPLE
 
-\eof
+#end_src

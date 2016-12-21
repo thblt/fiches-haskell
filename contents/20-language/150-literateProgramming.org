@@ -1,3 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Haskell fait partie des rares langages à gérer nativement la
 programmation lettrée. Les fichiers sources ont l'extension =.lhs= (au
 lieu de =.hs=) et les blocs de code peuvent être délimités de deux
@@ -16,4 +40,4 @@ précédé d'au moins une ligne vide.
    :CUSTOM_ID: begin-end-façon-latex
    :END:
 
-Le code est entouré de =@\begin{code}= et =@\end{code}=.
+Le code est entouré de =\begin{code}= et =\end{code}=.

@@ -4,7 +4,7 @@ title: "GHC"
 
 L'implémentation de Haskell la plus répandue est GHC, /The Glasgow
 Haskell Compiler/. GHC fournit trois binaires: un compilateur (=ghc=),
-un interpréteur (=runghc=) et un interpréteur ligne à ligne (\gls{REPL})
+un interpréteur (=runghc=) et un interpréteur ligne à ligne (REPL)
 (=ghci=).
 
 * GHC
@@ -17,7 +17,7 @@ GHC reconnaît les formats d'entrées suivants:
 | Extension   | Format                                            |
 |-------------+---------------------------------------------------|
 | =.hs=       | Source Haskell                                    |
-| =.lhs=      | Source \qsee{Literate Haskell}{literateHaskell}   |
+| =.lhs=      | Source [[#literateHaskell][Literate Haskell]]   |
 
 #+begin_info
 La liaison d'un exécutable avec ghc a tendance à être très
@@ -27,4 +27,4 @@ parce que ghc tend à lier plus de symboles qu'il n'est nécessaire.
 
 Pour accélérer la liaison (uniquement lors du développement et pas pour
 produire des binaires destinés à la distribution, évidemment), on peut
-invoquer ghc avec le drapeau =-dynamic=. \endbox
+invoquer ghc avec le drapeau =-dynamic=. #end_

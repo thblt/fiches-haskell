@@ -1,0 +1,24 @@
+\define{qsee}{[[##2][#1]]}
+\define{hs}{~#1~}
+\define{haskell}{#begin_src haskell}
+\define{haskellN}{#begin_src haskell}
+\define{ghci}{\haskell}
+\define{prompt}{ghci> }
+\define{eof}{#end_src}
+\define{box}{#begin_#1}
+\define{boxtitle}{BOXTITLE: #1}
+\define{endbox}{#end_#1}
+\define{hsC}{\hs{#1}}
+\define{hsFn}{\hs{#1}}
+\define{hsKw}{\hs{#1}}
+\define{hsM}{\hs{#1}}
+\define{hsMod}{\hs{#1}}
+\define{hsT}{\hs{#1}}
+\define{hsTC}{\hs{#1}}
+\define{hsTP}{\hs{#1}}
+\define{rot}{#1}
+\define{Y}{•}
+\define{gls}{#1}
+\define{glspl}{#1}
+\define{Gls}{#1}
+\define{Glspl}{#1}

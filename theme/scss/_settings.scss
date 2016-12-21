@@ -1,11 +1,7 @@
-@import "gridle/gridle";
-@import "compass/reset";
-@import "compass";
+@import "node_modules/gridle/sass/gridle/gridle";
 
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,400italic,700,700italic&subset=latin,latin-ext);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,latin-ext);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,latin-ext);
-@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&subset=latin,latin-ext);
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700|Open+Sans+Condensed:300,700|Open+Sans:400,400i,700,700i');
+
 
 // Configuration
 $lightGrey: #eee;
@@ -14,7 +10,7 @@ $darkGrey: #777;
 $bgColor: #eee;
 $textColor: #000;
 $pageBgColor: #fff;
-$textFont: "Roboto Slab";
+$textFont: "Open Sans";
 $blockTitleFont: "Open Sans Condensed";
 $inlineTitleFont: "Open Sans";
 $figureFont: "Open Sans";
@@ -26,9 +22,104 @@ $midLighten: rgba(255,255,255,.3);
 
 // Boxes
 $mathBoxColor: $pageBgColor;
-$infoBoxColor: #ffffee;
+$infoBoxColor: #eeeeff;
 $lawBoxColor: $pageBgColor;
 $warnBoxColor: #ffcc77;
 
 @include gridle_setup( ( context : 10, gutter-width : 20px, direction : ltr, ) );
 @include gridle_register_state( mobile , ( max-width : 400px ) );
+
+// Typebase
+
+/*! Typebase.less v0.1.0 | MIT License */
+/* Setup */
+html {
+  /* Change default typefaces here */
+  font-family: serif;
+  -webkit-font-smoothing: antialiased;
+}
+/* Copy & Lists */
+p {
+  line-height: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+ul,
+ol {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+ul li,
+ol li {
+  line-height: 1.5rem;
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+blockquote {
+  line-height: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Change heading typefaces here */
+  font-family: sans-serif;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+}
+h1 {
+  font-size: 4.242rem;
+  line-height: 4.5rem;
+  margin-top: 3rem;
+}
+h2 {
+  font-size: 2.828rem;
+  line-height: 3rem;
+  margin-top: 3rem;
+}
+h3 {
+  font-size: 1.414rem;
+}
+h4 {
+  font-size: 0.707rem;
+}
+h5 {
+  font-size: 0.4713333333333333rem;
+}
+h6 {
+  font-size: 0.3535rem;
+}
+/* Tables */
+table {
+  margin-top: 1.5rem;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+table td,
+table th {
+  padding: 0;
+  line-height: 33px;
+}
+/* Code blocks */
+code {
+  vertical-align: bottom;
+}
+/* Leading paragraph text */
+.lead {
+  font-size: 1.414rem;
+}
+/* Hug the block above you */
+.hug {
+  margin-top: 0;
+}

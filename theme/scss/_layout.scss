@@ -9,22 +9,20 @@ body {
     margin: 0 auto;
 }
 nav {
-	position: static;
+    position: static;
     @include gridle(2);
 }
 #contents {
-	/*@include gridle_push(2);*/
     @include gridle(8);
 
     section {
-        padding: 2em;
-        &.l0 {
+	&.level1 {
+	    margin-top: 5em;
+	}
+        &.level2  {
             padding: 2em;
-						.body {
-							margin: 0 20%;
-						}
         }
-        &.l1 {
+        &.level2 {
             background: white;
             margin: 0 0 2em;
             box-shadow: 0 2px 2px 0 #ccc;

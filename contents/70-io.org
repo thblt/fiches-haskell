@@ -1,12 +1,36 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 La gestion des entrées/sorties requiert un traitement spécifique dans un
 langage fonctionnel. Contrairement aux fonctions pures du langage, les
 fonctions d'E/S produisent des effets de bord, et violent le principe de
-\gls{referential-transparency}.
+referential-transparency.
 
 Le mécanisme d'E/S d'Haskell est implémenté sous la forme d'une
-\qsee{monade}{Monad} nommée \hsM{IO}.
+[[#Monad][monade]] nommée ~IO~.
 
 Contrairement à ce qui se fait en général dans les bouquins sur Haskell,
-il vaut mieux avoir vraiment compris les \qsee{types}{definingTypes},
-les \qsee{classes de types}{typeclasses} /et/ les \qsee{monades}{Monad}
+il vaut mieux avoir vraiment compris les [[#definingTypes][types]],
+les [[#typeclasses][classes de types]] /et/ les [[#Monad][monades]]
 avant de se lancer dans l'exploration du mécanisme d'entrée/sortie.

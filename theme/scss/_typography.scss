@@ -1,153 +1,145 @@
 %container {
-	& > *:first-child {
-		margin-top: 0;
-	}
-	& > *:last-child {
-		margin-bottom: 0;
-	}
+    & > *:first-child {
+	margin-top: 0;
+    }
+    & > *:last-child {
+	margin-bottom: 0;
+    }
 }
 @mixin box($bgColor, $icon) {
-	@extend %container;
-	padding: 1em;
-	margin-left: 3em;
-	min-height: 2em;
-	border: thin solid $midDarken;
-	background-color: $bgColor;
-	&:before {
-		display: block;
-		float: left;
-		margin-left: -4em;
-		height: 2em;
-		width: 2em;
-		background-image: url("/theme/img/"+$icon+".svg");
-		content: " "; // url("/theme/img/"+$icon+".svg");
-		background-position: center;
-		background-size : 2em 2em;
-		background-repeat: no-repeat;
-	}
+    @extend %container;
+    padding: 1em;
+    margin: 1em 0;
+    margin-left: 3em;
+    min-height: 2em;
+    border: thin solid $midDarken;
+    background-color: $bgColor;
+    &:before {
+	display: block;
+	float: left;
+	margin-left: -4em;
+	height: 2em;
+	width: 2em;
+	background-image: url("/theme/img/"+$icon+".svg");
+	content: " "; // url("/theme/img/"+$icon+".svg");
+	background-position: center;
+	background-size : 2em 2em;
+	background-repeat: no-repeat;
+    }
 }
 #contents {
-	text-align: justify;
-	em {
-		font-style: italic;
+    text-align: justify;
+    em {
+	font-style: italic;
+    }
+    h1 {
+	font-size: 5em;
+	font-family: $blockTitleFont;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+	text-align: center;
+    }
+    h2 {
+	font-family: $blockTitleFont;
+	font-size: 2em;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 1em;
+	margin-top: 0;
+	a {
+	    text-decoration: none;
+	    color: black;
+	    &:hover:after {
+		content : ' §';
+		color: $midDarken;
+	    }
 	}
-	h1 {
-		font-size: 5em;
-		font-family: $blockTitleFont;
-		text-transform: uppercase;
-		font-weight: bold;
-		margin-bottom: 0.5em;
-		text-align: center;
+    }
+    h3 {
+	font-family: $blockTitleFont;
+	font-size: 1.5em;
+	text-align: center;
+	border-bottom: thin solid black;
+	margin-top: 2em;
+	margin-bottom: 0.5em;
+	text-transform: uppercase;
+    }
+    h4 {
+	font-size: 1.5em;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	font-family: $inlineTitleFont;
+	font-weight: normal;
+
+	& + p {
+	    display: inline;
+	    &:after // Force a line break in case a new h4 immediatly follows.
+	    {
+		display:block;
+		height: 0;
+		content: "";
+	    }
 	}
-	h2 {
-		font-family: $blockTitleFont;
-		font-size: 2em;
-		font-weight: bold;
-		text-transform: uppercase;
-		margin-bottom: 1em;
-		a {
-			text-decoration: none;
-			color: black;
-			&:hover:after {
-				content : ' §';
-				color: $midDarken;
-			}
-		}
+    }
+    p {
+	line-height: 1.5;
+	margin: 0.5em 0;
+    }
+    blockquote,
+    table,
+    .box,
+    .sourceCode {
+	margin: 1em 0;
+    }
+    div {
+	&.info {
+	    @include box($infoBoxColor, "info");
 	}
-	h3 {
-		font-family: $blockTitleFont;
-		font-size: 1.5em;
-		text-align: center;
-		border-bottom: thin solid black;
-		margin-top: 1em;
-		margin-bottom: 0.5em;
-		text-transform: uppercase;
+	&.law {
+	    @include box($lawBoxColor, "law");
 	}
-	h4 {
-		margin-top: 1em;
-		font-family: $inlineTitleFont;
-		display: inline-block;
-		font-weight: bold;
-		white-space: pre;
-		margin-right: 1em;
-		&:before {
-			display:inline-block;
-			margin-left: -2ex;
-			height: 1ex;
-			width: 1ex;
-			margin-right: 1ex;
-			background: black;
-			content: "";
-			vertical-align: baseline;
-		}
-		& + p {
-			display: inline;
-			&:after // Force a line break in case a new h4 immediatly follows.
-			{
-				display:block;
-				height: 0;
-				content: "";
-			}
-		}
+	&.math {
+	    @include box($mathBoxColor, "math");
 	}
-	p,
-	{
-		line-height: 1.5;
-		margin: 0.5em 0;
+	&.warn {
+	    @include box($warnBoxColor, "warn");
 	}
-	blockquote,
-	table,
-	.box,
-	.sourceCode {
-		margin: 1em 0;
+	.title {
+	    font-family: $blockTitleFont;
+	    font-weight: bold;
 	}
-	.box {
-		&.info {
-			@include box($infoBoxColor, "info");
-		}
-		&.law {
-			@include box($lawBoxColor, "law");
-		}
-		&.math {
-			@include box($mathBoxColor, "math");
-		}
-		&.warn {
-			@include box($warnBoxColor, "warn");
-		}
-		.title {
-			font-family: $blockTitleFont;
-			font-weight: bold;
-		}
-	}
-	ul, ol {
+    }
+    ul, ol {
 	margin-left: 2em;
-	}
-	ul {
+    }
+    ul {
 	list-style-type: square;
+    }
+    table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: $figureFont;
+	td,
+	th {
+	    padding: 0.5em;
+	    text-align: left;
 	}
-	table {
-		width: 100%;
-		border-collapse: collapse;
-		font-family: $figureFont;
-		td,
-		th {
-			padding: 0.5em;
-		}
-		thead td,
-		th {
-			font-weight: bold;
-			background-color: $midGrey;
-		}
-		tr {
-			&:nth-child(even) {
-				background-color: $lightGrey;
-			}
-			td {
-				border-right: thin solid $lightGrey;
-			}
-		}
-		code {
-			font-family: $codeFont;
-		}
+	thead td,
+	th {
+	    font-weight: bold;
+	    background-color: $midGrey;
 	}
+	tr {
+	    &:nth-child(even) {
+		background-color: $lightGrey;
+	    }
+	    td {
+		border-right: thin solid $lightGrey;
+	    }
+	}
+	code {
+	    font-family: $codeFont;
+	}
+    }
 }

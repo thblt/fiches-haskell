@@ -1,4 +1,28 @@
-* Les types \hsT{Maybe} et \hsT{Either}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Les types ~Maybe~ et ~Either~
   :PROPERTIES:
   :CUSTOM_ID: les-types-et
   :END:

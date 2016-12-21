@@ -1,0 +1,1141 @@
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:nil
+#+OPTIONS: html-preamble:nil html-scripts:nil html-style:nil
+#+OPTIONS: html5-fancy:t tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD: <link rel="stylesheet" href="_site/theme/theme.css" type="text/css" />
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+HTML_MATHJAX:
+#+LATEX_HEADER:
+
+#+TITLE: Haskell!
+#+AUTHOR: Thibault Polge
+#+EMAIL: thibault@thb.lt
+#+LANGUAGE: fr
+
+** Introduction
+
+J’apprends Haskell, et comme [[#about][je]] suis consciencieux, je fais des fiches.
+
+Elles n’ont pas la prétention d’être un support d’apprentissage autonome, et présupposent une connaissance, même élémentaire, du langage. Elles ont vocation à présenter, de manière extrêmement synthétique, pour mémoire ou référence, l’essentiel de Haskell, et pas à se substituer à un apprentissage sérieux.
+
+J’ai décidé de préparer ces fiches pour combler un manque dans la documentation sur Haskell. Les livres dont je dispose sur le langage sont soit trop superficiels, soit insuffisamment systématiques. Certains présentent une version superficelle d’Haskell, d’autres, les plus élaborés, souffrent au contraire du syndrome de l’enseignant-passionné-mais-pas-méthodique : ils ne cessent de s’interrompre et de proposer des apartés hors de propos qui mobilisent soudainement des notions qui ne seront explicitées que plusieurs chapitres plus loin.
+
+#+begin_info
+  Ce qui précède est [[http://haskellbook.com/][de moins en moins vrai]].
+#+end_info
+
+
+Ces fiches tentent donc une présentation plus rigoureusement systématique, mais sans prétention pédagogique. L’ordre d’exposition y est aussi linéaire que possible, mais les renvois se font dans les deux sens : une fiche peut faire référence au contenu d’une fiche antérieure comme ultérieure.
+
+Ce travail est à peine entamé. À terme, il devrait offrir un aperçu complet du langage, et de quelques une des extensions de GHC.
+
+* L'environnement de développement
+
+** GHC
+
+L'implémentation de Haskell la plus répandue est GHC, /The Glasgow
+Haskell Compiler/. GHC fournit trois binaires: un compilateur (=ghc=),
+un interpréteur (=runghc=) et un interpréteur ligne à ligne (REPL)
+(=ghci=).
+*** GHC
+
+GHC reconnaît les formats d'entrées suivants:
+
+| Extension | Format                  |
+|-----------+-------------------------|
+| =.hs=       | Source Haskell          |
+| =.lhs=      | Source [[#literateHaskell][Literate Haskell]] |
+
+#+begin_info
+La liaison d'un exécutable avec ghc a tendance à être très
+longue, d'une part parce que ld est en général assez lent, d'autre part
+parce que ghc tend à lier plus de symboles qu'il n'est nécessaire.
+Pour accélérer la liaison (uniquement lors du développement et pas pour
+produire des binaires destinés à la distribution, évidemment), on peut
+invoquer ghc avec le drapeau =-dynamic=.
+#+end_info
+** Debuggers
+** Cabal
+
+** Stack
+
+* Le langage
+
+** Les types: généralités
+
+Haskell connaît deux espèces essentielles de type: les types de *données* et les types de *fonctions*.  Cette section traite uniquement des premiers, les seconds [[#functions][ont leur propre section]].
+
+*** Nommage des identifiants
+
+En Haskell, la casse du premier caractère d'un identifiant a une importance.  Un nom de type ou un constructeur de type commencent toujours par une majuscule, un nom de fonction ou de variable par une minuscule.
+
+*** Types produits, types sommes, types exponentielles
+
+Si on comprend qu'un type est un *ensemble* (de valeurs possibles), on voit aisément pourquoi on parle de types produit ou somme:
+
+ - Une *alternative* entre type (~data OuBien = Chaine String | Entier Int~) a pour cardinal la *somme* des cardinaux des types qui le constituent.
+
+ - Une *combinaison* de types (~data ChaineEtEntier = ChaineEtEntier String Int~) a pour cardinal le *produit* des cardinaux des types qui le constituent.
+
+ - Une *application* de types (~maFunction :: Int -> String~) a pour cardinal le cardinal du type du résultat élevé à la *puissance* du cardinal du type du paramètre.  Le cardinal de ~f :: a -> b~ est donc $\#b^{\#a}$.
+
+(Le cardinal d'un type défini avec ~data~ est simplement une somme de produits.)
+
+*** Types élémentaires
+
+Haskell fournit un grand nombre de types élémentaires, dont les plus
+importants sont résumés dans ce tableau:
+
+| Type                             | Description                                                                |
+|----------------------------------+----------------------------------------------------------------------------|
+| ~Double~                           | Virgule flottante, double précision                                        |
+| ~Float~                            | Virgule flottante, simple précision                                        |
+| ~Integer~                          | Entier signé en précision arbitraire                                       |
+| ~Int~                              | Entier signé à précision fixe, intervalle minimum $$[-2^{29} ; 2^{29}-1]$$ |
+| ~Int8~ , ~Int16~, ~Int32~, ~Int64~       | Entier signé de $n$ bits                                                   |
+| ~Word8~,  ~Word16~,  ~Word32~,  ~Word64~ | Entier non signé de $n$ bits                                               |
+| ~Rational, ~Ratio a~                | Nombre rationnel de précision arbitraire                                   |
+#+CAPTION: Types numériques essentiels, d'après cite[145,147]{OSullivan2008}}
+
+** Définition de types
+
+*** Produits
+
+#+begin_src haskell
+  data Book = NewBook String [String] Int
+  --                  ^               ^__ Année de publication
+  --                  |      ^___________ Auteurs
+  --                  |__________________ Titre
+#+end_src
+
+Cette ligne définit un type nommé ~Book~ qui fournit un unique constructeur ~NewBook~.  Le constructeur ~NewBook~ se comporte comme une fonction qui prend trois paramètres et qrenvoie un ~Book~: ~NewBook :: String -> [String] -> Int -> Book~.  Pour construire un nouveau ~Book~, on écrit donc ~book = NewBook "Critique of Pure Reason" ["Immanuel Kant"] 1781~.  Dans cette syntaxe, les arguments du constructeur sont positionnels et doivent être fournis dans l'ordre de la déclaration.
+
+#+begin_info
+Il est légal et très courant, quand un type ne fournit qu'un seul constructeur, de donner à ce constructeur le nom du type. On aurait alors ~data Book = Book String [String] Int~. L'exemple précédent les distingue par souci de clarté, mais n'est pas vraiment idiomatique.
+#+end_info
+
+*** Sommes
+
+Un type somme présente une alternative en offrant plusieurs constructeurs.
+
+#+begin_src haskell
+  data Bool = True | False
+  data Maybe a = Nothing | Just a
+#+end_src
+
+#+begin_info
+  Les types produits et sommes ne sont pas mutuellement exclusifs: ~data Something = This String Int | That String Bool~.
+#+end_info
+
+
+*** Syntaxe d'enregistrement
+  :PROPERTIES:
+  :CUSTOM_ID: syntaxe-denregistrement
+  :END:
+
+La syntaxe d'enregistrement permet de nommer les champs.
+
+#+begin_src haskell
+  data Book = Book {
+    bookTitle :: String, -- bookTitle :: Book -> String
+    bookAuthors :: [String], -- bookAuthors :: Book -> [String]
+    bookYear :: Int -- bookYear :: Book -> Int
+    }
+#+end_src
+
+Un type qui utilise cette syntaxe peut être instantié avec des arguments
+positionnels ou des arguments nommés. Ces derniers peuvent être fournis
+dans n'importe quel ordre:
+
+#+begin_src haskell
+  crp = Book "Critique de la Raison Pure" ["Immanuel Kant"] 1781
+  tlp = Book {
+    bookYear = 1921,
+    bookAuthors = ["Ludwig Wittgenstein"],
+    bookTitle = "Tractatus Logico-Philosophicus"
+    }
+#+end_src
+
+Il définit automatiquement une fonction accesseur pour chacun de ses
+champs. Le type ~Book~ ci-dessus fournit ainsi trois fonctions
+~bookYear :: Book -> Int~, ~bookAuthors :: Book -> [String]~ et
+~bookTitle :: Book -> String~:
+
+#+begin_src haskell
+ghci>  bookYear tlp 1921
+#+end_src
+
+Enfin, il permet de construire une nouvelle valeur à partir des champs
+d'une valeur existante:
+
+#+begin_src haskell
+rp = tlp {bookTitle = "Recherches philosophiques", bookYear=1953}
+#+end_src
+
+*** Les types comme contextes
+
+@TODO (On peut considérer un type algébrique comme un contexte sémantique pour un type natif.)
+
+*** Types récursifs
+
+Un type peut faire référence à lui-même. On peut construire un type
+liste identique au type natif de la façon suivante:
+
+#+begin_src haskell
+data List a = Empty | Cons a (List a) list = (Cons 1 (Cons 2 (Cons 3
+Empty)))
+#+end_src
+
+Un arbre binaire:
+
+#+begin_src haskell
+data BTree a = Node a (BTree a) (BTree a) | Empty deriving Show
+#+end_src
+
+** Synonymes de types
+
+Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.  Contrairement aux types définis avec [[#kw:data][~data~]], les informations des synonymes ne sont pas conservées à la compilation.
+
+*** ~type~
+  :PROPERTIES:
+  :CUSTOM_ID: section
+  :END:
+~type~ crée un synonyme d'un type existant. Le synonyme et le type
+auquel ils renvoient sont interchangeables.
+
+#+begin_src haskell
+type ObjectId = Int16
+#+end_src
+
+Les synonymes créés avec ~type~ peuvent servir:
+-  À clarifier le sens des champs dans les types personnalisés sans
+   accesseurs (~type ISBN = Int~ pour un type ~Book~, par
+   exemple):
+
+#+begin_src haskell
+   type Authors = [String] type Title = String type ISBN = Int type Year
+   = Int data Book2 = Authors Title Year ISBN
+#+end_src
+
+-  Comme notation abrégée pour des types complexes fréquemment utilisés.
+
+#+begin_src haskell
+   type Weird = (Int -> String) -> (Int -> Int) -> [Int] -> [(Int,
+   String, Int)]
+#+end_src
+
+*** ~newtype~
+Le mot-clé ~newtype~ permet de dupliquer un type, et crée un type
+distinct de l'original. Les synonymes créés avec ~newtype~ ne sont
+pas substituables avec le type dont ils sont synonymes. De plus, il
+n'appartiennent pas automatiquement aux
+[[#typeclasses][types de classe]] de ce dernier.
+Leur syntaxe est très proche de celle de ~data~:
+#+begin_src haskell
+newtype MyType = MyType Int
+#+end_src
+**** Contrairement à ~data~,
+~newtype~:
+-  n'autorise qu'un seul constructeur et un seul champ.
+-  ne conserve pas les informations du type après la compilation. Dans
+   le programme compilé, ~MyType~ ci-dessus est traité comme un
+   simple ~Int~:
+**** Contrairement à ~type~,
+~newtype~ ne maintient pas la substituabilité du nouveau type et du
+type dont il est un synonyme. ~type~ sert à faciliter la lecture,
+~newtype~ est plutôt utilisé pour masquer l'implémentation.
+**** ~newtype~ est principalement utile pour:
+-  Masquer un type sous-jacent sans la perte de performances liée à
+   l'usage de ~data~:
+
+#+begin_src haskell
+  type ResourceHandle = ResourceHandle Int16
+#+end_src
+
+-  Permet, sans perte de performances, de fournir des instances
+   différentes d'un unique [[#typeclasses][classe de type]] pour un
+   type.
+
+#+begin_src haskell
+  -- Data.Monoid
+  -- Booléen selon la conjonction newtype All = All { getAll :: Bool }
+  deriving (Eq, Ord, Read, Show, Bounded)
+  instance Monoid All where mempty = All True All x =mappend= All y =
+  All (x && y)
+  -- Booléen selon la disjonction newtype Any = Any { getAny :: Bool }
+  deriving (Eq, Ord, Read, Show, Bounded)
+  instance Monoid Any where mempty = Any False Any x =mappend= Any y =
+  Any (x || y)
+#+end_src
+
+** Classes de type
+Les classes de type ne sont pas des classes au sens que ce terme possède
+en POO. Elles sont plus proches de ce qu'on nomme des interfaces : elles
+décrivent des fonctions pour lesquelles un type qui appartient à la
+classe fournit une implémentation.
+*** Créer une classe de type
+#+begin_src haskell
+  class Parsable a where
+    parse :: String -> a
+#+end_src
+Une implémentation par défaut peut être fournie.  La classe de type =Eq= par exemple est définie comme:
+#+begin_src haskell
+  class Eq a where
+    (==), (/=) :: a -> a -> Bool
+    x /= y     =  not (x == y)
+    x == y     =  not (x /= y)
+#+end_src
+*** Dériver une classe de type
+#+begin_src haskell
+  data CanardLapin = { canard :: Bool, lapin :: Bool }
+  instance Show CanardLapin where
+    show (CanardLapin True False) = "Seulement un canard"
+    show (CanardLapin False True) = "Seulement un lapin"
+    show _ = "Un canard lapin!"
+#+end_src
+#+begin_warn
+À certaines classes de type sont associées des lois (lois des [[#Functor][foncteurs]], des [[#Monad][monades]], /etc./) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+Autrement dit, le système des classes de types est en partie formel, en partie contractuel. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.  Il est aussi possible, dans une certaine mesure, d'automatiser la vérification de conformité.
+#+end_warn
+*** Dérivation automatique
+Les types crées avec ~data~ et ~newtype~ peuvent dériver automatiquement certaines classes avec le mot clé ~deriving~:
+#+begin_example haskell
+data Something = Something Integer Integer deriving (Show)
+#+end_example haskell
+La dérivation automatique est implémentée au niveau du compilateur.
+** Sortes
+Les Kinds sont aux types ce que les types sont aux valeurs. Autrement
+dit, c'est le type d'un constructeur de type.
+Un type ordinaire a @TODO
+** Conditionnels
+
+Haskell connaît deux structures conditionnelles: les tests binaires avec
+~if~, et les cas de ~case~.
+
+*** ~if~
+  :PROPERTIES:
+  :CUSTOM_ID: if-then-else
+  :END:
+
+Une clause ~if~ est une *expression*, pas une structure de contrôle. La syntaxe est ~if a then b else c~, où ~a~ est une expression de type ~Bool~, ~b~ et ~c~ des expressions d'un type quelconque. Si ~a~ est vraie, l'expression vaut ~b~, sinon ~c~.
+
+Comme c'est une expression, on peut affecter son résultat directement à une variable:
+
+#+begin_src haskell
+a = if even x then "pair" else "impair"
+#+end_src
+
+Que ~if~ soit une primitive du compilateur n'est justifié que par le gain de clarté qu'il apporte.  L'implémenter en Haskell directement est trivial:
+
+#+begin_src haskell
+if' :: Bool -> a -> a
+if' True a _ = a
+if' _ _ b = b
+#+end_src
+
+
+*** ~case~
+
+
+** Évaluation paresseuse
+
+#+begin_src haskell
+let a = [1..] -- a est la liste de l'ensemble des entiers positifs
+let b = map ((^^) 2) a
+#+end_src
+
+L'évaluation paresseuse a un prix, qui est une plus grande consommation
+de mémoire : au lieu d'évaluer ~2 + 2~, Haskell stocke un
+thunk, c'est à dire en gros un calcul différé. Mais sur les gros
+traitements récursifs, l'accumulation de thunk peut entrainer
+rapidement un débordement de mémoire. La commande ~seq~ force
+l'évaluation et permet d'éviter un débordement de mémoire.
+
+#+begin_info
+*L'évaluation paresseuse obéit à des règles strictes.*
+
+Il est possible de déterminer avec précision /si/ une expression va être
+évaluée, et si oui /quand/. C'est parce qu'il est garanti qu'une
+expression dont le résultat n'est pas utilisé ne sera pas évaluée qu'on
+peut, par exemple, programmer des opérateurs logiques court-circuitants
+directement en Haskell, ou manipuler des suites infinies.
+#+end_info
+
+** Polymorphisme
+*** Polymorphisme paramétrique
+
+N'importe quelle [[#functions-and-variables][fonction]] ou [[#defining-types][type]] peut accepter des paramètres d'un type non défini. Sa signature remplace dans ce cas le nom d'un type par un paramètre de type, [[#identifiers][qui commence par une minuscule]].
+
+**** Types polymorphiques
+Le type ~Maybe~, qui représente une valeur possible, est un exemple
+de type polymorphique. Il a deux constructeurs : ~Nothing~ et
+~Just a~. ~Nothing~ ne prend pas de paramètre, et représente
+l'absence de valeur. ~Just a~ prend un paramètre du type quelconque
+~a~.
+
+#+begin_src haskell
+ghci> :type Just 3 Just 3 :: Num a => Maybe a ghci> :type Just "Une
+chaîne" Just "Une chaîne" :: Maybe [Char] ghci> :type Nothing Nothing
+:: Maybe a
+#+end_src
+
+**** Fonctions polymorphiques
+   :PROPERTIES:
+   :CUSTOM_ID: fonctions-polymorphiques
+   :END:
+Une fonction peut accepter, ou renvoyer, des types non-définis.
+#+begin_src haskell
+third :: [a] -> Maybe a
+third (_:_:x:_) = Just x
+third _ = Nothing
+#+end_src
+#+begin_info
+*«Théorèmes gratuits»*
+
+Comme une fonction polymorphique n'a pas accès au type réel de son
+paramètre, on peut déduire (au sens strict) ce qu'elle peut faire à sa
+seule signature.
+
+La fonction ~head :: [a] -> a~ n'a pas accès au type ~a~, et par
+conséquent ne peut ni construire un nouvel ~a~, ni modifier un des
+~a~ du tableau qu'elle reçoit: elle doit en renvoyer un tel quel.
+On peut donc déduire que ~head b `elem` b~.
+
+La fonction ~fst :: (a, b) -> a~ ne peut /rien/ faire d'autre que
+renvoyer le premier élément de la paire qui lui est passée, et ignorer
+le second.
+
+cite:Wadler1989 (pp. 33-35, 38-39 et /passim/) explicite le
+soubassement logico-mathématique de ce principe et montre des
+applications à des cas beaucoup plus complexes que ces quelque exemples.
+
+#+end_info
+
+*** Polymorphisme /ad hoc/
+  :PROPERTIES:
+  :CUSTOM_ID: polymorphisme-ad-hoc
+  :END:
+** Modules
+*** Écrire un module
+  :PROPERTIES:
+  :CUSTOM_ID: écrire-un-module
+  :END:
+Un module a le même nom que le fichier .hs qui le contient, et
+[[#identifiers][ce nom commence par une majuscule]]. La déclaration de
+module a la syntaxe suivante:
+#+begin_src haskell
+-- MyModule.hs module Mod ( x, y, z ) where -- code
+#+end_src
+Cette déclaration exporte les identifiants x, y et z du code qui la
+suit. On exporterait la totalité des noms en enlevant la parenthèse, et
+aucun en la laissant vide.
+#+begin_info
+Ce n'est pas une erreur de syntaxe que de ne pas respecter la
+règle nom du module = nom du fichier. Un tel module ne serait simplement
+pas importable, puisque le compilateur ne saurait pas où le trouver.
+#+end_info
+TODO exporter un type mais pas ses constructeurs.
+*** Importation de modules
+  :PROPERTIES:
+  :CUSTOM_ID: import
+  :END:
+
+#+begin_src haskell
+-- Commande Importé import Mod -- x, y, z, Mod.x, Mod.y, Mod.z import
+Mod () -- Uniquement les instances, voir ci-dessous. import Mod (x,y) --
+x, y, Mod.x, Mod.y import qualified Mod -- Mod.x, Mod.y, Mod.z import
+qualified Mod (x,y) -- Mod.x, Mod.y import Mod hiding (x,y) -- z, Mod.z
+import qualified Mod hiding (x,y) -- Mod.z import Mod as Foo -- x, y, z,
+Foo.x, Foo.y, Foo.z import Mod as Foo (x,y) -- x, y, Foo.x, Foo.y import
+qualified Mod as Foo -- Foo.x, Foo.y, Foo.z import qualified Mod as Foo
+(x,y) -- Foo.x, Foo.y
+#+end_src
+
+D'après cite:Hudak2000
+
+Même sans importer aucun nom (c'est le cas de ~import Mod ()~), tout ~import~ importe les instances de classes de types définies dans le module importé.
+
+*** Modules et instances
+  :PROPERTIES:
+  :CUSTOM_ID: modules-et-instances
+  :END:
+Les instances de classes de types définies dans un module sont toujours
+exportées et importées, quels que soient les noms explicitement importés
+ou exportés, et même s'il n'y en a aucun.
+** Le prélude
+
+Le Prélude (~Prelude~) est la librairie fondamentale d'Haskell.
+Contrairement aux autres modules, il est importé implicitement (cette
+importation peut néanmoins être contrôlée avec une
+[[#import][clause ~import~]] explicite).
+
+L'implémentation de référence est écrite en Haskell.
+
+Il est particulièrement intéressant de noter que parmi les définitions
+fournies par le Prélude, un certain nombre sont, dans la plupart des
+langages procéduraux, définies au niveau du compilateur. Parmi
+celles-ci, on trouve notamment les opérateurs booléens
+court-circuitants, dont l'implémentation est rendue triviale par le
+principe d'évaluation paresseuse.
+
+
+#+begin_src haskell
+  module Prelude (
+      module PreludeList, module PreludeText, module PreludeIO,
+      Bool(False, True),
+      Maybe(Nothing, Just),
+      Either(Left, Right),
+      Ordering(LT, EQ, GT),
+      Char, String, Int, Integer, Float, Double, Rational, IO,
+
+      -- These built-in types are defined in the Prelude, but
+      -- are denoted by built-in syntax, and cannot legally
+      -- appear in an export list.
+      -- List type: []((:), [])
+      -- Tuple types: (,)((,)), (,,)((,,)), etc.
+      -- Trivial type: ()(())
+      -- Functions: (->)
+
+      Eq((==), (/=)),
+      Ord(compare, (<), (<=), (>=), (>), max, min),
+      Enum(succ, pred, toEnum, fromEnum, enumFrom, enumFromThen,
+           enumFromTo, enumFromThenTo),
+      Bounded(minBound, maxBound),
+      Num((+), (-), (*), negate, abs, signum, fromInteger),
+      Real(toRational),
+      Integral(quot, rem, div, mod, quotRem, divMod, toInteger),
+      Fractional((/), recip, fromRational),
+      Floating(pi, exp, log, sqrt, (**), logBase, sin, cos, tan,
+               asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh),
+      RealFrac(properFraction, truncate, round, ceiling, floor),
+      RealFloat(floatRadix, floatDigits, floatRange, decodeFloat,
+                encodeFloat, exponent, significand, scaleFloat, isNaN,
+                isInfinite, isDenormalized, isIEEE, isNegativeZero, atan2),
+      Monad((>>=), (>>), return, fail),
+      Functor(fmap),
+      mapM, mapM_, sequence, sequence_, (=<<),
+      maybe, either,
+      (&&), (||), not, otherwise,
+      subtract, even, odd, gcd, lcm, (^), (^^),
+      fromIntegral, realToFrac,
+      fst, snd, curry, uncurry, id, const, (.), flip, ($), until,
+      asTypeOf, error, undefined,
+      seq, ($!)
+    ) where
+#+end_src
+Noms exportés par le Prélude d'Haskell 2010
+(cite:Haskell2010)
+
+** Programmation lettrée
+:PROPERTIES:
+:CUSTOM_ID: literateHaskell
+:END:
+
+
+Haskell fait partie des rares langages à gérer nativement la
+programmation lettrée. Les fichiers sources ont l'extension =.lhs= (au
+lieu de =.hs=) et les blocs de code peuvent être délimités de deux
+façons
+
+ - Soit par des *chevrons*, à la façon de Markdown.  Les lignes de code commencent par un =>=. Chaque bloc de code doit être précédé d’au moins une ligne vide.
+ - Soit par des délimiteurs d'environnement La$\TeX$:  Le code est entouré de =\begin{code}= et =\end{code}=.
+
+* Fonctions
+:PROPERTIES:
+:CUSTOM_ID: functions
+:END:
+
+** Fonctions et variables
+
+
+
+
+
+
+Haskell n'a pas de notion de variable au sens qu'a ce terme en
+programmation procédurale. Il est possible d'assigner une expression ou
+une valeur à un nom, avec la syntaxe ~nom = expression~, mais
+~nom~ est immuable, et est donc plus proche d'une constante (c'est
+une variable au sens mathématique du terme).
+
+En combinant ceci avec les principes de transparence référentielle,
+[[#lazyness][d'évaluation paresseuse]] et
+[[#partial-application][d'application partielle]], on voit facilement
+qu'il n'existe aucune différence stricte entre une fonction et une
+ariable, donc qu'il n'existe pas de variables. Par exemple:
+
+#+begin_src haskell
+a = 3 * 2 times3 x = 3 * x b = times3 2 c = 6
+#+end_src
+
+Ici, ~times3~ est une fonction, ~a~, ~b~ et ~c~ des
+variables. Dans la mesure où la valeur d'aucune n'est évaluée tant
+qu'elle n'est pas utilisée, la variable ~a~ a strictement la même
+valeur que ~b~, qui n'est pas 6, mais le thunk ~3 * 2~.
+
+#+begin_warn
+Cette identité n'est vraie que des fonctions pures. Les
+fonctions impures, comme par exemple ~getLine~, peuvent évidemment
+renvoyer un résultat différent à chaque invocation. Voir \fsee{io}.
+#+end_warn
+
+La suite de cette fiche ne s'intéresse donc qu'aux fonctions, puisque
+les «variables» n'en sont qu'un cas particulier.
+
+*** Signature de type
+
+La signature a la forme ~f :: TypeA -> TypeRet~, ce qui signifie que
+la fonction prend un paramètre de type ~TypeA~ et renvoie une valeur
+de type ~TypeRet~.
+Une fonction définie avec plusieurs paramètres a pour signature
+~f :: TypeA -> TypeB -> TypeC -> TypeRet~. Cette syntaxe est
+explicitée fiche \fsee{partial-application-and-currying}.
+Les fonctions d'ordre supérieur utilisent les parenthèses pour indiquer
+qu'elles prennent une autre fonction en paramètre. Par exemple, le type
+~map :: (a -> b) -> [a] -> [b]~ se lit : ~map~ prend comme
+premier paramètre une fonction quelconque ~x :: a -> b~.
+Une variable ou une fonction sans paramètres a pour type
+~nom :: Type~.
+
+*** Fonctions préfixes et infixes
+:PROPERTIES:
+:CUSTOM_ID: infix-and-prefix-functions
+:END:
+
+Une fonction est dite préfixe si son nom est placé avant ses
+arguments, et infixe si son nom est placé entre ses arguments.
+~map~ est une fonction préfixe, ~+~ est infixe. La distinction
+est syntaxique, et se fait au niveau des caractères qui constituent le
+nom de la fonction.
+
+**** Fonctions infixes
+
+Une fonction infixe a un nom composé uniquement de symboles non alphanumériques: ~+~,
+~*~ ou ~>>=~ sont infixes.
+On peut utiliser une fonction infixe comme préfixe en entourant son nom
+de parenthèses : ~(+) 1 1~.
+
+**** Fonctions préfixes
+
+Une fonction préfixe
+a un nom composé de caractères alphanumériques. ~map~, ~elem~
+ou ~foldr~ sont préfixes.
+On peut utiliser une fonction préfixe comme infixe en entourant son nom
+de \enconcept{backticks}: ~1 `elem` [1..10]~.
+
+** Définition de fonctions
+
+Une fonction se définit de la façon suivante:
+#+begin_src haskell
+add :: a -> b -- Signature de type, généralement optionnel. add x = expr
+x
+#+end_src
+
+Une fonction infixe se définit en entourant son nom de parenthèses,
+comme pour l'utiliser en préfixe:
+
+#+begin_src haskell
+(+/) a b = a + b + a / b
+#+end_src
+
+*** Fonctions locales
+  :PROPERTIES:
+  :CUSTOM_ID: fonctions-locales
+  :END:
+On peut définir des fonctions dont la visibilité est limitée à une
+fonction. C'est utile pour définir des constantes, ou fournir des
+fonctions utilitaires qui n'ont pas besoin d'être disponibles au niveau
+du module. Haskell propose deux syntaxes: ~let~, qui place les
+variables locales /avant/ le code de la fonction, et ~where~, qui les
+positionne /après/.
+
+
+#+begin_src haskell
+circLet :: Fractional a => a -> a
+circLet radius = let pi   = 3.14
+                     diam = 2 * radius
+                 in pi * diam
+#+end_src
+
+    #+begin_src haskell
+circWhere :: Fractional a => a -> a
+circWhere radius = pi * diam
+    where pi   = 3.141592653589793
+          diam = 2 * radius
+#+end_src
+
+
+ - Le choix de l'une ou de l'autre syntaxe est une question de lisibilité.
+ - On peut les imbriquer: une fonction locale peut à son tour définir des fonctions locales, etc.
+ - La visiblité des fonctions locales est limitée à la définition englobante.
+
+*** Fixité (précédence et associativité)
+  :PROPERTIES:
+  :CUSTOM_ID: fixité-précédence-et-associativité
+  :END:
+\label{defining-fixity}
+L'associativité et la précédence sont collectivement nommées «fixité».
+La fixité d'une fonction infixe (et de n'importe quelle fonction préfixe
+dans sa forme infixe, comme ~`elem`~) est fixée par une déclaration
+~infixl~ (associatif à gauche), ~infixr~ (associatif à droite) ou
+~infix~ (non-associatif ), suivie de l'ordre de précédence compris
+entre 0 et 9 et du nom de la fonction:
+#+begin_src haskell
+(+/) :: Num a => a -> a -> a infixl 9 +/ (+/) a b = a + b + a / b
+#+end_src
+Il est possible de définir la fixité d'une fonction locale, directement
+dans la clause ~let~ ou ~where~ où elle est définie.
+** Paramètres, motifs et gardes
+*** Passage de paramètres
+  :PROPERTIES:
+  :CUSTOM_ID: passage-de-paramètres
+  :END:
+@TODO
+
+**** Déconstruction de types composites.
+
+«Déconstruire» un argument d'une fonction permet d'obtenir directement
+les arguments du constructeur. Par exemple, la fonction suivante
+déconstruit un constructeur de paire (tuple de deux éléments) pour en
+renvoyer le premier:
+
+#+begin_src haskell
+toggle :: (a, b) -> a toggle (x, y) = (y, x)
+#+end_src
+
+Un paramètre non utilisé peut être remplacé par un ~_~:
+#+begin_src haskell
+duplFirst :: (a, b) -> (a, a) duplFirst (x, \_) = (x, x)
+#+end_src
+
+On n'a pas besoin du second membre de la paire: on la décompose donc en
+évitant de nommer cet élément.
+
+De la même façon, si le paramètre est un ~Maybe~, on peut récupérer
+directement sa valeur en déconstruisant ~Just~:
+
+#+begin_src haskell
+double :: Maybe Int -> Int double (Just x) = x * 2
+#+end_src
+
+**** Motifs nommés.
+:PROPERTIES:
+:CUSTOM_ID: as-patterns
+:END:
+
+On peut avoir besoin de déconstruire un paramètre selon un motif en conservant le paramètre entier. Les motifs nommés permettent d'éviter des suites déconstruction-reconstruction redondantes.  La fonction ~suffixes~ (d'après cite:OSullivan2008, 103) renvoie tous les suffixes d'une liste. Elle peut s'écrire:
+
+#+begin_src haskell
+  suffixes :: [a] -> [[a]] suffixes xs(/:xs') = xs : suffixes xs'
+  suffixes / = []
+#+end_src
+
+*** Filtrage par motif et gardes
+
+Le filtrage par motifs et l'emploi de gardes permettent de proposer
+différentes implémentations d'une même fonction selon les paramètres qui
+y sont passés, de façon similaire à l'emploi de cas en notation
+mathématique :
+
+$$
+
+ f(x) =
+  \begin{cases}
+   f(x-1) + x & \text{si } x > 0 \\
+   1          & \text{sinon}
+  \end{cases}
+
+$$
+
+Le filtrage par motifs permet de choisir une implémentation selon le
+type et dans une certaine mesure la valeur des paramètres, les gardes
+selon une expression arbitraire.
+
+#+begin_info
+Le filtrage par motif et les gardes permettent de définir plusieurs cas qui se recouvrent. Par exemple, une fonction peut fournir une implémentation pour n'importe quelle liste, et une autre pour n'importe quelle liste /non vide/. Haskell utilise toujours la première implémentation qui s'applique aux paramètres, dans l'ordre de déclaration : il faut donc déclarer les moins générales en premier.
+#+end_info
+
+*** Filtrage par motifs
+  :PROPERTIES:
+  :CUSTOM_ID: pattern-matching
+  :END:
+
+Le filtrage par motifs permet de filtrer selon un constructeur ou selon
+une valeur arbitraire.
+
+**** Par constructeur.
+
+Le filtrage par constructeurs permet de sélectionner quel constructeur
+d'un [[#algebraic-types][type algébrique]] correspond à quelle
+implémentation.
+
+#+begin_src haskell
+maybeIntToStr :: Maybe Int -> String maybeIntToStr (Just a) = show a
+maybeIntToStr Nothing = "NaN"
+#+end_src
+
+#+begin_src haskell
+mySum :: (Num a) => [a] -> a mySum (x:xs) = x + mySum xs mySum [] = 0
+#+end_src
+
+**** Par valeur littérale.
+
+Le filtrage par valeur littérale est le plus simple. Il choisit une
+implémentation si un paramètre a une valeur déterminée.
+
+#+begin_src haskell
+compte :: String -> String -> Int -> String
+compte singulier pluriel 0 = "Aucun(e) " ++ singulier
+compte singulier pluriel 1 = "Un(e) " ++ singulier
+compte singulier pluriel quantite = show quantite ++ " " ++ pluriel
+#+end_src
+
+#+begin_warn
+Une valeur littérale /doit/ être littérale et ne peut pas, pour des raisons syntaxiques, être une variable.  Un nom de variable dans une définition de fonction est *toujours* un paramètre de la fonction, jamais un filtre par valeur.
+#+end_warn
+
+**** Paramètres ignorés.
+   :PROPERTIES:
+   :CUSTOM_ID: paramètres-ignorés.
+   :END:
+Certaines implémentations d'une fonction peuvent ne pas faire usage de
+tous les paramètres. On ignore un paramètre dans la définition avec le
+symbole ~_~:
+La fonction ~compte~ ci-dessus pourrait s'écrire:
+#+begin_src haskell
+compte :: String -> String -> Int -> String
+compte singulier _ 0 = "Aucun(e) " ++ singulier
+compte singulier _ 1 = "Un(e) " ++ singulier
+compte _ pluriel quantite = show quantite ++ " " ++ pluriel
+#+end_src
+~_~ n'est pas un nom de variable mais la mention explicite que le
+paramètre ne sera pas utilisé.
+*** Gardes
+  :PROPERTIES:
+  :CUSTOM_ID: guards
+  :END:
+Un garde est une expression de type ~Bool~. Si l'expression s'évalue à ~True~, l'implémentation qui suit est utilisée.
+
+Leur syntaxe est:
+
+#+begin_src haskell
+func args | garde = impl
+#+end_src
+
+Par exemple, une fonction qui détermine si un nombre est pair, qui
+s'implémenterait naïvement sous la forme
+~isEven x = if x `mod` 2 == 0 then True else False~ peut s'écrire
+plus lisiblement:
+
+#+begin_src haskell
+isEven x | x =mod= 2 == 0 = True isEven \_ = False
+#+end_src
+
+La partie à gauche du garde peut être omise si elle est identique à
+celle qui précède (c'est-à-dire si l'éventuel motif est le même):
+
+#+begin_src haskell
+isEven x | x =mod= 2 == 0 = True | otherwise = False
+#+end_src
+
+#+begin_info
+~otherwise~ est une constante définie dans le Prélude.
+Sa valeur est simplement ~True~.
+#+end_info
+
+#+begin_warn
+~otherwise~ est simplement définie comme ~otherwise = True~. Son emploi est donc limité aux gardes.
+#+end_warn
+
+**** «Pattern guards»
+
+Haskell 2010 étend la syntaxe des gardes \todo{Cette section}
+#+begin_src haskell
+gardes :: Int -> String gardes a | odd a, a =mod= 5 == 0 = "Impair et/ou
+multiple de 5" | even a = "Pair mais pas multiple de 5"
+#+end_src
+\todo{}
+
+** Application partielle et currying
+
+Une fonction, quel que soit le nombre de paramètres avec lequel elle a été déclarée, ne prend qu'un seul paramètre et renvoie une autre fonction. Le type de ~+~, par exemple, est : ~Num a => Num a -> Num a -> Num a~, ce qui signifie que ~+~ prend un premier paramètre d'un type de type ~Num~
+
+** Lambdas
+
+#+begin_info
+Certaines fonctions du Prélude peuvent remplacer un lambda:
+~const x~ prend un paramètre et renvoie toujours x: c'est
+l'équivalent de ~\_ -> x~.
+#+end_info
+* Idiomes
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum."
+
+** Composition
+** Récursivité
+*** Récursivité en queue
+  :PROPERTIES:
+  :CUSTOM_ID: récursivité-en-queue
+  :END:
+*** Folds
+  :PROPERTIES:
+  :CUSTOM_ID: folds
+  :END:
+* Données
+** Listes
+  :PROPERTIES:
+  :CUSTOM_ID: lists
+  :END:
+
+Cette fiche résume quelques unes des fonctions essentielles applicables
+à des listes.
+
+ - ~head~, ~tail~.
+ - ~take~, ~takeWhile~, ~drop~, ~dropWhile~
+
+| ~(++)~, ~(<>)~           | ~[a] -> [a] -> [a]~                              |                                                   |
+| ~head~, ~last~           | ~[a] -> a~                                       |                                                   |
+| ~tail~                 | ~[a] -> [a]~                                     |                                                   |
+| ~drop~, ~take~           | ~Int -> [a] -> [a]~                              | Retient/retire $n$ premiers éléments de la liste. |
+| ~dropWhile~, ~takeWhile~ | ~(a -> Bool) -> [a] -> [a]~                      |                                                   |
+| ~map~, ~fmap~            | ~(a -> b) -> [a] -> [b]~~                        | Applique une fonction sur chaque élément          |
+| ~zip~                  | ~[a] -> [b] -> [(a, b)]~                         |                                                   |
+| ~zip3~                 | ~[a] -> [b] -> [c] -> [(a, b, c)]~               |                                                   |
+| ~zipWith~              | ~(a -> b -> c) -> [a] -> [b] -> [c]~             |                                                   |
+| ~zipWith3~           | ~(a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]~ |                                                   |
+** Monoïdes
+
+
+
+
+
+
+#+begin_src haskell
+class Monoid a where mempty :: a -- \^ Identity of 'mappend' mappend ::
+a -> a -> a -- \^ An associative operation mconcat :: [a] -> a
+#+BEGIN_EXAMPLE
+        -- ^ Fold a list using the monoid.
+        -- For most types, the default definition for 'mconcat' will be
+        -- used, but the function is included in the class definition so
+        -- that an optimized version can be provided for specific types.
+        mconcat = foldr mappend mempty
+#+END_EXAMPLE
+#+end_src
+* Control
+
+Cette section décrit les classes de types définies dans le Prelude au
+niveau du paquet =Control= et de ses sous-paquets. Il s'agit
+principalement des [[#Functor][foncteurs]], des
+[[#Applicative][foncteurs applicatifs]], des [[#Monad][monades]].
+
+#+begin_warn
+La hiérarchie des types a changé dans =base= 4.8.0.0, faisant de Monad une instance Applicative.
+#+end_warn
+
+** Foncteurs
+
+Il s'agit d'une [[#typeclasses][classe de type]], définie comme suit:
+
+#+begin_src haskell
+class Functor f where fmap :: (a -> b) -> f a -> f b
+#+end_src
+
+#+begin_law
+ 1. ~fmap id === id~. Mapper =id= sur un foncteur renvoie le
+même foncteur. Autrement dit, =fmap= ne peut pas introduire d'autres
+modifications dans le foncteur que l'application de la fonction.
+2. ~fmap (f . g)  ==  fmap f . fmap g~
+#+end_law
+
+La métaphore la plus répandue pour décrire un foncteur consiste à le
+comparer à une boîte qui contient une valeur. La métaphore est un peu
+courte. Plus abstraitement, un foncteur est un type de
+[[#kinds][sorte]] =* -> *= qui permet l'application d'une fonction sur
+les données du type encapsulée dans le foncteur.
+Ainsi =->= (la définition de fonction) est un foncteur. Par exemple:
+
+#+BEGIN_SRC haskell
+    a = (*) 2        -- Application partielle
+    b = fmap (*2) a  -- fmap
+    b 2              -- == 8
+#+END_SRC
+
+#+begin_info
+~fmap~ est une généralisation de ~map~, et peut donc toujours le remplacer.
+#+end_info
+
+** Foncteurs applicatifs
+
+Un foncteur applicatif est une structure intermédiaire entre un foncteur
+et une monade.
+
+Il s'agit d'une [[#typeclasses][classe de type]], définie comme suit:
+
+#+begin_src haskell
+  class Functor f => Applicative f where
+    -- | Lift a value.
+    pure :: a -> f a
+
+    -- | Sequential application.
+    (<*>) :: f (a -> b) -> f a -> f b
+
+    -- | Sequence actions, discarding the value of the first argument.
+    (*>) :: f a -> f b -> f b
+    a1 *> a2 = (id <$ a1) <*> a2
+    -- This is essentially the same as liftA2 (const id), but if the
+    -- Functor instance has an optimized (<$), we want to use that instead.
+    -- | Sequence actions, discarding the value of the second argument.
+    (<*) :: f a -> f b -> f a
+    (<*) = liftA2 const
+
+#+end_src
+
+** Monades
+
+Au plus simple, une monade est une classe de type définie comme suit:
+
+
+
+#+begin_src haskell
+  class Applicative m => Monad m where
+    -- | Sequentially compose two actions, passing any value produced
+    -- by the first as an argument tothe second.
+    (>>=) :: forall a b. m a -> (a -> m b) -> m b
+
+    -- | Sequentially compose two actions, discarding any value produced
+    -- by the first, like sequencing operators (such as the semicolon)
+    -- in imperative languages.
+    (>>)        :: forall a b. m a -> m b -> m b
+    m >> k = m >>= \_ -> k -- See Note [Recursive bindings for Applicative/Monad]
+    {-# INLINE (>>) #-}
+    -- | Inject a value into the monadic type.
+    return      :: a -> m a
+    return      = pure
+    -- | Fail with a message.  This operation is not part of the
+    -- mathematical definition of a monad, but is invoked on pattern-match
+    -- failure in a do expression.
+    fail        :: String -> m a
+    fail s      = error s
+
+#+end_src
+
+@TODO Déf propre, exemples, >>, >>=
+
+* Entrées et sorties
+
+La gestion des entrées/sorties requiert un traitement spécifique dans un
+langage fonctionnel. Contrairement aux fonctions pures du langage, les
+fonctions d'E/S produisent des effets de bord, et violent le principe de
+[[#referential-transparency][transparence référentielle]].
+
+Le mécanisme d'E/S d'Haskell est implémenté sous la forme d'une
+[[#Monad][monade]] nommée ~IO~.
+
+Contrairement à ce qui se fait en général dans les bouquins sur Haskell,
+il vaut mieux avoir vraiment compris les [[#definingTypes][types]],
+les [[#typeclasses][classes de types]] /et/ les [[#Monad][monades]]
+avant de se lancer dans l'exploration du mécanisme d'entrée/sortie.
+** Fonctions d'entrée sortie de base
+
+*** Fonctions d'entrée
+
+| ~Prelude~ | =h*= | Fonctions                | Description                  |
+|---------+----+--------------------------+------------------------------|
+| ✓       | ✓  | ~getChar :: IO Char~       | Lit un caractère.            |
+| ✓       | ✓  | ~getLine :: IO String~     | Lit une ligne.               |
+| ✓       | ✓  | ~getContents :: IO String~ | Lit le contenu d'un fichier. |
+
+*** Fonctions de sortie
+  :PROPERTIES:
+  :CUSTOM_ID: fonctions-de-sortie
+  :END:
+*** Manipulation de fichiers ou de répertoires
+  :PROPERTIES:
+  :CUSTOM_ID: manipulation-de-fichiers-ou-de-répertoires
+  :END:
+** Gestion des erreurs
+
+*** Les types ~Maybe~ et ~Either~
+  :PROPERTIES:
+  :CUSTOM_ID: les-types-et
+  :END:
+*** Exceptions
+  :PROPERTIES:
+  :CUSTOM_ID: exceptions
+  :END:
+
+* Contenu à organiser
+
+** TODOs
+
+À intégrer, en vrac:
+-  Idiome : Point-free style (RWH 120)
+-  Lexique : Liste de paires = association list (RWH 121)
+-  Extensions :
+   -  TypeSynonymInstances
+   -  OverlappingInstances
+-  monomorphisme (RWH 163, Haskell 98 4.5.5)
+-  IO
+-  Qu'est ce qu'une action (RWH 167, 184)
+-  Buffering (RWH 189)
+-  Data.ByteString, Data.ByteString.Lazy
+
+** Conventions
+
+#+begin_info
+Une information, pour préciser un point ou renvoyer vers d'autres sources.
+#+end_info
+
+#+begin_warn
+Un avertissement généralement important.
+#+end_warn
+
+#+begin_math
+Ces boîtes précisent un point concernant le soubassement mathématico-logique de Haskell.
+#+end_math
+
+#+begin_law
+Les lois sont des propriétés attendues des instances de classes de type que le compilateur ne peut pas contrôler.
+#+end_law
+
+** À propos de ce document
+  :PROPERTIES:
+  :CUSTOM_ID: about
+  :END:
+
+*** Auteur et mainteneur
+
+[[https://thb.lt][Thibault Polge]] ([[mailto:thibault@thb.lt][thibault@thb.lt]])
+
+*** Outils
+
+Ce site est généré avec [[http://jaspervdj.be/hakyll/][Hakyll]], une librairie de génération de sites statiques écrite en Haskell.
+
+Le thème est compilé avec [[http://sass-lang.com/][Sass]] et utilise [[http://gridle.org/][Gridle]].
+
+Le corps du texte est composé en [[https://www.google.com/fonts/specimen/Open+Sans][Open Sans]], les titres en [[https://www.google.com/fonts/specimen/Open+Sans+Condensed][Open Sans Condensed]].
+
+Les icônes des différentes boîtes proviennent de différentes séries compilées sur IcoMoon
+
+*** Licence
+  :PROPERTIES:
+  :CUSTOM_ID: licence
+  :END:
+
+[[http://creativecommons.org/licenses/by-nc-sa/2.0/fr/][[[https://i.creativecommons.org/l/by-nc-sa/2.0/fr/80x15.png]]]]
+
+
+ Pour l'instant, ce travail est mis à disposition sous la (relativement restrictive) [[https://creativecommons.org/licenses/by-nc-sa/2.0/fr/][Licence Creative Commons Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 2.0 France]].
+
+** Bibliographie

@@ -1,28 +1,52 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * Polymorphisme paramétrique
   :PROPERTIES:
   :CUSTOM_ID: polymorphisme-paramétrique
   :END:
 
-N'importe quelle \qsee{fonction}{functions-and-variables} ou
-\qsee{type}{defining-types} peut accepter des paramètres d'un type non
+N'importe quelle [[#functions-and-variables][fonction]] ou
+[[#defining-types][type]] peut accepter des paramètres d'un type non
 défini. Sa signature remplace dans ce cas le nom d'un type par un
-paramètre de type, \qsee{qui commence par une minuscule}{identifiers}.
+paramètre de type, [[#identifiers][qui commence par une minuscule]].
 
 ** Types polymorphiques
    :PROPERTIES:
    :CUSTOM_ID: types-polymorphiques
    :END:
 
-Le type \hsT{Maybe}, qui représente une valeur possible, est un exemple
-de type polymorphique. Il a deux constructeurs : \hs{Nothing} et
-\hs{Just a}. \hs{Nothing} ne prend pas de paramètre, et représente
-l'absence de valeur. \hs{Just a} prend un paramètre du type quelconque
-\hsTP{a}.
+Le type ~Maybe~, qui représente une valeur possible, est un exemple
+de type polymorphique. Il a deux constructeurs : ~Nothing~ et
+~Just a~. ~Nothing~ ne prend pas de paramètre, et représente
+l'absence de valeur. ~Just a~ prend un paramètre du type quelconque
+~a~.
 
-\ghci
-\prompt:type Just 3 Just 3 :: Num a => Maybe a \prompt:type Just "Une
-chaîne" Just "Une chaîne" :: Maybe [Char] \prompt:type Nothing Nothing
-:: Maybe a \eof
+#begin_src haskell
+ghci> :type Just 3 Just 3 :: Num a => Maybe a ghci> :type Just "Une
+chaîne" Just "Une chaîne" :: Maybe [Char] ghci> :type Nothing Nothing
+:: Maybe a #end_src
 
 ** Fonctions polymorphiques
    :PROPERTIES:
@@ -31,30 +55,30 @@ chaîne" Just "Une chaîne" :: Maybe [Char] \prompt:type Nothing Nothing
 
 Une fonction peut accepter, ou renvoyer, des types non-définis.
 
-\haskell
-third :: [a] -> Maybe a third (/:/:x:/) = Just x third / = Nothing \eof
+#begin_src haskell
+third :: [a] -> Maybe a third (/:/:x:/) = Just x third / = Nothing #end_src
 
-\box{info}\boxtitle{«Théorèmes gratuits»}
+#begin_infoBOXTITLE: «Théorèmes gratuits»
 
 Comme une fonction polymorphique n'a pas accès au type réel de son
 paramètre, on peut déduire (au sens strict) ce qu'elle peut faire à sa
 seule signature.
 
-La fonction \hs{head :: [a] -> a} n'a pas accès au type \hsTP{a}, et par
-conséquent ne peut ni construire un nouvel \hsTP{a}, ni modifier un des
-\hsTP{a} du tableau qu'elle reçoit: elle doit en renvoyer un tel quel.
-On peut donc déduire que \hs{head b `elem` b}.
+La fonction ~head :: [a] -> a~ n'a pas accès au type ~a~, et par
+conséquent ne peut ni construire un nouvel ~a~, ni modifier un des
+~a~ du tableau qu'elle reçoit: elle doit en renvoyer un tel quel.
+On peut donc déduire que ~head b `elem` b~.
 
-La fonction \hs{fst :: (a, b) -> a} ne peut /rien/ faire d'autre que
+La fonction ~fst :: (a, b) -> a~ ne peut /rien/ faire d'autre que
 renvoyer le premier élément de la paire qui lui est passée, et ignorer
 le second.
 
-\box{ref} [@Wadler1989, pp. 33-35, 38-39 and *passim*] explicite le
+#begin_ref [Wadler1989, pp. 33-35, 38-39 and *passim*] explicite le
 soubassement logico-mathématique de ce principe et montre des
 applications à des cas beaucoup plus complexes que ces quelque exemples.
-\endbox
+#end_
 
-\endbox
+#end_
 
 * Polymorphisme /ad hoc/
   :PROPERTIES:

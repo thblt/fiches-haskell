@@ -1,15 +1,39 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * Conventions
   :PROPERTIES:
   :CUSTOM_ID: conventions
   :END:
 
-\box{info} Une information, pour préciser un point ou préciser un point
-ou renvoyer vers d'autres sources. \endbox
+#begin_info Une information, pour préciser un point ou préciser un point
+ou renvoyer vers d'autres sources. #end_
 
-\box{warn} Un avertissement généralement important. \endbox
+#begin_warn Un avertissement généralement important. #end_
 
-\box{math} Ces boîtes précisent un point concernant le soubassement
-mathématico-logique de Haskell. \endbox
+#begin_math Ces boîtes précisent un point concernant le soubassement
+mathématico-logique de Haskell. #end_
 
-\box{law} Les lois sont des propriétés attendues des instances de
-classes de type que le compilateur ne peut pas contrôler. \endbox
+#begin_law Les lois sont des propriétés attendues des instances de
+classes de type que le compilateur ne peut pas contrôler. #end_

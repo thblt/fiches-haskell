@@ -1,6 +1,30 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Au plus simple, une monade est une classe de type définie comme suit:
 
-\haskell
+#begin_src haskell
 class Applicative m => Monad m where -- | Sequentially compose two
 actions, passing any value produced -- by the first as an argument to
 the second. (>>=) :: forall a b. m a -> (a -> m b) -> m b
@@ -19,11 +43,11 @@ the second. (>>=) :: forall a b. m a -> (a -> m b) -> m b
 
     -- | Fail with a message.  This operation is not part of the
     -- mathematical definition of a monad, but is invoked on pattern-match
-    -- failure in a @do@ expression.
+    -- failure in a do expression.
     fail        :: String -> m a
     fail s      = error s
 #+END_EXAMPLE
 
-\eof
+#end_src
 
 \todo {Déf propre, exemples, >>, >>=} \todo{Return}
