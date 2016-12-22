@@ -22,7 +22,7 @@ main = hakyll $ do
   match (fromGlob cslFile) $ compile cslCompiler
 
   match "haskell.org" $ do
-    route $ setExtension "html"
+    route $ customRoute $ const "index.html"
     compile $
         bibtexCompiler cslFile bibFile >>=
         loadAndApplyTemplate "theme/tpl/default.html" defaultContext >>=

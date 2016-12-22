@@ -1,19 +1,3 @@
-#+OPTIONS: html-link-use-abs-url:nil html-postamble:nil
-#+OPTIONS: html-preamble:nil html-scripts:nil html-style:nil
-#+OPTIONS: html5-fancy:t tex:t
-#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)
-#+HTML_CONTAINER: div
-#+HTML_DOCTYPE: xhtml-strict
-#+HTML_HEAD: <link rel="stylesheet" href="_site/theme/theme.css" type="text/css" />
-#+HTML_HEAD_EXTRA:
-#+HTML_LINK_HOME:
-#+HTML_LINK_UP:
-#+HTML_MATHJAX:
-#+HTML_MATHJAX:
-#+LATEX_HEADER:
-
-#+LANGUAGE: fr
-
 ** Introduction
 
 J’apprends Haskell, et comme [[#about][je]] suis consciencieux, je fais des fiches.
@@ -240,25 +224,26 @@ String, Int)]
 #+END_SRC
 
 *** ~newtype~
+
 Le mot-clé ~newtype~ permet de dupliquer un type, et crée un type
 distinct de l'original. Les synonymes créés avec ~newtype~ ne sont
 pas substituables avec le type dont ils sont synonymes. De plus, il
 n'appartiennent pas automatiquement aux
 [[#typeclasses][types de classe]] de ce dernier.
 Leur syntaxe est très proche de celle de ~data~:
+
 #+BEGIN_SRC haskell
 newtype MyType = MyType Int
 #+END_SRC
-**** Contrairement à ~data~,
-~newtype~:
--  n'autorise qu'un seul constructeur et un seul champ.
--  ne conserve pas les informations du type après la compilation. Dans
-   le programme compilé, ~MyType~ ci-dessus est traité comme un
+
+ - Contrairement à ~data~, ~newtype~:
+   -  n'autorise qu'un seul constructeur et un seul champ.
+   -  ne conserve pas les informations du type après la
+     compilation. Dans le programme compilé, ~MyType~ ci-dessus est traité comme un
    simple ~Int~:
-**** Contrairement à ~type~,
-~newtype~ ne maintient pas la substituabilité du nouveau type et du
-type dont il est un synonyme. ~type~ sert à faciliter la lecture,
-~newtype~ est plutôt utilisé pour masquer l'implémentation.
+
+ - Contrairement à ~type~, ~newtype~ ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme. ~type~ sert à faciliter la lecture, ~newtype~ est plutôt utilisé pour masquer l'implémentation.
+
 **** ~newtype~ est principalement utile pour:
 -  Masquer un type sous-jacent sans la perte de performances liée à
    l'usage de ~data~:
