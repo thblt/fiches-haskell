@@ -89,7 +89,7 @@ importants sont résumés dans ce tableau:
 | ~Double~                           | Virgule flottante, double précision                                        |
 | ~Float~                            | Virgule flottante, simple précision                      		                    |
 | ~Integer~                          | Entier signé en précision arbitraire                                       |
-| ~Int~                              | Entier signé à précision fixe, intervalle minimum $$[-2^{29} ; 2^{29}-1]$$ |
+| ~Int~                              | Entier signé à précision fixe, intervalle minimum $[-2^{29} ; 2^{29}-1]$   |
 | ~Int8~ , ~Int16~, ~Int32~, ~Int64~       | Entier signé de $n$ bits                                                   |
 | ~Word8~,  ~Word16~,  ~Word32~,  ~Word64~ | Entier non signé de $n$ bits                                               |
 | ~Rational, ~Ratio a~                | Nombre rationnel de précision arbitraire                                   |
@@ -190,7 +190,7 @@ Un arbre binaire:
 #+BEGIN_SRC haskell
 data BTree a = Node a (BTree a) (BTree a) | Empty deriving Show
 #+END_SRC
-h
+
 ** Synonymes de types
 
 Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.  Contrairement aux types définis avec [[#data][~data~]], les informations des synonymes ne sont pas conservées à la compilation.
@@ -225,48 +225,40 @@ String, Int)]
 
 *** ~newtype~
 
-Le mot-clé ~newtype~ permet de dupliquer un type, et crée un type
-distinct de l'original. Les synonymes créés avec ~newtype~ ne sont
-pas substituables avec le type dont ils sont synonymes. De plus, il
-n'appartiennent pas automatiquement aux
-[[#typeclasses][types de classe]] de ce dernier.
-Leur syntaxe est très proche de celle de ~data~:
+Le mot-clé ~newtype~ permet de dupliquer un type, et crée un type distinct de l'original. Les synonymes créés avec ~newtype~ ne sont pas substituables avec le type dont ils sont synonymes. De plus, il n'appartiennent pas automatiquement aux [[#typeclasses][types de classe]] de ce dernier.  Leur syntaxe est très proche de celle de ~data~:
 
 #+BEGIN_SRC haskell
 newtype MyType = MyType Int
 #+END_SRC
 
  - Contrairement à ~data~, ~newtype~:
+
    -  n'autorise qu'un seul constructeur et un seul champ.
-   -  ne conserve pas les informations du type après la
-     compilation. Dans le programme compilé, ~MyType~ ci-dessus est traité comme un
+
+   -  ne conserve pas les informations du type après la compilation. Dans le programme compilé, ~MyType~ ci-dessus est traité comme un
    simple ~Int~:
 
- - Contrairement à ~type~, ~newtype~ ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme. ~type~ sert à faciliter la lecture, ~newtype~ est plutôt utilisé pour masquer l'implémentation.
+ - Contrairement à ~type~, il ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme.  *Alors que ~type~ sert à faciliter la lecture, ~newtype~ est plutôt utilisé pour masquer l'implémentation*.  Il permet notamment de masquer un type sous-jacent sans la perte de performances liée à l'usage de ~data~, par exemple: ~newtype ResourceHandle = ResourceHandle Int16~.  Comme il est possible à un module de [[#module][n'exporter que le type mais pas le constructeur]], un programme peut recevoir et transmettre des données de type ~ResourceHandle~ sans connaître leur type réel.
 
-**** ~newtype~ est principalement utile pour:
--  Masquer un type sous-jacent sans la perte de performances liée à
-   l'usage de ~data~:
+-  Il permet aussi, sans perte de performances, de fournir *des instances différentes d'une unique [[#typeclasses][classe de type]]* pour un type donné:
 
-#+BEGIN_SRC haskell
-type ResourceHandle = ResourceHandle Int16
-#+END_SRC
+    #+BEGIN_SRC haskell
+      -- Data.Monoid
 
--  Permet, sans perte de performances, de fournir des instances
-   différentes d'un unique [[#typeclasses][classe de type]] pour un
-   type.
+      -- Booléen selon la conjonction
+      newtype All = All { getAll :: Bool }
+        deriving (Eq, Ord, Read, Show, Bounded)
+      instance Monoid All where
+        mempty = All True
+        mappend (All x) (All y) = All (x && y)
 
-#+BEGIN_SRC haskell
--- Data.Monoid
--- Booléen selon la conjonction newtype All = All { getAll :: Bool }
-deriving (Eq, Ord, Read, Show, Bounded)
-instance Monoid All where mempty = All True All x =mappend= All y =
-All (x && y)
--- Booléen selon la disjonction newtype Any = Any { getAny :: Bool }
-deriving (Eq, Ord, Read, Show, Bounded)
-instance Monoid Any where mempty = Any False Any x =mappend= Any y =
-Any (x || y)
-#+END_SRC
+      -- Booléen selon la disjonction
+      newtype Any = Any { getAny :: Bool }
+        deriving (Eq, Ord, Read, Show, Bounded)
+      instance Monoid Any where
+        mempty = Any False
+        mappend (Any x) (Any y) = Any (x || y)
+    #+END_SRC
 
 ** Classes de type
 :PROPERTIES:
@@ -385,9 +377,12 @@ l'absence de valeur. ~Just a~ prend un paramètre du type quelconque
 ~a~.
 
 #+BEGIN_SRC haskell
-ghci> :type Just 3 Just 3 :: Num a => Maybe a ghci> :type Just "Une
-chaîne" Just "Une chaîne" :: Maybe [Char] ghci> :type Nothing Nothing
-:: Maybe a
+ghci> :type Just 3
+Just 3 :: Num a => Maybe a
+ghci> :type Just "Une chaîne"
+Just "Une chaîne" :: Maybe [Char]
+ghci> :type Nothing
+Nothing :: Maybe a
 #+END_SRC
 
 **** Fonctions polymorphiques
@@ -400,6 +395,7 @@ third :: [a] -> Maybe a
 third (_:_:x:_) = Just x
 third _ = Nothing
 #+END_SRC
+
 #+begin_info
 *«Théorèmes gratuits»*
 
@@ -429,23 +425,28 @@ applications à des cas beaucoup plus complexes que ces quelque exemples.
 ** Modules
 *** Écrire un module
   :PROPERTIES:
-  :CUSTOM_ID: écrire-un-module
+  :CUSTOM_ID: module
   :END:
 Un module a le même nom que le fichier .hs qui le contient, et
 [[#_identifiers][ce nom commence par une majuscule]]. La déclaration de
 module a la syntaxe suivante:
+
 #+BEGIN_SRC haskell
 -- MyModule.hs module Mod ( x, y, z ) where -- code
 #+END_SRC
+
 Cette déclaration exporte les identifiants x, y et z du code qui la
 suit. On exporterait la totalité des noms en enlevant la parenthèse, et
 aucun en la laissant vide.
+
 #+begin_info
 Ce n'est pas une erreur de syntaxe que de ne pas respecter la
 règle nom du module = nom du fichier. Un tel module ne serait simplement
 pas importable, puisque le compilateur ne saurait pas où le trouver.
 #+end_info
+
 TODO exporter un type mais pas ses constructeurs.
+
 *** Importation de modules
   :PROPERTIES:
   :CUSTOM_ID: import
@@ -882,14 +883,6 @@ l'équivalent de ~\_ -> x~.
 #+end_info
 * Idiomes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum."
-
 ** Composition
 ** Récursivité
 *** Récursivité en queue
@@ -908,9 +901,6 @@ mollit anim id est laborum."
 
 Cette fiche résume quelques unes des fonctions essentielles applicables
 à des listes.
-
- - ~head~, ~tail~.
- - ~take~, ~takeWhile~, ~drop~, ~dropWhile~
 
 | ~(++)~, ~(<>)~           | ~[a] -> [a] -> [a]~                              |                                                   |
 | ~head~, ~last~           | ~[a] -> a~                                       |                                                   |
