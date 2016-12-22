@@ -29,6 +29,10 @@
 }
 #contents {
     text-align: justify;
+    .citation {
+	font-variant: small-caps;
+    }
+
     em {
 	font-style: italic;
     }
