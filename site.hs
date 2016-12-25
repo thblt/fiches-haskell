@@ -12,7 +12,7 @@ import           Text.Pandoc
 
 bibFile, cslFile :: String
 bibFile = "bibliography.bib"
-cslFile = "theme/iso690-author-date-fr.csl"
+cslFile = "theme/citstyle.csl"
 
 main :: IO ()
 main = hakyll $ do

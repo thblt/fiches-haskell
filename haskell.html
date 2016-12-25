@@ -1,223 +1,410 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Haskell</title>
-<!-- 2016-12-22 jeu. 02:19 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Thibault Polge" />
-<link rel="stylesheet" href="_site/theme/theme.css" type="text/css" />
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
-    MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
-        displayAlign: "center",
-        displayIndent: "2em",
+<!-- 2016-12-23 ven. 16:07 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title></title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Thibault Polge" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
-             }
-        }
-    });
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">Haskell</h1>
 <div id="table-of-contents">
-<h2>Table des matières</h2>
+<h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-0-1">0.1. Introduction</a></li>
+<li><a href="#org62cb99a">0.1. Introduction</a></li>
 </ul>
 </li>
-<li><a href="#sec-1">1. L'environnement de développement</a>
+<li><a href="#orgff4dbb4">1. L'environnement de développement</a>
 <ul>
-<li><a href="#sec-1-1">1.1. GHC</a>
+<li><a href="#org67312ef">1.1. GHC</a>
 <ul>
-<li><a href="#sec-1-1-1">1.1.1. GHC</a></li>
+<li><a href="#org9b5d2d2">1.1.1. GHC</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Debuggers</a></li>
-<li><a href="#sec-1-3">1.3. Cabal</a></li>
-<li><a href="#sec-1-4">1.4. Stack</a></li>
-</ul>
-</li>
-<li><a href="#sec-2">2. Le langage</a>
+<li><a href="#orgb955744">1.2. Outils de construction</a>
 <ul>
-<li><a href="#_types">2.1. Les types: généralités</a>
-<ul>
-<li><a href="#_identifiers">2.1.1. Nommage des identifiants</a></li>
-<li><a href="#_algebraic-types">2.1.2. Types produits, types sommes, types exponentielles</a></li>
-<li><a href="#sec-2-1-3">2.1.3. Types élémentaires</a></li>
-</ul>
-</li>
-<li><a href="#data">2.2. Définition de types</a>
-<ul>
-<li><a href="#sec-2-2-1">2.2.1. Produits</a></li>
-<li><a href="#sec-2-2-2">2.2.2. Sommes</a></li>
-<li><a href="#syntaxe-denregistrement">2.2.3. Syntaxe d'enregistrement</a></li>
-<li><a href="#sec-2-2-4">2.2.4. Les types comme contextes</a></li>
-<li><a href="#sec-2-2-5">2.2.5. Types récursifs</a></li>
-</ul>
-</li>
-<li><a href="#sec-2-3">2.3. Synonymes de types</a>
-<ul>
-<li><a href="#section">2.3.1. <code>type</code></a></li>
-<li><a href="#sec-2-3-2">2.3.2. <code>newtype</code></a></li>
-</ul>
-</li>
-<li><a href="#typeclasses">2.4. Classes de type</a>
-<ul>
-<li><a href="#sec-2-4-1">2.4.1. Créer une classe de type</a></li>
-<li><a href="#sec-2-4-2">2.4.2. Dériver une classe de type</a></li>
-<li><a href="#sec-2-4-3">2.4.3. Dérivation automatique</a></li>
-</ul>
-</li>
-<li><a href="#_kinds">2.5. Sortes</a></li>
-<li><a href="#sec-2-6">2.6. Conditionnels</a>
-<ul>
-<li><a href="#if-then-else">2.6.1. <code>if</code></a></li>
-<li><a href="#sec-2-6-2">2.6.2. <code>case</code></a></li>
-</ul>
-</li>
-<li><a href="#_lazyness">2.7. Évaluation paresseuse</a></li>
-<li><a href="#sec-2-8">2.8. Polymorphisme</a>
-<ul>
-<li><a href="#sec-2-8-1">2.8.1. Polymorphisme paramétrique</a></li>
-<li><a href="#polymorphisme-ad-hoc">2.8.2. Polymorphisme <i>ad hoc</i></a></li>
-</ul>
-</li>
-<li><a href="#sec-2-9">2.9. Modules</a>
-<ul>
-<li><a href="#crire-un-module">2.9.1. Écrire un module</a></li>
-<li><a href="#import">2.9.2. Importation de modules</a></li>
-<li><a href="#modules-et-instances">2.9.3. Modules et instances</a></li>
-</ul>
-</li>
-<li><a href="#sec-2-10">2.10. Le prélude</a></li>
-<li><a href="#literateHaskell">2.11. Programmation lettrée</a></li>
-</ul>
-</li>
-<li><a href="#functions">3. Fonctions</a>
-<ul>
-<li><a href="#sec-3-1">3.1. Fonctions et variables</a>
-<ul>
-<li><a href="#sec-3-1-1">3.1.1. Signature de type</a></li>
-<li><a href="#infix-and-prefix-functions">3.1.2. Fonctions préfixes et infixes</a></li>
-</ul>
-</li>
-<li><a href="#sec-3-2">3.2. Définition de fonctions</a>
-<ul>
-<li><a href="#fonctions-locales">3.2.1. Fonctions locales</a></li>
-<li><a href="#fixit-pr-c-dence-et-associativit">3.2.2. Fixité (précédence et associativité)</a></li>
-</ul>
-</li>
-<li><a href="#sec-3-3">3.3. Paramètres, motifs et gardes</a>
-<ul>
-<li><a href="#passage-de-param-tres">3.3.1. Passage de paramètres</a></li>
-<li><a href="#sec-3-3-2">3.3.2. Filtrage par motif et gardes</a></li>
-<li><a href="#pattern-matching">3.3.3. Filtrage par motifs</a></li>
-<li><a href="#guards">3.3.4. Gardes</a></li>
-</ul>
-</li>
-<li><a href="#_partial-application">3.4. Application partielle et currying</a></li>
-<li><a href="#sec-3-5">3.5. Lambdas</a></li>
-</ul>
-</li>
-<li><a href="#sec-4">4. Idiomes</a>
-<ul>
-<li><a href="#sec-4-1">4.1. Composition</a></li>
-<li><a href="#sec-4-2">4.2. Récursivité</a>
-<ul>
-<li><a href="#r-cursivit-en-queue">4.2.1. Récursivité en queue</a></li>
-<li><a href="#folds">4.2.2. Folds</a></li>
+<li><a href="#org65174ab">1.2.1. Les fichiers <code>.cabal</code></a></li>
+<li><a href="#org1cdc614">1.2.2. Cabal et Stack</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Données</a>
+<li><a href="#org5df9be1">2. Le langage</a>
 <ul>
-<li><a href="#lists">5.1. Listes</a></li>
-<li><a href="#Monoid">5.2. Monoïdes</a></li>
+<li><a href="#org3d4c14c">2.1. Conditionnels</a>
+<ul>
+<li><a href="#if-then-else">2.1.1. <code>if</code></a></li>
+<li><a href="#org41fa2af">2.1.2. <code>case</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6. Control</a>
+<li><a href="#_lazyness">2.2. Évaluation paresseuse</a></li>
+<li><a href="#orgdf288a7">2.3. Polymorphisme</a>
 <ul>
-<li><a href="#Functor">6.1. Foncteurs</a></li>
-<li><a href="#Applicative">6.2. Foncteurs applicatifs</a></li>
-<li><a href="#Monad">6.3. Monades</a></li>
+<li><a href="#org7cf9887">2.3.1. Polymorphisme paramétrique</a></li>
+<li><a href="#polymorphisme-ad-hoc">2.3.2. Polymorphisme <i>ad hoc</i></a></li>
 </ul>
 </li>
-<li><a href="#IO">7. Entrées et sorties</a>
+<li><a href="#org477fae3">2.4. Modules</a>
 <ul>
-<li><a href="#sec-7-1">7.1. Fonctions d'entrée sortie de base</a>
-<ul>
-<li><a href="#sec-7-1-1">7.1.1. Fonctions d'entrée</a></li>
-<li><a href="#fonctions-de-sortie">7.1.2. Fonctions de sortie</a></li>
-<li><a href="#manipulation-de-fichiers-ou-de-r-pertoires">7.1.3. Manipulation de fichiers ou de répertoires</a></li>
+<li><a href="#module">2.4.1. Écrire un module</a></li>
+<li><a href="#import">2.4.2. Importation de modules</a></li>
+<li><a href="#modules-et-instances">2.4.3. Modules et instances</a></li>
 </ul>
 </li>
-<li><a href="#sec-7-2">7.2. Gestion des erreurs</a>
+<li><a href="#Prelude">2.5. Le prélude</a></li>
+<li><a href="#_literateHaskell">2.6. Programmation lettrée</a></li>
+<li><a href="#orgc22ad53">2.7. Idiomes</a>
 <ul>
-<li><a href="#les-types-et">7.2.1. Les types <code>Maybe</code> et <code>Either</code></a></li>
-<li><a href="#exceptions">7.2.2. Exceptions</a></li>
+<li><a href="#orga9e9b5a">2.7.1. Composition et <i>point-free style</i></a></li>
+<li><a href="#org15a4ca3">2.7.2. Récursivité</a></li>
+<li><a href="#fold">2.7.3. Folds</a></li>
+</ul>
+</li>
+<li><a href="#org8e0658e">2.8. Extensions GHC</a></li>
+</ul>
+</li>
+<li><a href="#_types">3. Types</a>
+<ul>
+<li><a href="#orgaefd815">3.1. Généralités</a>
+<ul>
+<li><a href="#_identifiers">3.1.1. Nommage des identifiants</a></li>
+<li><a href="#_algebraic-types">3.1.2. Types produits, types sommes, types exponentielles</a></li>
+<li><a href="#org32dd414">3.1.3. Types élémentaires</a></li>
+</ul>
+</li>
+<li><a href="#data">3.2. Définition de types</a>
+<ul>
+<li><a href="#org2b616cd">3.2.1. Produits</a></li>
+<li><a href="#org2d63702">3.2.2. Sommes</a></li>
+<li><a href="#syntaxe-denregistrement">3.2.3. Syntaxe d'enregistrement</a></li>
+<li><a href="#org297e27d">3.2.4. Les types comme contextes</a></li>
+<li><a href="#org4eb93da">3.2.5. Types récursifs</a></li>
+</ul>
+</li>
+<li><a href="#org448a29d">3.3. Synonymes de types</a>
+<ul>
+<li><a href="#section">3.3.1. <code>type</code></a></li>
+<li><a href="#org3e2e098">3.3.2. <code>newtype</code></a></li>
+</ul>
+</li>
+<li><a href="#typeclasses">3.4. Classes de type</a>
+<ul>
+<li><a href="#orgfd9fac2">3.4.1. Créer une classe de type</a></li>
+<li><a href="#org4237874">3.4.2. Dériver une classe de type</a></li>
+<li><a href="#org93ab2f0">3.4.3. Dérivation automatique</a></li>
+</ul>
+</li>
+<li><a href="#_kinds">3.5. Sortes</a></li>
+</ul>
+</li>
+<li><a href="#functions">4. Fonctions</a>
+<ul>
+<li><a href="#orgb54cb78">4.1. Fonctions et variables</a>
+<ul>
+<li><a href="#org7e35a6e">4.1.1. Signature de type</a></li>
+<li><a href="#org4441e81">4.1.2. Définition de fonctions</a></li>
+<li><a href="#infix-and-prefix-functions">4.1.3. Fonctions préfixes et infixes</a></li>
+<li><a href="#fonctions-locales">4.1.4. Fonctions locales</a></li>
+<li><a href="#_fixity">4.1.5. Fixité (précédence et associativité)</a></li>
+</ul>
+</li>
+<li><a href="#org8bdc0e9">4.2. Paramètres, motifs et gardes</a>
+<ul>
+<li><a href="#passage-de-paramètres">4.2.1. Paramètres</a></li>
+<li><a href="#orgf92df54">4.2.2. Filtrage par motif et gardes</a></li>
+<li><a href="#pattern-matching">4.2.3. Filtrage par motifs</a></li>
+<li><a href="#guards">4.2.4. Gardes</a></li>
+</ul>
+</li>
+<li><a href="#_partial-application">4.3. Application partielle et currying</a></li>
+<li><a href="#org059ff5d">4.4. Lambdas</a></li>
+<li><a href="#lists">4.5. Listes</a></li>
+<li><a href="#Monoid">4.6. Monoïdes</a></li>
+<li><a href="#Functor">4.7. Foncteurs</a></li>
+<li><a href="#Applicative">4.8. Foncteurs applicatifs</a></li>
+<li><a href="#Monad">4.9. Monades</a></li>
+</ul>
+</li>
+<li><a href="#IO">5. Entrées et sorties</a>
+<ul>
+<li><a href="#org7ab9833">5.1. Fonctions d'entrée sortie de base</a>
+<ul>
+<li><a href="#org7b261bb">5.1.1. Fonctions d'entrée</a></li>
+<li><a href="#fonctions-de-sortie">5.1.2. Fonctions de sortie</a></li>
+<li><a href="#manipulation-de-fichiers-ou-de-répertoires">5.1.3. Manipulation de fichiers ou de répertoires</a></li>
+</ul>
+</li>
+<li><a href="#org791d65d">5.2. Gestion des erreurs</a>
+<ul>
+<li><a href="#les-types-et">5.2.1. Les types <code>Maybe</code> et <code>Either</code></a></li>
+<li><a href="#exceptions">5.2.2. Exceptions</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#sec-8">8. Contenu à organiser</a>
+<li><a href="#orgd36a803">6. Contenu à organiser</a>
 <ul>
-<li><a href="#sec-8-1">8.1. TODOs</a></li>
-<li><a href="#sec-8-2">8.2. Conventions</a></li>
-<li><a href="#about">8.3. À propos de ce document</a>
+<li><a href="#orgdc00681">6.1. <span class="todo TODO">TODO</span> s</a></li>
+<li><a href="#orgc0f08cb">6.2. Conventions</a></li>
+<li><a href="#about">6.3. À propos de ce document</a>
 <ul>
-<li><a href="#sec-8-3-1">8.3.1. Auteur et mainteneur</a></li>
-<li><a href="#sec-8-3-2">8.3.2. Outils</a></li>
-<li><a href="#licence">8.3.3. Licence</a></li>
+<li><a href="#orgf4643a2">6.3.1. Auteur et mainteneur</a></li>
+<li><a href="#orge937039">6.3.2. Outils</a></li>
+<li><a href="#licence">6.3.3. Licence</a></li>
 </ul>
 </li>
-<li><a href="#sec-8-4">8.4. Bibliographie</a></li>
+<li><a href="#org990568e">6.4. Bibliographie</a></li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-sec-0-1" class="outline-3">
-<h3 id="sec-0-1"><span class="section-number-3">0.1</span> Introduction</h3>
+<div id="outline-container-org62cb99a" class="outline-3">
+<h3 id="org62cb99a"><span class="section-number-3">0.1</span> Introduction</h3>
 <div class="outline-text-3" id="text-0-1">
 <p>
-J’apprends Haskell, et comme <a href="#about">je</a> suis consciencieux, je fais des fiches.
+Ce document est destiné à devenir, à terme, une série complète de fiches sur le langage <a href="https://www.haskell.org/">Haskell</a>.
 </p>
 
 <p>
@@ -225,19 +412,11 @@ Elles n’ont pas la prétention d’être un support d’apprentissage autonome
 </p>
 
 <p>
-J’ai décidé de préparer ces fiches pour combler un manque dans la documentation sur Haskell. Les livres dont je dispose sur le langage sont soit trop superficiels, soit insuffisamment systématiques. Certains présentent une version superficelle d’Haskell, d’autres, les plus élaborés, souffrent au contraire du syndrome de l’enseignant-passionné-mais-pas-méthodique : ils ne cessent de s’interrompre et de proposer des apartés hors de propos qui mobilisent soudainement des notions qui ne seront explicitées que plusieurs chapitres plus loin.
+J’ai décidé de préparer ces fiches pour combler un manque dans la documentation sur Haskell.  Les livres dont je dispose sur le langage sont soit trop superficiels, soit insuffisamment systématiques. Certains présentent une version superficelle du langage, d’autres, les plus élaborés, souffrent au contraire du syndrome de l’enseignant-passionné-mais-pas-méthodique : ils ne cessent de s’interrompre et de proposer des apartés hors de propos qui mobilisent soudainement des notions qui ne seront explicitées que plusieurs chapitres plus loin.  (Ce qui précède est devenu nettement moins depuis la sortie <a href="http://haskellbook.com/">moins vrai</a>.
 </p>
 
-<div class="info">
 <p>
-Ce qui précède est <a href="http://haskellbook.com/">de moins en moins vrai</a>.
-</p>
-
-</div>
-
-
-<p>
-Ces fiches tentent donc une présentation plus rigoureusement systématique, mais sans prétention pédagogique. L’ordre d’exposition y est aussi linéaire que possible, mais les renvois se font dans les deux sens : une fiche peut faire référence au contenu d’une fiche antérieure comme ultérieure.
+Ces fiches tentent donc une présentation plus rigoureusement systématique, mais sans prétention pédagogique. L’ordre d’exposition n'y est absolument pas linéaire, et l'organisation tente d'être plus logique que pédagogique.
 </p>
 
 <p>
@@ -246,11 +425,11 @@ Ce travail est à peine entamé. À terme, il devrait offrir un aperçu complet 
 </div>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> L'environnement de développement</h2>
+<div id="outline-container-orgff4dbb4" class="outline-2">
+<h2 id="orgff4dbb4"><span class="section-number-2">1</span> L'environnement de développement</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> GHC</h3>
+</div><div id="outline-container-org67312ef" class="outline-3">
+<h3 id="org67312ef"><span class="section-number-3">1.1</span> GHC</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 L'implémentation de Haskell la plus répandue est GHC, <i>The Glasgow
@@ -259,8 +438,8 @@ un interpréteur (<code>runghc</code>) et un interpréteur ligne à ligne (REPL)
 (<code>ghci</code>).
 </p>
 </div>
-<div id="outline-container-sec-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> GHC</h4>
+<div id="outline-container-org9b5d2d2" class="outline-4">
+<h4 id="org9b5d2d2"><span class="section-number-4">1.1.1</span> GHC</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 GHC reconnaît les formats d'entrées suivants:
@@ -270,25 +449,25 @@ GHC reconnaît les formats d'entrées suivants:
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">Extension</th>
-<th scope="col" class="left">Format</th>
+<th scope="col" class="org-left">Extension</th>
+<th scope="col" class="org-left">Format</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left"><code>.hs</code></td>
-<td class="left">Source Haskell</td>
+<td class="org-left"><code>.hs</code></td>
+<td class="org-left">Source Haskell</td>
 </tr>
 
 <tr>
-<td class="left"><code>.lhs</code></td>
-<td class="left">Source <a href="#literateHaskell">Literate Haskell</a></td>
+<td class="org-left"><code>.lhs</code></td>
+<td class="org-left">Source <a href="#_literateHaskell">Literate Haskell</a></td>
 </tr>
 </tbody>
 </table>
@@ -307,505 +486,76 @@ invoquer ghc avec le drapeau <code>-dynamic</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Debuggers</h3>
+
+<div id="outline-container-orgb955744" class="outline-3">
+<h3 id="orgb955744"><span class="section-number-3">1.2</span> Outils de construction</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Haskell dispose de deux outils de construction (<i>make</i>): <a href="#cabal">Cabal</a> et <a href="#stack">Stack</a>.  Ces deux outils implémentent la même spécification pour automatiser le processus de compilation.  Ils tentent chacun d'assurer la reproductibilité de la compilation et de la résolution des dépendances, et de faciliter la cohabitation de plusieurs versions de la même librairie.
+</p>
+
+<p>
+Le nom «Cabal» (pour  <i>Common Architecture for Building Applications and Libraries</i>) désigne à la fois:
+</p>
+
+<ul class="org-ul">
+<li>Une spécification</li>
+<li>Une librairie</li>
+<li>Une implémentation (<code>cabal-install</code>)</li>
+</ul>
+
+<p>
+Stack est une implémentation alternative de la même spécification.  Un projet construit pour n'importe lequel des deux moteurs devrait compiler avec l'autre.
+</p>
+
+<div class="info">
+<p>
+Dans la mesure où les deux outils gèrent les dépendances de façon différente, et d'une façon différente de GHC, ils fournissent chacun une commande pour invoquer le REPL avec les bonnes dépendances: <code>cabal repl</code> et <code>stack repl</code>.
+</p>
+
 </div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Cabal</h3>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Stack</h3>
+<div id="outline-container-org65174ab" class="outline-4">
+<h4 id="org65174ab"><span class="section-number-4">1.2.1</span> Les fichiers <code>.cabal</code></h4>
+</div>
+
+<div id="outline-container-org1cdc614" class="outline-4">
+<h4 id="org1cdc614"><span class="section-number-4">1.2.2</span> Cabal et Stack</h4>
+<div class="outline-text-4" id="text-1-2-2">
+</div><ol class="org-ol"><li><a id="cabal"></a><a id="org3e51058"></a>Cabal (<code>cabal-install</code>)<br  /><div class="outline-text-5" id="text-cabal">
+<p>
+Cabal-le-programme est le programme de construction «historique» de Haskell.  Jusqu'à la version 1.24, il reposait sur un mécanisme de «bac à sable» pour isoler les dépendances nécessaires à un projet.  Le coût de cette solution était une initialisation relativement longue pour les projets ayant de nombreuses dépendances.  À partir de la version 1.24, Cabal fournit <code>new-build</code>, qui utilise un dépôt centralisé.
+</p>
+</div></li>
+
+<li><a id="stack"></a><a id="orgfe71244"></a>Stack<br  /><div class="outline-text-5" id="text-stack">
+<p>
+Stack est un moteur de construction alternatif qui suit la spécification Cabal, mais fournit sa propre implémentation.
+</p>
+
+<p>
+@TODO
+</p>
+</div></li></ol>
+</div>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Le langage</h2>
+<div id="outline-container-org5df9be1" class="outline-2">
+<h2 id="org5df9be1"><span class="section-number-2">2</span> Le langage</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-_types" class="outline-3">
-<h3 id="_types"><a id="sec-2-1" name="sec-2-1"></a><span class="section-number-3">2.1</span> Les types: généralités</h3>
-<div class="outline-text-3" id="text-_types">
-
+</div><div id="outline-container-org3d4c14c" class="outline-3">
+<h3 id="org3d4c14c"><span class="section-number-3">2.1</span> Conditionnels</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
-Haskell connaît deux espèces essentielles de type: les types de <b>données</b> et les types de <b>fonctions</b>.  Cette section traite uniquement des premiers, les seconds <a href="#functions">ont leur propre section</a>.
+Haskell connaît deux structures conditionnelles: <code>if</code> et <code>case</code>.
 </p>
 </div>
 
-<div id="outline-container-_identifiers" class="outline-4">
-<h4 id="_identifiers"><a id="sec-2-1-1" name="sec-2-1-1"></a><span class="section-number-4">2.1.1</span> Nommage des identifiants</h4>
-<div class="outline-text-4" id="text-_identifiers">
-
-
-<p>
-En Haskell, la casse du premier caractère d'un identifiant a une importance.  Un nom de type ou un constructeur de type commencent toujours par une majuscule, un nom de fonction ou de variable par une minuscule.
-</p>
-</div>
-</div>
-
-<div id="outline-container-_algebraic-types" class="outline-4">
-<h4 id="_algebraic-types"><a id="sec-2-1-2" name="sec-2-1-2"></a><span class="section-number-4">2.1.2</span> Types produits, types sommes, types exponentielles</h4>
-<div class="outline-text-4" id="text-_algebraic-types">
-
-
-<p>
-Si on comprend qu'un type est un <b>ensemble</b> (de valeurs possibles), on voit aisément pourquoi on parle de types produit ou somme:
-</p>
-
-<ul class="org-ul">
-<li>Une <b>alternative</b> entre type (<code>data OuBien = Chaine String | Entier Int</code>) a pour cardinal la <b>somme</b> des cardinaux des types qui le constituent.
-</li>
-
-<li>Une <b>combinaison</b> de types (<code>data ChaineEtEntier = ChaineEtEntier String Int</code>) a pour cardinal le <b>produit</b> des cardinaux des types qui le constituent.
-</li>
-
-<li>Une <b>application</b> de types (<code>TypeA -&gt; TypeB</code>) a pour cardinal le cardinal du type du résultat élevé à la <b>puissance</b> du cardinal du type du paramètre.  Le cardinal de <code>a -&gt; b</code> est donc \(\#b^{\#a}\).
-</li>
-</ul>
-
-<p>
-(Le cardinal d'un type défini avec <code>data</code> est simplement une somme de produits.)
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Types élémentaires</h4>
-<div class="outline-text-4" id="text-2-1-3">
-<p>
-Haskell fournit un grand nombre de types élémentaires, dont les plus
-importants sont résumés dans ce tableau:
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Tableau 1 :</span> Types numériques essentiels, d'après cite:OSullivan2008.</caption>
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Type</th>
-<th scope="col" class="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left"><code>Double</code></td>
-<td class="left">Virgule flottante, double précision</td>
-</tr>
-
-<tr>
-<td class="left"><code>Float</code></td>
-<td class="left">Virgule flottante, simple précision</td>
-</tr>
-
-<tr>
-<td class="left"><code>Integer</code></td>
-<td class="left">Entier signé en précision arbitraire</td>
-</tr>
-
-<tr>
-<td class="left"><code>Int</code></td>
-<td class="left">Entier signé à précision fixe, intervalle minimum $$[-2^{29} ; 2^{29}-1]$$</td>
-</tr>
-
-<tr>
-<td class="left"><code>Int8</code> , <code>Int16</code>, <code>Int32</code>, <code>Int64</code></td>
-<td class="left">Entier signé de \(n\) bits</td>
-</tr>
-
-<tr>
-<td class="left"><code>Word8</code>,  <code>Word16</code>,  <code>Word32</code>,  <code>Word64</code></td>
-<td class="left">Entier non signé de \(n\) bits</td>
-</tr>
-
-<tr>
-<td class="left"><code>Rational, ~Ratio a</code></td>
-<td class="left">Nombre rationnel de précision arbitraire</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-
-<div id="outline-container-data" class="outline-3">
-<h3 id="data"><a id="sec-2-2" name="sec-2-2"></a><span class="section-number-3">2.2</span> Définition de types</h3>
-<div class="outline-text-3" id="text-data">
-</div>
-<div id="outline-container-sec-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Produits</h4>
-<div class="outline-text-4" id="text-2-2-1">
-<div class="org-src-container">
-
-<pre class="src src-haskell">data Book = NewBook String [String] Int
---                  ^               ^__ Année de publication
---                  |      ^___________ Auteurs
---                  |__________________ Titre
-</pre>
-</div>
-
-<p>
-Cette ligne définit un type nommé <code>Book</code> qui fournit un unique constructeur <code>NewBook</code>.  Le constructeur <code>NewBook</code> se comporte comme une fonction qui prend trois paramètres et qrenvoie un <code>Book</code>: <code>NewBook :: String -&gt; [String] -&gt; Int -&gt; Book</code>.  Pour construire un nouveau <code>Book</code>, on écrit donc <code>book = NewBook "Critique of Pure Reason" ["Immanuel Kant"] 1781</code>.  Dans cette syntaxe, les arguments du constructeur sont positionnels et doivent être fournis dans l'ordre de la déclaration.
-</p>
-
-<div class="info">
-<p>
-Il est légal et très courant, quand un type ne fournit qu'un seul constructeur, de donner à ce constructeur le nom du type. On aurait alors <code>data Book = Book String [String] Int</code>. L'exemple précédent les distingue par souci de clarté, mais n'est pas vraiment idiomatique.
-</p>
-
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2-2-2" class="outline-4">
-<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Sommes</h4>
-<div class="outline-text-4" id="text-2-2-2">
-<p>
-Un type somme présente une alternative en offrant plusieurs constructeurs.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">data Bool = True | False
-data Maybe a = Nothing | Just a
-</pre>
-</div>
-
-<div class="info">
-<p>
-Les types produits et sommes ne sont pas mutuellement exclusifs: <code>data Something = This String Int | That String Bool</code>.
-</p>
-
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-syntaxe-denregistrement" class="outline-4">
-<h4 id="syntaxe-denregistrement"><a id="sec-2-2-3" name="sec-2-2-3"></a><span class="section-number-4">2.2.3</span> Syntaxe d'enregistrement</h4>
-<div class="outline-text-4" id="text-syntaxe-denregistrement">
-
-<p>
-La syntaxe d'enregistrement permet de nommer les champs.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">data Book = Book {
-  bookTitle :: String, -- bookTitle :: Book -&gt; String
-  bookAuthors :: [String], -- bookAuthors :: Book -&gt; [String]
-  bookYear :: Int -- bookYear :: Book -&gt; Int
-  }
-</pre>
-</div>
-
-<p>
-Un type qui utilise cette syntaxe peut être instantié avec des arguments
-positionnels ou des arguments nommés. Ces derniers peuvent être fournis
-dans n'importe quel ordre:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">crp = Book "Critique de la Raison Pure" ["Immanuel Kant"] 1781
-tlp = Book {
-  bookYear = 1921,
-  bookAuthors = ["Ludwig Wittgenstein"],
-  bookTitle = "Tractatus Logico-Philosophicus"
-  }
-</pre>
-</div>
-
-<p>
-Il définit automatiquement une fonction accesseur pour chacun de ses
-champs. Le type <code>Book</code> ci-dessus fournit ainsi trois fonctions
-<code>bookYear :: Book -&gt; Int</code>, <code>bookAuthors :: Book -&gt; [String]</code> et
-<code>bookTitle :: Book -&gt; String</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">ghci&gt;  bookYear tlp 1921
-</pre>
-</div>
-
-<p>
-Enfin, il permet de construire une nouvelle valeur à partir des champs
-d'une valeur existante:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">rp = tlp {bookTitle = "Recherches philosophiques", bookYear=1953}
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2-2-4" class="outline-4">
-<h4 id="sec-2-2-4"><span class="section-number-4">2.2.4</span> Les types comme contextes</h4>
-<div class="outline-text-4" id="text-2-2-4">
-<p>
-@TODO (On peut considérer un type algébrique comme un contexte sémantique pour un type natif.)
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2-2-5" class="outline-4">
-<h4 id="sec-2-2-5"><span class="section-number-4">2.2.5</span> Types récursifs</h4>
-<div class="outline-text-4" id="text-2-2-5">
-<p>
-Un type peut faire référence à lui-même. On peut construire un type
-liste identique au type natif de la façon suivante:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">data List a = Empty | Cons a (List a) list = (Cons 1 (Cons 2 (Cons 3
-Empty)))
-</pre>
-</div>
-
-<p>
-Un arbre binaire:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">data BTree a = Node a (BTree a) (BTree a) | Empty deriving Show
-</pre>
-</div>
-<p>
-h
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Synonymes de types</h3>
-<div class="outline-text-3" id="text-2-3">
-<p>
-Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.  Contrairement aux types définis avec <a href="#data"><code>data</code></a>, les informations des synonymes ne sont pas conservées à la compilation.
-</p>
-</div>
-
-<div id="outline-container-section" class="outline-4">
-<h4 id="section"><a id="sec-2-3-1" name="sec-2-3-1"></a><span class="section-number-4">2.3.1</span> <code>type</code></h4>
-<div class="outline-text-4" id="text-section">
-<p>
-<code>type</code> crée un synonyme d'un type existant. Le synonyme et le type
-auquel ils renvoient sont interchangeables.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">type ObjectId = Int16
-</pre>
-</div>
-
-<p>
-Les synonymes créés avec <code>type</code> peuvent servir:
-</p>
-<ul class="org-ul">
-<li>À clarifier le sens des champs dans les types personnalisés sans
-accesseurs (<code>type ISBN = Int</code> pour un type <code>Book</code>, par
-exemple):
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">type Authors = [String] type Title = String type ISBN = Int type Year
-= Int data Book2 = Authors Title Year ISBN
-</pre>
-</div>
-
-<ul class="org-ul">
-<li>Comme notation abrégée pour des types complexes fréquemment utilisés.
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">type Weird = (Int -&gt; String) -&gt; (Int -&gt; Int) -&gt; [Int] -&gt; [(Int,
-String, Int)]
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2-3-2" class="outline-4">
-<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> <code>newtype</code></h4>
-<div class="outline-text-4" id="text-2-3-2">
-<p>
-Le mot-clé <code>newtype</code> permet de dupliquer un type, et crée un type
-distinct de l'original. Les synonymes créés avec <code>newtype</code> ne sont
-pas substituables avec le type dont ils sont synonymes. De plus, il
-n'appartiennent pas automatiquement aux
-<a href="#typeclasses">types de classe</a> de ce dernier.
-Leur syntaxe est très proche de celle de <code>data</code>:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-haskell">newtype MyType = MyType Int
-</pre>
-</div>
-</div>
-<ol class="org-ol"><li><a id="sec-2-3-2-1" name="sec-2-3-2-1"></a>Contrairement à <code>data</code>,<br  /><div class="outline-text-5" id="text-2-3-2-1">
-<p>
-<code>newtype</code>:
-</p>
-<ul class="org-ul">
-<li>n'autorise qu'un seul constructeur et un seul champ.
-</li>
-<li>ne conserve pas les informations du type après la compilation. Dans
-le programme compilé, <code>MyType</code> ci-dessus est traité comme un
-simple <code>Int</code>:
-</li>
-</ul>
-</div>
-</li>
-<li><a id="sec-2-3-2-2" name="sec-2-3-2-2"></a>Contrairement à <code>type</code>,<br  /><div class="outline-text-5" id="text-2-3-2-2">
-<p>
-<code>newtype</code> ne maintient pas la substituabilité du nouveau type et du
-type dont il est un synonyme. <code>type</code> sert à faciliter la lecture,
-<code>newtype</code> est plutôt utilisé pour masquer l'implémentation.
-</p>
-</div>
-</li>
-<li><a id="sec-2-3-2-3" name="sec-2-3-2-3"></a><code>newtype</code> est principalement utile pour:<br  /><div class="outline-text-5" id="text-2-3-2-3">
-<ul class="org-ul">
-<li>Masquer un type sous-jacent sans la perte de performances liée à
-l'usage de <code>data</code>:
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">type ResourceHandle = ResourceHandle Int16
-</pre>
-</div>
-
-<ul class="org-ul">
-<li>Permet, sans perte de performances, de fournir des instances
-différentes d'un unique <a href="#typeclasses">classe de type</a> pour un
-type.
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">-- Data.Monoid
--- Booléen selon la conjonction newtype All = All { getAll :: Bool }
-deriving (Eq, Ord, Read, Show, Bounded)
-instance Monoid All where mempty = All True All x =mappend= All y =
-All (x &amp;&amp; y)
--- Booléen selon la disjonction newtype Any = Any { getAny :: Bool }
-deriving (Eq, Ord, Read, Show, Bounded)
-instance Monoid Any where mempty = Any False Any x =mappend= Any y =
-Any (x || y)
-</pre>
-</div>
-</div>
-</li></ol>
-</div>
-</div>
-
-<div id="outline-container-typeclasses" class="outline-3">
-<h3 id="typeclasses"><a id="sec-2-4" name="sec-2-4"></a><span class="section-number-3">2.4</span> Classes de type</h3>
-<div class="outline-text-3" id="text-typeclasses">
-
-<p>
-Les classes de type ne sont pas des classes au sens que ce terme possède
-en POO. Elles sont plus proches de ce qu'on nomme des interfaces : elles
-décrivent des fonctions pour lesquelles un type qui appartient à la
-classe fournit une implémentation.
-</p>
-</div>
-<div id="outline-container-sec-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1"><span class="section-number-4">2.4.1</span> Créer une classe de type</h4>
-<div class="outline-text-4" id="text-2-4-1">
-<div class="org-src-container">
-
-<pre class="src src-haskell">class Parsable a where
-  parse :: String -&gt; a
-</pre>
-</div>
-<p>
-Une implémentation par défaut peut être fournie.  La classe de type <code>Eq</code> par exemple est définie comme:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-haskell">class Eq a where
-  (==), (/=) :: a -&gt; a -&gt; Bool
-  x /= y     =  not (x == y)
-  x == y     =  not (x /= y)
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-4-2" class="outline-4">
-<h4 id="sec-2-4-2"><span class="section-number-4">2.4.2</span> Dériver une classe de type</h4>
-<div class="outline-text-4" id="text-2-4-2">
-<div class="org-src-container">
-
-<pre class="src src-haskell">data CanardLapin = { canard :: Bool, lapin :: Bool }
-instance Show CanardLapin where
-  show (CanardLapin True False) = "Seulement un canard"
-  show (CanardLapin False True) = "Seulement un lapin"
-  show _ = "Un canard lapin!"
-</pre>
-</div>
-<div class="warn">
-<p>
-À certaines classes de type sont associées des lois (lois des <a href="#Functor">foncteurs</a>, des <a href="#Monad">monades</a>, <i>etc.</i>) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
-Autrement dit, le système des classes de types est en partie formel, en partie contractuel. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.  Il est aussi possible, dans une certaine mesure, d'automatiser la vérification de conformité.
-</p>
-
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-4-3" class="outline-4">
-<h4 id="sec-2-4-3"><span class="section-number-4">2.4.3</span> Dérivation automatique</h4>
-<div class="outline-text-4" id="text-2-4-3">
-<p>
-Les types crées avec <code>data</code> et <code>newtype</code> peuvent dériver automatiquement certaines classes avec le mot clé <code>deriving</code>:
-#+begin<sub>example</sub> haskell
-data Something = Something Integer Integer deriving (Show)
-#+end<sub>example</sub> haskell
-La dérivation automatique est implémentée au niveau du compilateur.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-_kinds" class="outline-3">
-<h3 id="_kinds"><a id="sec-2-5" name="sec-2-5"></a><span class="section-number-3">2.5</span> Sortes</h3>
-<div class="outline-text-3" id="text-_kinds">
-
-<p>
-Les Kinds sont aux types ce que les types sont aux valeurs. Autrement
-dit, c'est le type d'un constructeur de type.
-Un type ordinaire a @TODO
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Conditionnels</h3>
-<div class="outline-text-3" id="text-2-6">
-<p>
-Haskell connaît deux structures conditionnelles: les tests binaires avec
-<code>if</code>, et les cas de <code>case</code>.
-</p>
-</div>
-
-<div id="outline-container-if-then-else" class="outline-4">
-<h4 id="if-then-else"><a id="sec-2-6-1" name="sec-2-6-1"></a><span class="section-number-4">2.6.1</span> <code>if</code></h4>
+<div id="outline-container-org6e53a41" class="outline-4">
+<h4 id="if-then-else"><a id="org6e53a41"></a><span class="section-number-4">2.1.1</span> <code>if</code></h4>
 <div class="outline-text-4" id="text-if-then-else">
-
 <p>
 Une clause <code>if</code> est une <b>expression</b>, pas une structure de contrôle. La syntaxe est <code>if a then b else c</code>, où <code>a</code> est une expression de type <code>Bool</code>, <code>b</code> et <code>c</code> des expressions d'un type quelconque. Si <code>a</code> est vraie, l'expression vaut <code>b</code>, sinon <code>c</code>.
 </p>
@@ -815,8 +565,7 @@ Comme c'est une expression, on peut affecter son résultat directement à une va
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">a = if even x then "pair" else "impair"
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">a</span> <span style="color: #000000;">=</span> <span style="color: #000000; font-weight: bold;">if</span> even x <span style="color: #000000; font-weight: bold;">then</span> <span style="color: #888888;">"pair"</span> <span style="color: #000000; font-weight: bold;">else</span> <span style="color: #888888;">"impair"</span>
 </pre>
 </div>
 
@@ -825,29 +574,26 @@ Que <code>if</code> soit une primitive du compilateur n'est justifié que par le
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">if' :: Bool -&gt; a -&gt; a
-if' True a _ = a
-if' _ _ b = b
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">if'</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Bool</span> <span style="color: #000000;">-&gt;</span> a <span style="color: #000000;">-&gt;</span> a
+<span style="background-color: #FFFFFF;">if'</span> <span style="color: #222222; text-decoration: underline;">True</span> a <span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000;">=</span> a
+<span style="background-color: #FFFFFF;">if'</span> <span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000; font-weight: bold;">_</span> b <span style="color: #000000;">=</span> b
 </pre>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-sec-2-6-2" class="outline-4">
-<h4 id="sec-2-6-2"><span class="section-number-4">2.6.2</span> <code>case</code></h4>
+<div id="outline-container-org41fa2af" class="outline-4">
+<h4 id="org41fa2af"><span class="section-number-4">2.1.2</span> <code>case</code></h4>
 </div>
 </div>
 
-<div id="outline-container-_lazyness" class="outline-3">
-<h3 id="_lazyness"><a id="sec-2-7" name="sec-2-7"></a><span class="section-number-3">2.7</span> Évaluation paresseuse</h3>
+<div id="outline-container-org7c34a63" class="outline-3">
+<h3 id="_lazyness"><a id="org7c34a63"></a><span class="section-number-3">2.2</span> Évaluation paresseuse</h3>
 <div class="outline-text-3" id="text-_lazyness">
-
 <div class="org-src-container">
-
-<pre class="src src-haskell">let a = [1..] -- a est la liste de l'ensemble des entiers positifs
-let b = map ((^^) 2) a
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">let</span> a <span style="color: #000000;">=</span> [1<span style="color: #000000;">..</span>] <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">a est la liste de l'ensemble des entiers positifs</span>
+<span style="color: #000000; font-weight: bold;">let</span> b <span style="color: #000000;">=</span> map ((<span style="color: #000000;">^^</span>) 2) a
 </pre>
 </div>
 
@@ -877,18 +623,18 @@ directement en Haskell, ou manipuler des suites infinies.
 </div>
 </div>
 
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Polymorphisme</h3>
-<div class="outline-text-3" id="text-2-8">
-</div><div id="outline-container-sec-2-8-1" class="outline-4">
-<h4 id="sec-2-8-1"><span class="section-number-4">2.8.1</span> Polymorphisme paramétrique</h4>
-<div class="outline-text-4" id="text-2-8-1">
+<div id="outline-container-orgdf288a7" class="outline-3">
+<h3 id="orgdf288a7"><span class="section-number-3">2.3</span> Polymorphisme</h3>
+<div class="outline-text-3" id="text-2-3">
+</div><div id="outline-container-org7cf9887" class="outline-4">
+<h4 id="org7cf9887"><span class="section-number-4">2.3.1</span> Polymorphisme paramétrique</h4>
+<div class="outline-text-4" id="text-2-3-1">
 <p>
 N'importe quelle <a href="#functions">fonction</a> ou <a href="#data">type</a> peut accepter des paramètres d'un type non défini. Sa signature remplace dans ce cas le nom d'un type par un paramètre de type, <a href="#_identifiers">qui commence par une minuscule</a>.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-2-8-1-1" name="sec-2-8-1-1"></a>Types polymorphiques<br  /><div class="outline-text-5" id="text-2-8-1-1">
+<ol class="org-ol"><li><a id="org6afa87c"></a>Types polymorphiques<br  /><div class="outline-text-5" id="text-2-3-1-1">
 <p>
 Le type <code>Maybe</code>, qui représente une valeur possible, est un exemple
 de type polymorphique. Il a deux constructeurs : <code>Nothing</code> et
@@ -898,26 +644,27 @@ l'absence de valeur. <code>Just a</code> prend un paramètre du type quelconque
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">ghci&gt; :type Just 3 Just 3 :: Num a =&gt; Maybe a ghci&gt; :type Just "Une
-chaîne" Just "Une chaîne" :: Maybe [Char] ghci&gt; :type Nothing Nothing
-:: Maybe a
+<pre class="src src-haskell">ghci<span style="background-color: #FFFFFF;">&gt;</span> <span style="color: #222222; text-decoration: underline;">:</span><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Just</span> 3
+<span style="color: #222222; text-decoration: underline;">Just</span> 3 <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Num</span> a <span style="color: #000000;">=&gt;</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> a
+ghci<span style="background-color: #FFFFFF;">&gt;</span> <span style="color: #222222; text-decoration: underline;">:</span><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Just</span> <span style="color: #888888;">"Une cha&#238;ne"</span>
+<span style="color: #222222; text-decoration: underline;">Just</span> <span style="color: #888888;">"Une cha&#238;ne"</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> [<span style="color: #222222; text-decoration: underline;">Char</span>]
+ghci<span style="background-color: #FFFFFF;">&gt;</span> <span style="color: #222222; text-decoration: underline;">:</span><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Nothing</span>
+<span style="color: #222222; text-decoration: underline;">Nothing</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> a
 </pre>
 </div>
-</div>
-</li>
+</div></li>
 
-<li><a id="fonctions-polymorphiques" name="fonctions-polymorphiques"></a><a id="sec-2-8-1-2" name="sec-2-8-1-2"></a>Fonctions polymorphiques<br  /><div class="outline-text-5" id="text-fonctions-polymorphiques">
+<li><a id="fonctions-polymorphiques"></a><a id="org46d9c5b"></a>Fonctions polymorphiques<br  /><div class="outline-text-5" id="text-fonctions-polymorphiques">
 <p>
 Une fonction peut accepter, ou renvoyer, des types non-définis.
 </p>
 <div class="org-src-container">
-
-<pre class="src src-haskell">third :: [a] -&gt; Maybe a
-third (_:_:x:_) = Just x
-third _ = Nothing
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">third</span> <span style="color: #000000;">::</span> [a] <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> a
+<span style="background-color: #FFFFFF;">third</span> (<span style="color: #000000; font-weight: bold;">_</span><span style="color: #222222; text-decoration: underline;">:</span><span style="color: #000000; font-weight: bold;">_</span><span style="color: #222222; text-decoration: underline;">:</span>x<span style="color: #222222; text-decoration: underline;">:</span><span style="color: #000000; font-weight: bold;">_</span>) <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Just</span> x
+<span style="background-color: #FFFFFF;">third</span> <span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Nothing</span>
 </pre>
 </div>
+
 <div class="info">
 <p>
 <b>«Théorèmes gratuits»</b>
@@ -929,57 +676,53 @@ paramètre, on peut déduire (au sens strict) ce qu'elle peut faire à sa
 seule signature.
 </p>
 
-<p>
-La fonction <code>head :: [a] -&gt; a</code> n'a pas accès au type <code>a</code>, et par
-conséquent ne peut ni construire un nouvel <code>a</code>, ni modifier un des
-<code>a</code> du tableau qu'elle reçoit: elle doit en renvoyer un tel quel.
-On peut donc déduire que <code>head b `elem` b</code>.
-</p>
+<ul class="org-ul">
+<li>La fonction
+<code>head :: [a] -&gt; a</code>
+n'a pas accès au type <code>a</code>, et par conséquent ne peut ni construire un nouvel <code>a</code>, ni modifier un des <code>a</code> de la liste <code>[a]</code> d'entrée: elle doit en renvoyer un tel quel.  On peut donc déduire que <code>head b `elem` b</code>.</li>
+
+<li>La fonction
+<code>fst :: (a, b) -&gt; a</code>
+ne peut <i>rien</i> faire d'autre que renvoyer le premier élément de la paire qui lui est passée, et ignorer le second.</li>
+</ul>
 
 <p>
-La fonction <code>fst :: (a, b) -&gt; a</code> ne peut <i>rien</i> faire d'autre que
-renvoyer le premier élément de la paire qui lui est passée, et ignorer
-le second.
-</p>
-
-<p>
-cite:Wadler1989 (pp. 33-35, 38-39 et <i>passim</i>) explicite le
-soubassement logico-mathématique de ce principe et montre des
-applications à des cas beaucoup plus complexes que ces quelque exemples.
+\cite{Wadler1989} explicite le soubassement logico-mathématique de ce principe et montre des applications à des cas beaucoup plus complexes que ces quelque exemples.
 </p>
 
 </div>
-</div>
-</li></ol>
+</div></li></ol>
 </div>
 
-<div id="outline-container-polymorphisme-ad-hoc" class="outline-4">
-<h4 id="polymorphisme-ad-hoc"><a id="sec-2-8-2" name="sec-2-8-2"></a><span class="section-number-4">2.8.2</span> Polymorphisme <i>ad hoc</i></h4>
+<div id="outline-container-org2411e63" class="outline-4">
+<h4 id="polymorphisme-ad-hoc"><a id="org2411e63"></a><span class="section-number-4">2.3.2</span> Polymorphisme <i>ad hoc</i></h4>
 <div class="outline-text-4" id="text-polymorphisme-ad-hoc">
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9"><span class="section-number-3">2.9</span> Modules</h3>
-<div class="outline-text-3" id="text-2-9">
-</div><div id="outline-container-écrire-un-module" class="outline-4">
-<h4 id="écrire-un-module"><a id="sec-2-9-1" name="sec-2-9-1"></a><span class="section-number-4">2.9.1</span> Écrire un module</h4>
-<div class="outline-text-4" id="text-écrire-un-module">
+<div id="outline-container-org477fae3" class="outline-3">
+<h3 id="org477fae3"><span class="section-number-3">2.4</span> Modules</h3>
+<div class="outline-text-3" id="text-2-4">
+</div><div id="outline-container-org2f39976" class="outline-4">
+<h4 id="module"><a id="org2f39976"></a><span class="section-number-4">2.4.1</span> Écrire un module</h4>
+<div class="outline-text-4" id="text-module">
 <p>
 Un module a le même nom que le fichier .hs qui le contient, et
 <a href="#_identifiers">ce nom commence par une majuscule</a>. La déclaration de
 module a la syntaxe suivante:
 </p>
-<div class="org-src-container">
 
-<pre class="src src-haskell">-- MyModule.hs module Mod ( x, y, z ) where -- code
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">MyModule.hs module Mod ( x, y, z ) where -- code</span>
 </pre>
 </div>
+
 <p>
 Cette déclaration exporte les identifiants x, y et z du code qui la
 suit. On exporterait la totalité des noms en enlevant la parenthèse, et
 aucun en la laissant vide.
 </p>
+
 <div class="info">
 <p>
 Ce n'est pas une erreur de syntaxe que de ne pas respecter la
@@ -988,35 +731,31 @@ pas importable, puisque le compilateur ne saurait pas où le trouver.
 </p>
 
 </div>
+
 <p>
 TODO exporter un type mais pas ses constructeurs.
 </p>
 </div>
 </div>
-<div id="outline-container-import" class="outline-4">
-<h4 id="import"><a id="sec-2-9-2" name="sec-2-9-2"></a><span class="section-number-4">2.9.2</span> Importation de modules</h4>
+
+<div id="outline-container-org4c82ee2" class="outline-4">
+<h4 id="import"><a id="org4c82ee2"></a><span class="section-number-4">2.4.2</span> Importation de modules</h4>
 <div class="outline-text-4" id="text-import">
-
 <div class="org-src-container">
-
-<pre class="src src-haskell">-- Commande                       -- Importé
-import Mod                        -- x, y, z, Mod.x, Mod.y, Mod.z
-import Mod ()                     -- Uniquement les instances, voir ci-dessous.
-import Mod (x,y)                  -- x, y, Mod.x, Mod.y
-import qualified Mod              -- Mod.x, Mod.y, Mod.z
-import qualified Mod (x,y)        -- Mod.x, Mod.y
-import Mod hiding (x,y)           -- z, Mod.z
-import qualified Mod hiding (x,y) -- Mod.z
-import Mod as Foo                 -- x, y, z, Foo.x, Foo.y, Foo.z
-import Mod as Foo (x,y)           -- x, y, Foo.x, Foo.y
-import qualified Mod as Foo       -- Foo.x, Foo.y, Foo.z
-import qualified Mod as Foo (x,y) -- Foo.x, Foo.y
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>D'après \cite{Hudak2000}.</label><pre class="src src-haskell"><span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Commande                       -- Import&#233;</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span>                        <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">x, y, z, Mod.x, Mod.y, Mod.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #222222; text-decoration: underline;">()</span>                     <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Uniquement les instances, voir ci-dessous.</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span> (x,y)                  <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">x, y, Mod.x, Mod.y</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #000000; font-weight: bold;">qualified</span> <span style="color: #222222; text-decoration: underline;">Mod</span>              <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Mod.x, Mod.y, Mod.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #000000; font-weight: bold;">qualified</span> <span style="color: #222222; text-decoration: underline;">Mod</span> (x,y)        <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Mod.x, Mod.y</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">hiding</span> (x,y)           <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">z, Mod.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #000000; font-weight: bold;">qualified</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">hiding</span> (x,y) <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Mod.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">as</span> <span style="color: #222222; text-decoration: underline;">Foo</span>                 <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">x, y, z, Foo.x, Foo.y, Foo.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">as</span> <span style="color: #222222; text-decoration: underline;">Foo</span> (x,y)           <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">x, y, Foo.x, Foo.y</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #000000; font-weight: bold;">qualified</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">as</span> <span style="color: #222222; text-decoration: underline;">Foo</span>       <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Foo.x, Foo.y, Foo.z</span>
+<span style="color: #000000; font-weight: bold;">import</span> <span style="color: #000000; font-weight: bold;">qualified</span> <span style="color: #222222; text-decoration: underline;">Mod</span> <span style="color: #000000; font-weight: bold;">as</span> <span style="color: #222222; text-decoration: underline;">Foo</span> (x,y) <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Foo.x, Foo.y</span>
 </pre>
 </div>
-
-<p>
-D'après cite:Hudak2000
-</p>
 
 <p>
 Même sans importer aucun nom (c'est le cas de <code>import Mod ()</code>), tout <code>import</code> importe les instances de classes de types définies dans le module importé.
@@ -1024,8 +763,8 @@ Même sans importer aucun nom (c'est le cas de <code>import Mod ()</code>), tout
 </div>
 </div>
 
-<div id="outline-container-modules-et-instances" class="outline-4">
-<h4 id="modules-et-instances"><a id="sec-2-9-3" name="sec-2-9-3"></a><span class="section-number-4">2.9.3</span> Modules et instances</h4>
+<div id="outline-container-org2a3caa7" class="outline-4">
+<h4 id="modules-et-instances"><a id="org2a3caa7"></a><span class="section-number-4">2.4.3</span> Modules et instances</h4>
 <div class="outline-text-4" id="text-modules-et-instances">
 <p>
 Les instances de classes de types définies dans un module sont toujours
@@ -1035,9 +774,9 @@ ou exportés, et même s'il n'y en a aucun.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-2-10" class="outline-3">
-<h3 id="sec-2-10"><span class="section-number-3">2.10</span> Le prélude</h3>
-<div class="outline-text-3" id="text-2-10">
+<div id="outline-container-orgcaa250c" class="outline-3">
+<h3 id="Prelude"><a id="orgcaa250c"></a><span class="section-number-3">2.5</span> Le prélude</h3>
+<div class="outline-text-3" id="text-Prelude">
 <p>
 Le Prélude (<code>Prelude</code>) est la librairie fondamentale d'Haskell.
 Contrairement aux autres modules, il est importé implicitement (cette
@@ -1058,65 +797,57 @@ court-circuitants, dont l'implémentation est rendue triviale par le
 principe d'évaluation paresseuse.
 </p>
 
-
 <div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Noms exportés par le Prélude d'Haskell 2010 \parencite{Haskell2010}.</label><pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">module</span> <span style="color: #222222; text-decoration: underline;">Prelude</span> (
+    <span style="color: #000000; font-weight: bold;">module</span> <span style="color: #222222; text-decoration: underline;">PreludeList</span>, <span style="color: #000000; font-weight: bold;">module</span> <span style="color: #222222; text-decoration: underline;">PreludeText</span>, <span style="color: #000000; font-weight: bold;">module</span> <span style="color: #222222; text-decoration: underline;">PreludeIO</span>,
+    <span style="color: #222222; text-decoration: underline;">Bool</span>(<span style="color: #222222; text-decoration: underline;">False</span>, <span style="color: #222222; text-decoration: underline;">True</span>),
+    <span style="color: #222222; text-decoration: underline;">Maybe</span>(<span style="color: #222222; text-decoration: underline;">Nothing</span>, <span style="color: #222222; text-decoration: underline;">Just</span>),
+    <span style="color: #222222; text-decoration: underline;">Either</span>(<span style="color: #222222; text-decoration: underline;">Left</span>, <span style="color: #222222; text-decoration: underline;">Right</span>),
+    <span style="color: #222222; text-decoration: underline;">Ordering</span>(<span style="color: #222222; text-decoration: underline;">LT</span>, <span style="color: #222222; text-decoration: underline;">EQ</span>, <span style="color: #222222; text-decoration: underline;">GT</span>),
+    <span style="color: #222222; text-decoration: underline;">Char</span>, <span style="color: #222222; text-decoration: underline;">String</span>, <span style="color: #222222; text-decoration: underline;">Int</span>, <span style="color: #222222; text-decoration: underline;">Integer</span>, <span style="color: #222222; text-decoration: underline;">Float</span>, <span style="color: #222222; text-decoration: underline;">Double</span>, <span style="color: #222222; text-decoration: underline;">Rational</span>, <span style="color: #222222; text-decoration: underline;">IO</span>,
 
-<pre class="src src-haskell">module Prelude (
-    module PreludeList, module PreludeText, module PreludeIO,
-    Bool(False, True),
-    Maybe(Nothing, Just),
-    Either(Left, Right),
-    Ordering(LT, EQ, GT),
-    Char, String, Int, Integer, Float, Double, Rational, IO,
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">These built-in types are defined in the Prelude, but</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">are denoted by built-in syntax, and cannot legally</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">appear in an export list.</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">List type: []((:), [])</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Tuple types: (,)((,)), (,,)((,,)), etc.</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Trivial type: ()(())</span>
+    <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Functions: (-&gt;)</span>
 
-    -- These built-in types are defined in the Prelude, but
-    -- are denoted by built-in syntax, and cannot legally
-    -- appear in an export list.
-    -- List type: []((:), [])
-    -- Tuple types: (,)((,)), (,,)((,,)), etc.
-    -- Trivial type: ()(())
-    -- Functions: (-&gt;)
-
-    Eq((==), (/=)),
-    Ord(compare, (&lt;), (&lt;=), (&gt;=), (&gt;), max, min),
-    Enum(succ, pred, toEnum, fromEnum, enumFrom, enumFromThen,
-	 enumFromTo, enumFromThenTo),
-    Bounded(minBound, maxBound),
-    Num((+), (-), (*), negate, abs, signum, fromInteger),
-    Real(toRational),
-    Integral(quot, rem, div, mod, quotRem, divMod, toInteger),
-    Fractional((/), recip, fromRational),
-    Floating(pi, exp, log, sqrt, (**), logBase, sin, cos, tan,
-	     asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh),
-    RealFrac(properFraction, truncate, round, ceiling, floor),
-    RealFloat(floatRadix, floatDigits, floatRange, decodeFloat,
-	      encodeFloat, exponent, significand, scaleFloat, isNaN,
-	      isInfinite, isDenormalized, isIEEE, isNegativeZero, atan2),
-    Monad((&gt;&gt;=), (&gt;&gt;), return, fail),
-    Functor(fmap),
-    mapM, mapM_, sequence, sequence_, (=&lt;&lt;),
+    <span style="color: #222222; text-decoration: underline;">Eq</span>((<span style="color: #000000;">==</span>), (<span style="color: #000000;">/=</span>)),
+    <span style="color: #222222; text-decoration: underline;">Ord</span>(compare, (<span style="color: #000000;">&lt;</span>), (<span style="color: #000000;">&lt;=</span>), (<span style="color: #000000;">&gt;=</span>), (<span style="color: #000000;">&gt;</span>), max, min),
+    <span style="color: #222222; text-decoration: underline;">Enum</span>(succ, pred, toEnum, fromEnum, enumFrom, enumFromThen,
+         enumFromTo, enumFromThenTo),
+    <span style="color: #222222; text-decoration: underline;">Bounded</span>(minBound, maxBound),
+    <span style="color: #222222; text-decoration: underline;">Num</span>((<span style="color: #000000;">+</span>), (<span style="color: #000000;">-</span>), (<span style="color: #000000;">*</span>), negate, abs, signum, fromInteger),
+    <span style="color: #222222; text-decoration: underline;">Real</span>(toRational),
+    <span style="color: #222222; text-decoration: underline;">Integral</span>(quot, rem, div, mod, quotRem, divMod, toInteger),
+    <span style="color: #222222; text-decoration: underline;">Fractional</span>((<span style="color: #000000;">/</span>), recip, fromRational),
+    <span style="color: #222222; text-decoration: underline;">Floating</span>(pi, exp, log, sqrt, (<span style="color: #000000;">**</span>), logBase, sin, cos, tan,
+             asin, acos, atan, sinh, cosh, tanh, asinh, acosh, atanh),
+    <span style="color: #222222; text-decoration: underline;">RealFrac</span>(properFraction, truncate, round, ceiling, floor),
+    <span style="color: #222222; text-decoration: underline;">RealFloat</span>(floatRadix, floatDigits, floatRange, decodeFloat,
+              encodeFloat, exponent, significand, scaleFloat, isNaN,
+              isInfinite, isDenormalized, isIEEE, isNegativeZero, atan2),
+    <span style="color: #222222; text-decoration: underline;">Monad</span>((<span style="color: #000000;">&gt;&gt;=</span>), (<span style="color: #000000;">&gt;&gt;</span>), return, fail),
+    <span style="color: #222222; text-decoration: underline;">Functor</span>(fmap),
+    mapM, mapM_, sequence, sequence_, (<span style="color: #000000;">=&lt;&lt;</span>),
     maybe, either,
-    (&amp;&amp;), (||), not, otherwise,
-    subtract, even, odd, gcd, lcm, (^), (^^),
+    (<span style="color: #000000;">&amp;&amp;</span>), (<span style="color: #000000;">||</span>), not, otherwise,
+    subtract, even, odd, gcd, lcm, (<span style="color: #000000;">^</span>), (<span style="color: #000000;">^^</span>),
     fromIntegral, realToFrac,
-    fst, snd, curry, uncurry, id, const, (.), flip, ($), until,
+    fst, snd, curry, uncurry, id, const, (<span style="color: #000000;">.</span>), flip, (<span style="color: #000000;">$</span>), until,
     asTypeOf, error, undefined,
-    seq, ($!)
-  ) where
+    seq, (<span style="color: #000000;">$!</span>)
+  ) <span style="color: #000000; font-weight: bold;">where</span>
 </pre>
 </div>
-<p>
-Noms exportés par le Prélude d'Haskell 2010
-(cite:Haskell2010)
-</p>
 </div>
 </div>
 
-<div id="outline-container-literateHaskell" class="outline-3">
-<h3 id="literateHaskell"><a id="sec-2-11" name="sec-2-11"></a><span class="section-number-3">2.11</span> Programmation lettrée</h3>
-<div class="outline-text-3" id="text-literateHaskell">
-
-
+<div id="outline-container-org5d54aa0" class="outline-3">
+<h3 id="_literateHaskell"><a id="org5d54aa0"></a><span class="section-number-3">2.6</span> Programmation lettrée</h3>
+<div class="outline-text-3" id="text-_literateHaskell">
 <p>
 Haskell fait partie des rares langages à gérer nativement la
 programmation lettrée. Les fichiers sources ont l'extension <code>.lhs</code> (au
@@ -1125,42 +856,574 @@ façons
 </p>
 
 <ul class="org-ul">
-<li>Soit par des <b>chevrons</b>, à la façon de Markdown.  Les lignes de code commencent par un <code>&gt;</code>. Chaque bloc de code doit être précédé d’au moins une ligne vide.
-</li>
-<li>Soit par des délimiteurs d'environnement La\(\TeX\):  Le code est entouré de <code>\begin{code}</code> et <code>\end{code}</code>.
-</li>
+<li>Soit par des <b>chevrons</b>, à la façon de Markdown.  Les lignes de code commencent par un <code>&gt;</code>. Chaque bloc de code doit être précédé d’au moins une ligne vide.</li>
+<li>Soit par des délimiteurs d'environnement La\(\TeX\):  Le code est entouré de <code>\begin{code}</code> et <code>\end{code}</code>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc22ad53" class="outline-3">
+<h3 id="orgc22ad53"><span class="section-number-3">2.7</span> Idiomes</h3>
+<div class="outline-text-3" id="text-2-7">
+</div><div id="outline-container-orga9e9b5a" class="outline-4">
+<h4 id="orga9e9b5a"><span class="section-number-4">2.7.1</span> Composition et <i>point-free style</i></h4>
+<div class="outline-text-4" id="text-2-7-1">
+</div><ol class="org-ol"><li><a id="orgdce8021"></a>Composition<br  /><div class="outline-text-5" id="text-2-7-1-1">
+<p>
+La fonction de composition est <code>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c</code>.
+</p>
+</div></li>
+
+<li><a id="orgaf97e75"></a><i>Point-free</i><br  /><div class="outline-text-5" id="text-2-7-1-2">
+<p>
+Le <i>point-free style</i> est un style de programmation dans lequel une fonction n'identifie pas les arguments sur lesquels elle s'opère, mais compose simplement d'autres fonctions.
+</p>
+
+<p>
+Par exemple:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">reverseTail, reverseTailPointFree</span> <span style="color: #000000;">::</span> [a] <span style="color: #000000;">-&gt;</span> [a]
+<span style="background-color: #FFFFFF;">reverseTail</span> x <span style="color: #000000;">=</span> reverse <span style="color: #000000;">.</span> tail <span style="color: #000000;">$</span> x
+<span style="background-color: #FFFFFF;">reverseTailPointFree</span> <span style="color: #000000;">=</span> reverse <span style="color: #000000;">.</span> tail
+</pre>
+</div>
+</div></li></ol>
+</div>
+
+
+<div id="outline-container-org15a4ca3" class="outline-4">
+<h4 id="org15a4ca3"><span class="section-number-4">2.7.2</span> Récursivité</h4>
+<div class="outline-text-4" id="text-2-7-2">
+</div><ol class="org-ol"><li><a id="récursivité-en-queue"></a><a id="org7db4d7b"></a>Récursivité en queue<br  /><div class="outline-text-5" id="text-récursivité-en-queue">
+</div></li></ol>
+</div>
+<div id="outline-container-org421c815" class="outline-4">
+<h4 id="fold"><a id="org421c815"></a><span class="section-number-4">2.7.3</span> Folds</h4>
+<div class="outline-text-4" id="text-fold">
+<p>
+Les différents folds sont des catamorphismes.
+</p>
+
+<dl class="org-dl">
+<dt>Associatif à droite: :: ~foldr</dt><dd>Foldable t =&gt; (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b~</dd>
+
+<dt>Associatif à gauche: :: ~foldl</dt><dd>Foldable t =&gt; (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b~</dd>
+
+<dt>Associatif à gauche, évaluation stricte: :: ~Data.List.foldl'</dt><dd><p>
+Foldable t =&gt; (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b~
+</p>
+
+<p>
+Cette version
+</p></dd>
+</dl>
+
+<p>
+Voir le tutorial de \cite{Hutton1999}.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8e0658e" class="outline-3">
+<h3 id="org8e0658e"><span class="section-number-3">2.8</span> Extensions GHC</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Les extensions s'activent fichier par fichier avec le pragma <code>{-# LANGUAGE NameOfExtension #-}</code>
+</p>
+
+<dl class="org-dl">
+<dt><code>EmptyDataDecls</code></dt><dd>Déclarations de type sans constructeurs: <code>data S</code>, <code>data S a</code>.  La seule valeur possible est alors \(\bot\).</dd>
+
+<dt><code>FlexibleContexts</code></dt><dd></dd>
+
+
+<dt><code>FlexibleInstances</code> </dt><dd></dd>
+
+
+<dt><code>GeneralizedNewtypeDeriving</code></dt><dd></dd>
+
+
+<dt><code>MagicHash</code></dt><dd>Autorise <code>#</code> comme suffixe pour les identifiants.  Généralement utilisé pour les types et les valeurs natives (<i>unboxed</i>): par exemple, <code>GHC.Prim</code> déclare <code>Int#</code>.</dd>
+</dl>
+
+
+<dl class="org-dl">
+<dt><code>MultiParamTypeClasses</code></dt><dd>Classes de type avec plusieurs arguments: <code>class Monad m =&gt; VarMonad m v where…</code></dd>
+
+<dt><code>NegativeLiterals</code></dt><dd></dd>
+
+
+<dt><code>OverlappingInstances</code></dt><dd></dd>
+
+
+<dt><code>UnicodeSyntax</code></dt><dd>Autorise à remplacer  certaines séquences ASCII par des caractères Unicode:  <code>→</code> pour <code>-&gt;</code>, <code>★</code> pour <code>*</code>, <i>etc</i>.</dd>
+
+<dt><code>TypeSynonymInstances</code></dt><dd>qsd</dd>
+</dl>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2f0eee1" class="outline-2">
+<h2 id="_types"><a id="org2f0eee1"></a><span class="section-number-2">3</span> Types</h2>
+<div class="outline-text-2" id="text-_types">
+</div>
+
+<div id="outline-container-orgaefd815" class="outline-3">
+<h3 id="orgaefd815"><span class="section-number-3">3.1</span> Généralités</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Haskell connaît deux espèces essentielles de type: les types de <b>données</b> et les types de <b>fonctions</b>.  Cette section traite uniquement des premiers, les seconds <a href="#functions">ont leur propre section</a>.
+</p>
+</div>
+
+<div id="outline-container-orga7ea234" class="outline-4">
+<h4 id="_identifiers"><a id="orga7ea234"></a><span class="section-number-4">3.1.1</span> Nommage des identifiants</h4>
+<div class="outline-text-4" id="text-_identifiers">
+<p>
+En Haskell, la casse du premier caractère d'un identifiant a une importance.  Un nom de type ou un constructeur de type commencent toujours par une majuscule, un nom de fonction ou de variable par une minuscule.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga3ce3ab" class="outline-4">
+<h4 id="_algebraic-types"><a id="orga3ce3ab"></a><span class="section-number-4">3.1.2</span> Types produits, types sommes, types exponentielles</h4>
+<div class="outline-text-4" id="text-_algebraic-types">
+<p>
+Si on comprend qu'un type est un <b>ensemble</b> (de valeurs possibles), on voit aisément pourquoi on parle de types produit ou somme:
+</p>
+
+<ul class="org-ul">
+<li>Une <b>alternative</b> entre type (<code>data OuBien = Chaine String | Entier Int</code>) a pour cardinal la <b>somme</b> des cardinaux des types qui le constituent.</li>
+
+<li>Une <b>combinaison</b> de types (<code>data ChaineEtEntier = ChaineEtEntier String Int</code>) a pour cardinal le <b>produit</b> des cardinaux des types qui le constituent.</li>
+
+<li>Une <b>application</b> de types (<code>TypeA -&gt; TypeB</code>) a pour cardinal le cardinal du type du résultat élevé à la <b>puissance</b> du cardinal du type du paramètre.  Le cardinal de <code>a -&gt; b</code> est donc \(\#b^{\#a}\).</li>
+</ul>
+
+<p>
+(Le cardinal d'un type défini avec <code>data</code> est simplement une somme de produits.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org32dd414" class="outline-4">
+<h4 id="org32dd414"><span class="section-number-4">3.1.3</span> Types élémentaires</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+Haskell fournit un grand nombre de types élémentaires, dont les plus
+importants sont résumés dans ce tableau:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Types numériques essentiels, d'après \cite{OSullivan2008}.</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Type</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>Double</code></td>
+<td class="org-left">Virgule flottante, double précision</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Float</code></td>
+<td class="org-left">Virgule flottante, simple précision</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Integer</code></td>
+<td class="org-left">Entier signé en précision arbitraire</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Int</code></td>
+<td class="org-left">Entier signé à précision fixe, intervalle minimum \([-2^{29} ; 2^{29}-1]\)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Int8</code> , <code>Int16</code>, <code>Int32</code>, <code>Int64</code></td>
+<td class="org-left">Entier signé de \(n\) bits</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Word8</code>,  <code>Word16</code>,  <code>Word32</code>,  <code>Word64</code></td>
+<td class="org-left">Entier non signé de \(n\) bits</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Rational, ~Ratio a</code></td>
+<td class="org-left">Nombre rationnel de précision arbitraire</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga62ca1e" class="outline-3">
+<h3 id="data"><a id="orga62ca1e"></a><span class="section-number-3">3.2</span> Définition de types</h3>
+<div class="outline-text-3" id="text-data">
+</div>
+<div id="outline-container-org2b616cd" class="outline-4">
+<h4 id="org2b616cd"><span class="section-number-4">3.2.1</span> Produits</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Book</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">NewBook</span> <span style="color: #222222; text-decoration: underline;">String</span> [<span style="color: #222222; text-decoration: underline;">String</span>] <span style="color: #222222; text-decoration: underline;">Int</span>
+<span style="color: #888888; font-style: italic;">--                  </span><span style="color: #888888; font-style: italic;">^               ^__ Ann&#233;e de publication</span>
+<span style="color: #888888; font-style: italic;">--                  </span><span style="color: #888888; font-style: italic;">|      ^___________ Auteurs</span>
+<span style="color: #888888; font-style: italic;">--                  </span><span style="color: #888888; font-style: italic;">|__________________ Titre</span>
+</pre>
+</div>
+
+<p>
+Cette ligne définit un type nommé <code>Book</code> qui fournit un unique constructeur <code>NewBook</code>.  Le constructeur <code>NewBook</code> se comporte comme une fonction qui prend trois paramètres et qrenvoie un <code>Book</code>: <code>NewBook :: String -&gt; [String] -&gt; Int -&gt; Book</code>.  Pour construire un nouveau <code>Book</code>, on écrit donc <code>book = NewBook "Critique of Pure Reason" ["Immanuel Kant"] 1781</code>.  Dans cette syntaxe, les arguments du constructeur sont positionnels et doivent être fournis dans l'ordre de la déclaration.
+</p>
+
+<div class="info">
+<p>
+Il est légal et très courant, quand un type ne fournit qu'un seul constructeur, de donner à ce constructeur le nom du type. On aurait alors <code>data Book = Book String [String] Int</code>. L'exemple précédent les distingue par souci de clarté, mais n'est pas vraiment idiomatique.
+</p>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2d63702" class="outline-4">
+<h4 id="org2d63702"><span class="section-number-4">3.2.2</span> Sommes</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Un type somme présente une alternative en offrant plusieurs constructeurs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Bool</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">True</span> <span style="color: #000000;">|</span> <span style="color: #222222; text-decoration: underline;">False</span>
+<span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> a <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Nothing</span> <span style="color: #000000;">|</span>&#160;<span style="color: #222222; text-decoration: underline;">Just</span> a
+</pre>
+</div>
+
+<div class="info">
+<p>
+Les types produits et sommes ne sont pas mutuellement exclusifs: <code>data Something = This String Int | That String Bool</code>.
+</p>
+
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org63d4b50" class="outline-4">
+<h4 id="syntaxe-denregistrement"><a id="org63d4b50"></a><span class="section-number-4">3.2.3</span> Syntaxe d'enregistrement</h4>
+<div class="outline-text-4" id="text-syntaxe-denregistrement">
+<p>
+La syntaxe d'enregistrement permet de nommer les champs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Book</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Book</span> {
+  bookTitle <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">String</span>, <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">bookTitle :: Book -&gt; String</span>
+  bookAuthors <span style="color: #000000;">::</span> [<span style="color: #222222; text-decoration: underline;">String</span>], <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">bookAuthors :: Book -&gt; [String]</span>
+  bookYear <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">bookYear :: Book -&gt; Int</span>
+  }
+</pre>
+</div>
+
+<p>
+Un type qui utilise cette syntaxe peut être instantié avec des arguments
+positionnels ou des arguments nommés. Ces derniers peuvent être fournis
+dans n'importe quel ordre:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">crp</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Book</span> <span style="color: #888888;">"Critique de la Raison Pure"</span> [<span style="color: #888888;">"Immanuel Kant"</span>] 1781
+<span style="background-color: #FFFFFF;">tlp</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Book</span> {
+  bookYear <span style="color: #000000;">=</span> 1921,
+  bookAuthors <span style="color: #000000;">=</span> [<span style="color: #888888;">"Ludwig Wittgenstein"</span>],
+  bookTitle <span style="color: #000000;">=</span> <span style="color: #888888;">"Tractatus Logico-Philosophicus"</span>
+  }
+</pre>
+</div>
+
+<p>
+Il définit automatiquement une fonction accesseur pour chacun de ses
+champs. Le type <code>Book</code> ci-dessus fournit ainsi trois fonctions
+<code>bookYear :: Book -&gt; Int</code>, <code>bookAuthors :: Book -&gt; [String]</code> et
+<code>bookTitle :: Book -&gt; String</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">ghci<span style="background-color: #FFFFFF;">&gt;</span>  bookYear tlp 1921
+</pre>
+</div>
+
+<p>
+Enfin, il permet de construire une nouvelle valeur à partir des champs
+d'une valeur existante:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">rp</span> <span style="color: #000000;">=</span> tlp {bookTitle <span style="color: #000000;">=</span> <span style="color: #888888;">"Recherches philosophiques"</span>, bookYear<span style="color: #000000;">=</span>1953}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org297e27d" class="outline-4">
+<h4 id="org297e27d"><span class="section-number-4">3.2.4</span> Les types comme contextes</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<p>
+@TODO (On peut considérer un type algébrique comme un contexte sémantique pour un type natif.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4eb93da" class="outline-4">
+<h4 id="org4eb93da"><span class="section-number-4">3.2.5</span> Types récursifs</h4>
+<div class="outline-text-4" id="text-3-2-5">
+<p>
+Un type peut faire référence à lui-même. On peut construire un type
+liste identique au type natif de la façon suivante:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">List</span> a <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Empty</span> <span style="color: #000000;">|</span> <span style="color: #222222; text-decoration: underline;">Cons</span> a (<span style="color: #222222; text-decoration: underline;">List</span> a) list <span style="color: #000000;">=</span> (<span style="color: #222222; text-decoration: underline;">Cons</span> 1 (<span style="color: #222222; text-decoration: underline;">Cons</span> 2 (<span style="color: #222222; text-decoration: underline;">Cons</span> 3
+<span style="color: #222222; text-decoration: underline;">Empty</span>)))
+</pre>
+</div>
+
+<p>
+Un arbre binaire:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">BTree</span> a <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Node</span> a (<span style="color: #222222; text-decoration: underline;">BTree</span> a) (<span style="color: #222222; text-decoration: underline;">BTree</span> a) <span style="color: #000000;">|</span> <span style="color: #222222; text-decoration: underline;">Empty</span> <span style="color: #000000; font-weight: bold;">deriving</span> <span style="color: #222222; text-decoration: underline;">Show</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org448a29d" class="outline-3">
+<h3 id="org448a29d"><span class="section-number-3">3.3</span> Synonymes de types</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.  Contrairement aux types définis avec <a href="#data"><code>data</code></a>, les informations des synonymes ne sont pas conservées à la compilation.
+</p>
+</div>
+
+<div id="outline-container-orgfbdce64" class="outline-4">
+<h4 id="section"><a id="orgfbdce64"></a><span class="section-number-4">3.3.1</span> <code>type</code></h4>
+<div class="outline-text-4" id="text-section">
+<p>
+<code>type</code> crée un synonyme d'un type existant. Le synonyme et le type
+auquel ils renvoient sont interchangeables.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">ObjectId</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Int16</span>
+</pre>
+</div>
+
+<p>
+Les synonymes créés avec <code>type</code> peuvent servir:
+</p>
+<ul class="org-ul">
+<li>À clarifier le sens des champs dans les types personnalisés sans
+accesseurs (<code>type ISBN = Int</code> pour un type <code>Book</code>, par
+exemple):</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Authors</span> <span style="color: #000000;">=</span> [<span style="color: #222222; text-decoration: underline;">String</span>]
+<span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Title</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">String</span>
+<span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">ISBN</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Int</span>
+<span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Year</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Int</span>
+<span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Book2</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Authors</span> <span style="color: #222222; text-decoration: underline;">Title</span> <span style="color: #222222; text-decoration: underline;">Year</span> <span style="color: #222222; text-decoration: underline;">ISBN</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Comme notation abrégée pour des types complexes fréquemment utilisés.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">type</span> <span style="color: #222222; text-decoration: underline;">Weird</span> <span style="color: #000000;">=</span> (<span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span>) <span style="color: #000000;">-&gt;</span> (<span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span>) <span style="color: #000000;">-&gt;</span> [<span style="color: #222222; text-decoration: underline;">Int</span>] <span style="color: #000000;">-&gt;</span> [(<span style="color: #222222; text-decoration: underline;">Int</span>, <span style="color: #222222; text-decoration: underline;">String</span>, <span style="color: #222222; text-decoration: underline;">Int</span>)]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3e2e098" class="outline-4">
+<h4 id="org3e2e098"><span class="section-number-4">3.3.2</span> <code>newtype</code></h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+Le mot-clé <code>newtype</code> permet de dupliquer un type, et crée un type distinct de l'original. Les synonymes créés avec <code>newtype</code> ne sont pas substituables avec le type dont ils sont synonymes. De plus, il n'appartiennent pas automatiquement aux <a href="#typeclasses">types de classe</a> de ce dernier.  Leur syntaxe est très proche de celle de <code>data</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">newtype</span> <span style="color: #222222; text-decoration: underline;">MyType</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">MyType</span> <span style="color: #222222; text-decoration: underline;">Int</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><p>
+Contrairement à <code>data</code>, <code>newtype</code>:
+</p>
+
+<ul class="org-ul">
+<li>n'autorise qu'un seul constructeur et un seul champ.</li>
+
+<li>ne conserve pas les informations du type après la compilation. Dans le programme compilé, <code>MyType</code> ci-dessus est traité comme un</li>
+</ul>
+<p>
+simple <code>Int</code>:
+</p></li>
+
+<li>Contrairement à <code>type</code>, il ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme.  <b>Alors que <code>type</code> sert à faciliter la lecture, <code>newtype</code> est plutôt utilisé pour masquer l'implémentation</b>.  Il permet notamment de masquer un type sous-jacent sans la perte de performances liée à l'usage de <code>data</code>, par exemple: <code>newtype ResourceHandle = ResourceHandle Int16</code>.  Comme il est possible à un module de <a href="#module">n'exporter que le type mais pas le constructeur</a>, un programme peut recevoir et transmettre des données de type <code>ResourceHandle</code> sans connaître leur type réel.</li>
+</ul>
+<ul class="org-ul">
+<li><p>
+Il permet aussi, sans perte de performances, de fournir <b>des instances différentes d'une unique <a href="#typeclasses">classe de type</a></b> pour un type donné:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Data.Monoid</span>
+
+<span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Bool&#233;en selon la conjonction</span>
+<span style="color: #000000; font-weight: bold;">newtype</span> <span style="color: #222222; text-decoration: underline;">All</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">All</span> { getAll <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Bool</span> }
+  <span style="color: #000000; font-weight: bold;">deriving</span> (<span style="color: #222222; text-decoration: underline;">Eq</span>, <span style="color: #222222; text-decoration: underline;">Ord</span>, <span style="color: #222222; text-decoration: underline;">Read</span>, <span style="color: #222222; text-decoration: underline;">Show</span>, <span style="color: #222222; text-decoration: underline;">Bounded</span>)
+<span style="color: #000000; font-weight: bold;">instance</span> <span style="color: #222222; text-decoration: underline;">Monoid</span> <span style="color: #222222; text-decoration: underline;">All</span> <span style="color: #000000; font-weight: bold;">where</span>
+  mempty <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">All</span> <span style="color: #222222; text-decoration: underline;">True</span>
+  mappend (<span style="color: #222222; text-decoration: underline;">All</span> x) (<span style="color: #222222; text-decoration: underline;">All</span> y) <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">All</span> (x <span style="color: #000000;">&amp;&amp;</span> y)
+
+<span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Bool&#233;en selon la disjonction</span>
+<span style="color: #000000; font-weight: bold;">newtype</span> <span style="color: #222222; text-decoration: underline;">Any</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Any</span> { getAny <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Bool</span> }
+  <span style="color: #000000; font-weight: bold;">deriving</span> (<span style="color: #222222; text-decoration: underline;">Eq</span>, <span style="color: #222222; text-decoration: underline;">Ord</span>, <span style="color: #222222; text-decoration: underline;">Read</span>, <span style="color: #222222; text-decoration: underline;">Show</span>, <span style="color: #222222; text-decoration: underline;">Bounded</span>)
+<span style="color: #000000; font-weight: bold;">instance</span> <span style="color: #222222; text-decoration: underline;">Monoid</span> <span style="color: #222222; text-decoration: underline;">Any</span> <span style="color: #000000; font-weight: bold;">where</span>
+  mempty <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Any</span> <span style="color: #222222; text-decoration: underline;">False</span>
+  mappend (<span style="color: #222222; text-decoration: underline;">Any</span> x) (<span style="color: #222222; text-decoration: underline;">Any</span> y) <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Any</span> (x <span style="color: #000000;">||</span> y)
+</pre>
+</div></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-functions" class="outline-2">
-<h2 id="functions"><a id="sec-3" name="sec-3"></a><span class="section-number-2">3</span> Fonctions</h2>
-<div class="outline-text-2" id="text-functions">
-</div>
-
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Fonctions et variables</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org420947b" class="outline-3">
+<h3 id="typeclasses"><a id="org420947b"></a><span class="section-number-3">3.4</span> Classes de type</h3>
+<div class="outline-text-3" id="text-typeclasses">
 <p>
-Haskell n'a pas de notion de variable au sens qu'a ce terme en
-programmation procédurale. Il est possible d'assigner une expression ou
-une valeur à un nom, avec la syntaxe <code>nom = expression</code>, mais
-<code>nom</code> est immuable, et est donc plus proche d'une constante (c'est
-une variable au sens mathématique du terme).
+Les classes de type ne sont pas des classes au sens que ce terme possède
+en POO. Elles sont plus proches de ce qu'on nomme des interfaces : elles
+décrivent des fonctions pour lesquelles un type qui appartient à la
+classe fournit une implémentation.
+</p>
+</div>
+<div id="outline-container-orgfd9fac2" class="outline-4">
+<h4 id="orgfd9fac2"><span class="section-number-4">3.4.1</span> Créer une classe de type</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Parsable</span> a <span style="color: #000000; font-weight: bold;">where</span>
+  parse <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> a
+</pre>
+</div>
+<p>
+Une implémentation par défaut peut être fournie.  La classe de type <code>Eq</code> par exemple est définie comme:
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Eq</span> a <span style="color: #000000; font-weight: bold;">where</span>
+  (<span style="color: #000000;">==</span>), (<span style="color: #000000;">/=</span>) <span style="color: #000000;">::</span> a <span style="color: #000000;">-&gt;</span> a <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Bool</span>
+  x <span style="color: #000000;">/=</span> y     <span style="color: #000000;">=</span>  not (x <span style="color: #000000;">==</span> y)
+  x <span style="color: #000000;">==</span> y     <span style="color: #000000;">=</span>  not (x <span style="color: #000000;">/=</span> y)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4237874" class="outline-4">
+<h4 id="org4237874"><span class="section-number-4">3.4.2</span> Dériver une classe de type</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">CanardLapin</span> <span style="color: #000000;">=</span> { canard <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Bool</span>, lapin <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Bool</span> }
+<span style="color: #000000; font-weight: bold;">instance</span> <span style="color: #222222; text-decoration: underline;">Show</span> <span style="color: #222222; text-decoration: underline;">CanardLapin</span> <span style="color: #000000; font-weight: bold;">where</span>
+  show (<span style="color: #222222; text-decoration: underline;">CanardLapin</span> <span style="color: #222222; text-decoration: underline;">True</span> <span style="color: #222222; text-decoration: underline;">False</span>) <span style="color: #000000;">=</span> <span style="color: #888888;">"Seulement un canard"</span>
+  show (<span style="color: #222222; text-decoration: underline;">CanardLapin</span> <span style="color: #222222; text-decoration: underline;">False</span> <span style="color: #222222; text-decoration: underline;">True</span>) <span style="color: #000000;">=</span> <span style="color: #888888;">"Seulement un lapin"</span>
+  show <span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000;">=</span> <span style="color: #888888;">"Un canard lapin!"</span>
+</pre>
+</div>
+<div class="warn">
+<p>
+À certaines classes de type sont associées des lois (lois des <a href="#Functor">foncteurs</a>, des <a href="#Monad">monades</a>, <i>etc.</i>) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
+Autrement dit, le système des classes de types est <b>en partie formel, en partie contractuel</b>. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.  Il est aussi possible, dans une certaine mesure, d'automatiser la vérification de conformité.
 </p>
 
+</div>
+</div>
+</div>
+<div id="outline-container-org93ab2f0" class="outline-4">
+<h4 id="org93ab2f0"><span class="section-number-4">3.4.3</span> Dérivation automatique</h4>
+<div class="outline-text-4" id="text-3-4-3">
 <p>
-En combinant ceci avec les principes de transparence référentielle,
-<a href="#_lazyness">d'évaluation paresseuse</a> et
-<a href="#_partial-application">d'application partielle</a>, on voit facilement
-qu'il n'existe aucune différence stricte entre une fonction et une
-ariable, donc qu'il n'existe pas de variables. Par exemple:
+Les types crées avec <code>data</code> et <code>newtype</code> peuvent dériver automatiquement certaines classes avec le mot clé <code>deriving</code>:
 </p>
 
 <div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">data</span> <span style="color: #222222; text-decoration: underline;">Something</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">Something</span> <span style="color: #222222; text-decoration: underline;">Integer</span> <span style="color: #222222; text-decoration: underline;">Integer</span>
+  <span style="color: #000000; font-weight: bold;">deriving</span> (<span style="color: #222222; text-decoration: underline;">Show</span>)
+</pre>
+</div>
 
-<pre class="src src-haskell">a = 3 * 2 times3 x = 3 * x b = times3 2 c = 6
+<p>
+La dérivation automatique est implémentée au niveau du compilateur, et ne concerne que quelques classes de type du Prélude.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge90febe" class="outline-3">
+<h3 id="_kinds"><a id="orge90febe"></a><span class="section-number-3">3.5</span> Sortes</h3>
+<div class="outline-text-3" id="text-_kinds">
+<p>
+Les Kinds sont aux types ce que les types sont aux valeurs. Autrement
+dit, c'est le type d'un constructeur de type.
+Un type ordinaire a @TODO
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org337cba5" class="outline-2">
+<h2 id="functions"><a id="org337cba5"></a><span class="section-number-2">4</span> Fonctions</h2>
+<div class="outline-text-2" id="text-functions">
+</div>
+
+<div id="outline-container-orgb54cb78" class="outline-3">
+<h3 id="orgb54cb78"><span class="section-number-3">4.1</span> Fonctions et variables</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Haskell n'a pas de notion de variable au sens qu'a ce terme en programmation procédurale. Il est possible d'assigner une expression ou une valeur à un nom, avec la syntaxe <code>nom = expression</code>, mais <code>nom</code> est immuable, et est donc plus proche d'une constante (c'est une variable au sens mathématique du terme).
+</p>
+
+<p>
+En combinant ceci avec les principes de transparence référentielle, <a href="#_lazyness">d'évaluation paresseuse</a> et <a href="#_partial-application">d'application partielle</a>, on voit facilement qu'il n'existe aucune différence stricte entre une fonction et une ariable, donc qu'il n'existe pas de variables. Par exemple:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">a</span> <span style="color: #000000;">=</span> 3 <span style="color: #000000;">*</span> 2
+<span style="background-color: #FFFFFF;">times3</span> x <span style="color: #000000;">=</span> 3 <span style="color: #000000;">*</span> x
+<span style="background-color: #FFFFFF;">b</span> <span style="color: #000000;">=</span> times3 2
+<span style="background-color: #FFFFFF;">c</span> <span style="color: #000000;">=</span> 6
 </pre>
 </div>
 
@@ -1179,35 +1442,49 @@ Cette identité n'est vraie que des fonctions pures. Les fonctions impures, comm
 </div>
 
 <p>
-La suite de cette fiche ne s'intéresse donc qu'aux fonctions, puisque
-les «variables» n'en sont qu'un cas particulier.
+La suite de cette fiche ne s'intéresse donc qu'aux fonctions, puisque les «variables» n'en sont qu'un cas particulier.
 </p>
 </div>
 
-<div id="outline-container-sec-3-1-1" class="outline-4">
-<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Signature de type</h4>
-<div class="outline-text-4" id="text-3-1-1">
+<div id="outline-container-org7e35a6e" class="outline-4">
+<h4 id="org7e35a6e"><span class="section-number-4">4.1.1</span> Signature de type</h4>
+<div class="outline-text-4" id="text-4-1-1">
 <p>
-La signature a la forme <code>f :: TypeA -&gt; TypeRet</code>, ce qui signifie que
-la fonction prend un paramètre de type <code>TypeA</code> et renvoie une valeur
-de type <code>TypeRet</code>.
-Une fonction définie avec plusieurs paramètres a pour signature
-<code>f :: TypeA -&gt; TypeB -&gt; TypeC -&gt; TypeRet</code>. Cette syntaxe est
-explicitée fiche \fsee{partial-application-and-currying}.
-Les fonctions d'ordre supérieur utilisent les parenthèses pour indiquer
-qu'elles prennent une autre fonction en paramètre. Par exemple, le type
-<code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code> se lit : <code>map</code> prend comme
-premier paramètre une fonction quelconque <code>x :: a -&gt; b</code>.
-Une variable ou une fonction sans paramètres a pour type
-<code>nom :: Type</code>.
+La signature a la forme <code>f :: TypeA -&gt; TypeRet</code>, ce qui signifie que la fonction prend un paramètre de type <code>TypeA</code> et renvoie une valeur de type <code>TypeRet</code>.
+</p>
+
+<p>
+Une fonction définie avec plusieurs paramètres a pour signature <code>f :: TypeA -&gt; TypeB -&gt; TypeC -&gt; TypeRet</code>. Cette syntaxe est explicitée fiche \fsee{partial-application-and-currying @FIXME}.  Les fonctions d'ordre supérieur utilisent les parenthèses pour indiquer qu'elles prennent une autre fonction en paramètre. Par exemple, le type <code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code> se lit : <code>map</code> prend comme premier paramètre une fonction quelconque <code>x :: a -&gt; b</code>.  Une variable ou une fonction sans paramètres a pour type <code>nom :: Type</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-infix-and-prefix-functions" class="outline-4">
-<h4 id="infix-and-prefix-functions"><a id="sec-3-1-2" name="sec-3-1-2"></a><span class="section-number-4">3.1.2</span> Fonctions préfixes et infixes</h4>
-<div class="outline-text-4" id="text-infix-and-prefix-functions">
+<div id="outline-container-org4441e81" class="outline-4">
+<h4 id="org4441e81"><span class="section-number-4">4.1.2</span> Définition de fonctions</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+Une fonction se définit de la façon suivante:
+</p>
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">add</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Signature de type, g&#233;n&#233;ralement optionnel.</span>
+<span style="background-color: #FFFFFF;">add</span> a b <span style="color: #000000;">=</span> a <span style="color: #000000;">+</span> b
+</pre>
+</div>
 
+<p>
+Une fonction infixe se définit en entourant son nom de parenthèses, comme pour l'utiliser en préfixe:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell">(<span style="background-color: #FFFFFF;">+/</span>) a b <span style="color: #000000;">=</span> a <span style="color: #000000;">+</span> b <span style="color: #000000;">+</span> a <span style="color: #000000;">/</span> b
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2dcf715" class="outline-4">
+<h4 id="infix-and-prefix-functions"><a id="org2dcf715"></a><span class="section-number-4">4.1.3</span> Fonctions préfixes et infixes</h4>
+<div class="outline-text-4" id="text-infix-and-prefix-functions">
 <p>
 Une fonction est dite préfixe si son nom est placé avant ses
 arguments, et infixe si son nom est placé entre ses arguments.
@@ -1217,17 +1494,16 @@ nom de la fonction.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-3-1-2-1" name="sec-3-1-2-1"></a>Fonctions infixes<br  /><div class="outline-text-5" id="text-3-1-2-1">
+<ol class="org-ol"><li><a id="org22002af"></a>Fonctions infixes<br  /><div class="outline-text-5" id="text-4-1-3-1">
 <p>
 Une fonction infixe a un nom composé uniquement de symboles non alphanumériques: <code>+</code>,
 <code>*</code> ou <code>&gt;&gt;=</code> sont infixes.
 On peut utiliser une fonction infixe comme préfixe en entourant son nom
 de parenthèses : <code>(+) 1 1</code>.
 </p>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-3-1-2-2" name="sec-3-1-2-2"></a>Fonctions préfixes<br  /><div class="outline-text-5" id="text-3-1-2-2">
+<li><a id="org0158840"></a>Fonctions préfixes<br  /><div class="outline-text-5" id="text-4-1-3-2">
 <p>
 Une fonction préfixe
 a un nom composé de caractères alphanumériques. <code>map</code>, <code>elem</code>
@@ -1235,38 +1511,11 @@ ou <code>foldr</code> sont préfixes.
 On peut utiliser une fonction préfixe comme infixe en entourant son nom
 de \enconcept{backticks}: <code>1 `elem` [1..10]</code>.
 </p>
-</div>
-</li></ol>
-</div>
+</div></li></ol>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Définition de fonctions</h3>
-<div class="outline-text-3" id="text-3-2">
-<p>
-Une fonction se définit de la façon suivante:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-haskell">add :: a -&gt; b -- Signature de type, généralement optionnel. add x = expr
-x
-</pre>
-</div>
-
-<p>
-Une fonction infixe se définit en entourant son nom de parenthèses,
-comme pour l'utiliser en préfixe:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-haskell">(+/) a b = a + b + a / b
-</pre>
-</div>
-</div>
-
-<div id="outline-container-fonctions-locales" class="outline-4">
-<h4 id="fonctions-locales"><a id="sec-3-2-1" name="sec-3-2-1"></a><span class="section-number-4">3.2.1</span> Fonctions locales</h4>
+<div id="outline-container-orgd86b5a7" class="outline-4">
+<h4 id="fonctions-locales"><a id="orgd86b5a7"></a><span class="section-number-4">4.1.4</span> Fonctions locales</h4>
 <div class="outline-text-4" id="text-fonctions-locales">
 <p>
 On peut définir des fonctions dont la visibilité est limitée à une
@@ -1279,50 +1528,42 @@ positionne <i>après</i>.
 
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">circLet :: Fractional a =&gt; a -&gt; a
-circLet radius = let pi   = 3.14
-		     diam = 2 * radius
-		 in pi * diam
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">circLet</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Fractional</span> a <span style="color: #000000;">=&gt;</span> a <span style="color: #000000;">-&gt;</span> a
+<span style="background-color: #FFFFFF;">circLet</span> radius <span style="color: #000000;">=</span> <span style="color: #000000; font-weight: bold;">let</span> pi <span style="color: #000000;">=</span> 3.14
+                     diam <span style="color: #000000;">=</span> 2 <span style="color: #000000;">*</span> radius
+                 <span style="color: #000000; font-weight: bold;">in</span> pi <span style="color: #000000;">*</span> diam
 </pre>
 </div>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">circWhere :: Fractional a =&gt; a -&gt; a
-circWhere radius = pi * diam
-    where pi   = 3.141592653589793
-	  diam = 2 * radius
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">circWhere</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Fractional</span> a <span style="color: #000000;">=&gt;</span> a <span style="color: #000000;">-&gt;</span> a
+<span style="background-color: #FFFFFF;">circWhere</span> radius <span style="color: #000000;">=</span> pi <span style="color: #000000;">*</span> diam
+  <span style="color: #000000; font-weight: bold;">where</span> pi   <span style="color: #000000;">=</span> 3.141592653589793
+    diam <span style="color: #000000;">=</span> 2 <span style="color: #000000;">*</span> radius
 </pre>
 </div>
 
-
 <ul class="org-ul">
-<li>Le choix de l'une ou de l'autre syntaxe est une question de lisibilité.
-</li>
-<li>On peut les imbriquer: une fonction locale peut à son tour définir des fonctions locales, etc.
-</li>
-<li>La visiblité des fonctions locales est limitée à la définition englobante.
-</li>
+<li>Le choix de l'une ou de l'autre syntaxe est une question de goût et de lisibilité.</li>
+
+<li>On peut les imbriquer: une fonction locale peut à son tour définir des fonctions locales, etc.</li>
+
+<li>La visiblité des fonctions locales est limitée à la définition englobante.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-fixité-précédence-et-associativité" class="outline-4">
-<h4 id="fixité-précédence-et-associativité"><a id="sec-3-2-2" name="sec-3-2-2"></a><span class="section-number-4">3.2.2</span> Fixité (précédence et associativité)</h4>
-<div class="outline-text-4" id="text-fixité-précédence-et-associativité">
+<div id="outline-container-orgd89e885" class="outline-4">
+<h4 id="_fixity"><a id="orgd89e885"></a><span class="section-number-4">4.1.5</span> Fixité (précédence et associativité)</h4>
+<div class="outline-text-4" id="text-_fixity">
 <p>
-\label{defining-fixity}
-L'associativité et la précédence sont collectivement nommées «fixité».
-La fixité d'une fonction infixe (et de n'importe quelle fonction préfixe
-dans sa forme infixe, comme <code>`elem`</code>) est fixée par une déclaration
-<code>infixl</code> (associatif à gauche), <code>infixr</code> (associatif à droite) ou
-<code>infix</code> (non-associatif ), suivie de l'ordre de précédence compris
-entre 0 et 9 et du nom de la fonction:
+L'associativité et la précédence sont collectivement nommées «fixité».  La fixité d'une fonction infixe (et de n'importe quelle fonction préfixe dans sa forme infixe, comme <code>`elem`</code>) est fixée par une déclaration <code>infixl</code> (associatif à gauche), <code>infixr</code> (associatif à droite) ou <code>infix</code> (non-associatif), suivie de l'ordre de précédence compris entre 0 et 9 et du nom de la fonction:
 </p>
-<div class="org-src-container">
 
-<pre class="src src-haskell">(+/) :: Num a =&gt; a -&gt; a -&gt; a infixl 9 +/ (+/) a b = a + b + a / b
+<div class="org-src-container">
+<pre class="src src-haskell">(<span style="background-color: #FFFFFF;">+/</span>) <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Num</span> a <span style="color: #000000;">=&gt;</span> a <span style="color: #000000;">-&gt;</span> a <span style="color: #000000;">-&gt;</span> a
+<span style="color: #000000; font-weight: bold;">infixl</span> 9 <span style="color: #000000;">+/</span>
+(<span style="background-color: #FFFFFF;">+/</span>) a b <span style="color: #000000;">=</span> a <span style="color: #000000;">+</span> b <span style="color: #000000;">+</span> a <span style="color: #000000;">/</span> b
 </pre>
 </div>
 <p>
@@ -1332,77 +1573,66 @@ dans la clause <code>let</code> ou <code>where</code> où elle est définie.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Paramètres, motifs et gardes</h3>
-<div class="outline-text-3" id="text-3-3">
-</div><div id="outline-container-passage-de-paramètres" class="outline-4">
-<h4 id="passage-de-paramètres"><a id="sec-3-3-1" name="sec-3-3-1"></a><span class="section-number-4">3.3.1</span> Passage de paramètres</h4>
+<div id="outline-container-org8bdc0e9" class="outline-3">
+<h3 id="org8bdc0e9"><span class="section-number-3">4.2</span> Paramètres, motifs et gardes</h3>
+<div class="outline-text-3" id="text-4-2">
+</div><div id="outline-container-orgfc7205b" class="outline-4">
+<h4 id="passage-de-paramètres"><a id="orgfc7205b"></a><span class="section-number-4">4.2.1</span> Paramètres</h4>
 <div class="outline-text-4" id="text-passage-de-paramètres">
-<p>
-@TODO
-</p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-3-3-1-1" name="sec-3-3-1-1"></a>Déconstruction de types composites.<br  /><div class="outline-text-5" id="text-3-3-1-1">
+<ol class="org-ol"><li><a id="orga18b070"></a>Déconstruction de types composites<br  /><div class="outline-text-5" id="text-4-2-1-1">
 <p>
-«Déconstruire» un argument d'une fonction permet d'obtenir directement
-les arguments du constructeur. Par exemple, la fonction suivante
-déconstruit un constructeur de paire (tuple de deux éléments) pour en
-renvoyer le premier:
+«Déconstruire» un argument d'une fonction permet d'obtenir directement les arguments du constructeur. Par exemple, la fonction suivante déconstruit un constructeur de paire (tuple de deux éléments) pour en intervertir les termes:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">toggle :: (a, b) -&gt; a toggle (x, y) = (y, x)
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">toggle</span> <span style="color: #000000;">::</span> (a, b) <span style="color: #000000;">-&gt;</span> a
+<span style="background-color: #FFFFFF;">toggle</span> (x, y) <span style="color: #000000;">=</span> (y, x)
 </pre>
 </div>
 
 <p>
 Un paramètre non utilisé peut être remplacé par un <code>_</code>:
 </p>
-<div class="org-src-container">
 
-<pre class="src src-haskell">duplFirst :: (a, b) -&gt; (a, a) duplFirst (x, \_) = (x, x)
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">duplFirst</span> <span style="color: #000000;">::</span> (a, b) <span style="color: #000000;">-&gt;</span> (a, a)
+<span style="background-color: #FFFFFF;">duplFirst</span> (x, <span style="color: #000000;">\</span><span style="color: #000000; font-weight: bold;">_</span>) <span style="color: #000000;">=</span> (x, x)
 </pre>
 </div>
 
 <p>
-On n'a pas besoin du second membre de la paire: on la décompose donc en
-évitant de nommer cet élément.
+On n'a pas besoin du second membre de la paire: on la décompose donc en évitant de nommer cet élément.
 </p>
 
 <p>
-De la même façon, si le paramètre est un <code>Maybe</code>, on peut récupérer
-directement sa valeur en déconstruisant <code>Just</code>:
+De la même façon, si le paramètre est un <code>Maybe</code>, on peut récupérer directement sa valeur en déconstruisant <code>Just</code>:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">double :: Maybe Int -&gt; Int double (Just x) = x * 2
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">double</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span>
+<span style="background-color: #FFFFFF;">double</span> (<span style="color: #222222; text-decoration: underline;">Just</span> x) <span style="color: #000000;">=</span> x <span style="color: #000000;">*</span> 2
 </pre>
 </div>
-</div>
-</li>
+</div></li>
 
-<li><a id="as-patterns" name="as-patterns"></a><a id="sec-3-3-1-2" name="sec-3-3-1-2"></a>Motifs nommés.<br  /><div class="outline-text-5" id="text-as-patterns">
-
+<li><a id="as-patterns"></a><a id="org4780f6c"></a>Motifs nommés.<br  /><div class="outline-text-5" id="text-as-patterns">
 <p>
-On peut avoir besoin de déconstruire un paramètre selon un motif en conservant le paramètre entier. Les motifs nommés permettent d'éviter des suites déconstruction-reconstruction redondantes.  La fonction <code>suffixes</code> (d'après cite:OSullivan2008, 103) renvoie tous les suffixes d'une liste. Elle peut s'écrire:
+On peut avoir besoin de déconstruire un paramètre selon un motif en conservant le paramètre entier. Les motifs nommés permettent d'éviter des suites déconstruction-reconstruction redondantes.  La fonction <code>suffixes</code> (d'après \cite[103]{OSullivan2008}) renvoie tous les suffixes d'une liste. Elle peut s'écrire:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">suffixes :: [a] -&gt; [[a]] suffixes xs(/:xs') = xs : suffixes xs'
-suffixes / = []
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">suffixes</span> <span style="color: #000000;">::</span> [a] <span style="color: #000000;">-&gt;</span> [[a]] suffixes xs(<span style="color: #000000;">/:</span>xs') <span style="color: #000000;">=</span> xs <span style="color: #222222; text-decoration: underline;">:</span> suffixes xs'
+suffixes <span style="background-color: #FFFFFF;">/</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">[]</span>
 </pre>
 </div>
-</div>
-</li></ol>
+</div></li></ol>
 </div>
 
-<div id="outline-container-sec-3-3-2" class="outline-4">
-<h4 id="sec-3-3-2"><span class="section-number-4">3.3.2</span> Filtrage par motif et gardes</h4>
-<div class="outline-text-4" id="text-3-3-2">
+<div id="outline-container-orgf92df54" class="outline-4">
+<h4 id="orgf92df54"><span class="section-number-4">4.2.2</span> Filtrage par motif et gardes</h4>
+<div class="outline-text-4" id="text-4-2-2">
 <p>
 Le filtrage par motifs et l'emploi de gardes permettent de proposer
 différentes implémentations d'une même fonction selon les paramètres qui
@@ -1441,50 +1671,46 @@ Le filtrage par motif et les gardes permettent de définir plusieurs cas qui se 
 </div>
 </div>
 
-<div id="outline-container-pattern-matching" class="outline-4">
-<h4 id="pattern-matching"><a id="sec-3-3-3" name="sec-3-3-3"></a><span class="section-number-4">3.3.3</span> Filtrage par motifs</h4>
+<div id="outline-container-org9b222bf" class="outline-4">
+<h4 id="pattern-matching"><a id="org9b222bf"></a><span class="section-number-4">4.2.3</span> Filtrage par motifs</h4>
 <div class="outline-text-4" id="text-pattern-matching">
-
 <p>
 Le filtrage par motifs permet de filtrer selon un constructeur ou selon
 une valeur arbitraire.
 </p>
 </div>
 
-<ol class="org-ol"><li><a id="sec-3-3-3-1" name="sec-3-3-3-1"></a>Par constructeur.<br  /><div class="outline-text-5" id="text-3-3-3-1">
+<ol class="org-ol"><li><a id="orgeb0f2a8"></a>Par constructeur.<br  /><div class="outline-text-5" id="text-4-2-3-1">
 <p>
-Le filtrage par constructeurs permet de sélectionner quel constructeur
-d'un <a href="#_algebraic-types">type algébrique</a> correspond à quelle
-implémentation.
+Le filtrage par constructeurs permet de sélectionner quel constructeur d'un <a href="#_algebraic-types">type algébrique</a> correspond à quelle implémentation.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">maybeIntToStr :: Maybe Int -&gt; String maybeIntToStr (Just a) = show a
-maybeIntToStr Nothing = "NaN"
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">maybeIntToStr</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Maybe</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span>
+<span style="background-color: #FFFFFF;">maybeIntToStr</span> (<span style="color: #222222; text-decoration: underline;">Just</span> a) <span style="color: #000000;">=</span> show a
+<span style="background-color: #FFFFFF;">maybeIntToStr</span> <span style="color: #222222; text-decoration: underline;">Nothing</span> <span style="color: #000000;">=</span> <span style="color: #888888;">"NaN"</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">mySum :: (Num a) =&gt; [a] -&gt; a mySum (x:xs) = x + mySum xs mySum [] = 0
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">mySum</span> <span style="color: #000000;">::</span> (<span style="color: #222222; text-decoration: underline;">Num</span> a) <span style="color: #000000;">=&gt;</span> [a] <span style="color: #000000;">-&gt;</span> a
+<span style="background-color: #FFFFFF;">mySum</span> (x<span style="color: #222222; text-decoration: underline;">:</span>xs) <span style="color: #000000;">=</span> x <span style="color: #000000;">+</span> mySum xs
+<span style="background-color: #FFFFFF;">mySum</span> <span style="color: #222222; text-decoration: underline;">[]</span> <span style="color: #000000;">=</span> 0
 </pre>
 </div>
-</div>
-</li>
+</div></li>
 
-<li><a id="sec-3-3-3-2" name="sec-3-3-3-2"></a>Par valeur littérale.<br  /><div class="outline-text-5" id="text-3-3-3-2">
+<li><a id="orge7c2a03"></a>Par valeur littérale.<br  /><div class="outline-text-5" id="text-4-2-3-2">
 <p>
 Le filtrage par valeur littérale est le plus simple. Il choisit une
 implémentation si un paramètre a une valeur déterminée.
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">compte :: String -&gt; String -&gt; Int -&gt; String
-compte singulier pluriel 0 = "Aucun(e) " ++ singulier
-compte singulier pluriel 1 = "Un(e) " ++ singulier
-compte singulier pluriel quantite = show quantite ++ " " ++ pluriel
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">compte</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span>
+<span style="background-color: #FFFFFF;">compte</span> singulier pluriel 0 <span style="color: #000000;">=</span> <span style="color: #888888;">"Aucun(e) "</span> <span style="color: #000000;">++</span> singulier
+<span style="background-color: #FFFFFF;">compte</span> singulier pluriel 1 <span style="color: #000000;">=</span> <span style="color: #888888;">"Un(e) "</span> <span style="color: #000000;">++</span> singulier
+<span style="background-color: #FFFFFF;">compte</span> singulier pluriel quantite <span style="color: #000000;">=</span> show quantite <span style="color: #000000;">++</span> <span style="color: #888888;">" "</span> <span style="color: #000000;">++</span> pluriel
 </pre>
 </div>
 
@@ -1494,10 +1720,9 @@ Une valeur littérale <i>doit</i> être littérale et ne peut pas, pour des rais
 </p>
 
 </div>
-</div>
-</li>
+</div></li>
 
-<li><a id="paramètres-ignorés." name="paramètres-ignorés."></a><a id="sec-3-3-3-3" name="sec-3-3-3-3"></a>Paramètres ignorés.<br  /><div class="outline-text-5" id="text-paramètres-ignorés.">
+<li><a id="paramètres-ignorés."></a><a id="org16686d8"></a>Paramètres ignorés.<br  /><div class="outline-text-5" id="text-paramètres-ignorés.">
 <p>
 Certaines implémentations d'une fonction peuvent ne pas faire usage de
 tous les paramètres. On ignore un paramètre dans la définition avec le
@@ -1505,22 +1730,20 @@ symbole <code>_</code>:
 La fonction <code>compte</code> ci-dessus pourrait s'écrire:
 </p>
 <div class="org-src-container">
-
-<pre class="src src-haskell">compte :: String -&gt; String -&gt; Int -&gt; String
-compte singulier _ 0 = "Aucun(e) " ++ singulier
-compte singulier _ 1 = "Un(e) " ++ singulier
-compte _ pluriel quantite = show quantite ++ " " ++ pluriel
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">compte</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span>
+<span style="background-color: #FFFFFF;">compte</span> singulier <span style="color: #000000; font-weight: bold;">_</span> 0 <span style="color: #000000;">=</span> <span style="color: #888888;">"Aucun(e) "</span> <span style="color: #000000;">++</span> singulier
+<span style="background-color: #FFFFFF;">compte</span> singulier <span style="color: #000000; font-weight: bold;">_</span> 1 <span style="color: #000000;">=</span> <span style="color: #888888;">"Un(e) "</span> <span style="color: #000000;">++</span> singulier
+<span style="background-color: #FFFFFF;">compte</span> <span style="color: #000000; font-weight: bold;">_</span> pluriel quantite <span style="color: #000000;">=</span> show quantite <span style="color: #000000;">++</span> <span style="color: #888888;">" "</span> <span style="color: #000000;">++</span> pluriel
 </pre>
 </div>
 <p>
 <code>_</code> n'est pas un nom de variable mais la mention explicite que le
 paramètre ne sera pas utilisé.
 </p>
+</div></li></ol>
 </div>
-</li></ol>
-</div>
-<div id="outline-container-guards" class="outline-4">
-<h4 id="guards"><a id="sec-3-3-4" name="sec-3-3-4"></a><span class="section-number-4">3.3.4</span> Gardes</h4>
+<div id="outline-container-org476f8fd" class="outline-4">
+<h4 id="guards"><a id="org476f8fd"></a><span class="section-number-4">4.2.4</span> Gardes</h4>
 <div class="outline-text-4" id="text-guards">
 <p>
 Un garde est une expression de type <code>Bool</code>. Si l'expression s'évalue à <code>True</code>, l'implémentation qui suit est utilisée.
@@ -1531,21 +1754,17 @@ Leur syntaxe est:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">func args | garde = impl
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">func</span> args <span style="color: #000000;">|</span> garde <span style="color: #000000;">=</span> impl
 </pre>
 </div>
 
 <p>
-Par exemple, une fonction qui détermine si un nombre est pair, qui
-s'implémenterait naïvement sous la forme
-<code>isEven x = if x `mod` 2 == 0 then True else False</code> peut s'écrire
-plus lisiblement:
+Par exemple, une fonction qui détermine si un nombre est pair, qui s'implémenterait naïvement sous la forme <code>isEven x = if x `mod` 2 == 0 then True else False</code> peut s'écrire plus lisiblement:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">isEven x | x =mod= 2 == 0 = True isEven \_ = False
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">isEven</span> x <span style="color: #000000;">|</span> x mod 2 <span style="color: #000000;">==</span> 0 <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">True</span>
+<span style="background-color: #FFFFFF;">isEven</span> <span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">False</span>
 </pre>
 </div>
 
@@ -1555,264 +1774,201 @@ celle qui précède (c'est-à-dire si l'éventuel motif est le même):
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">isEven x | x =mod= 2 == 0 = True | otherwise = False
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">isEven</span> x <span style="color: #000000;">|</span> x mod 2 <span style="color: #000000;">==</span> 0 <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">True</span>
+         <span style="color: #000000;">|</span> otherwise <span style="color: #000000;">=</span> <span style="color: #222222; text-decoration: underline;">False</span>
 </pre>
 </div>
 
 <div class="info">
 <p>
-<code>otherwise</code> est une constante définie dans le Prélude.
-Sa valeur est simplement <code>True</code>.
-</p>
-
-</div>
-
-<div class="warn">
-<p>
-<code>otherwise</code> est simplement définie comme <code>otherwise = True</code>. Son emploi est donc limité aux gardes.
+<code>otherwise</code> est une variable définie dans le <a href="#Prelude">Prélude</a>.  Sa valeur est simplement <code>True</code>.
 </p>
 
 </div>
 </div>
 
-<ol class="org-ol"><li><a id="sec-3-3-4-1" name="sec-3-3-4-1"></a>«Pattern guards»<br  /><div class="outline-text-5" id="text-3-3-4-1">
+<ol class="org-ol"><li><a id="org6e79a33"></a>«Pattern guards»<br  /><div class="outline-text-5" id="text-4-2-4-1">
 <p>
 Haskell 2010 étend la syntaxe des gardes \todo{Cette section}
 </p>
 <div class="org-src-container">
-
-<pre class="src src-haskell">gardes :: Int -&gt; String gardes a | odd a, a =mod= 5 == 0 = "Impair et/ou
-multiple de 5" | even a = "Pair mais pas multiple de 5"
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">gardes</span> <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">Int</span> <span style="color: #000000;">-&gt;</span> <span style="color: #222222; text-decoration: underline;">String</span> gardes a <span style="color: #000000;">|</span> odd a, a <span style="color: #000000;">=</span>mod<span style="color: #000000;">=</span> 5 <span style="color: #000000;">==</span> 0 <span style="color: #000000;">=</span> <span style="color: #000000; font-weight: bold;">"</span><span style="color: #888888;">Impair et/ou</span>
+<span style="background-color: #FFFFFF;">multiple</span> de 5<span style="color: #888888;">" | even a = "</span><span style="color: #222222; text-decoration: underline;">Pair</span> mais pas multiple de 5<span style="color: #000000; font-weight: bold;">"</span>
 </pre>
 </div>
 <p>
 \todo{}
 </p>
-</div>
-</li></ol>
+</div></li></ol>
 </div>
 </div>
 
-<div id="outline-container-_partial-application" class="outline-3">
-<h3 id="_partial-application"><a id="sec-3-4" name="sec-3-4"></a><span class="section-number-3">3.4</span> Application partielle et currying</h3>
+<div id="outline-container-org8930998" class="outline-3">
+<h3 id="_partial-application"><a id="org8930998"></a><span class="section-number-3">4.3</span> Application partielle et currying</h3>
 <div class="outline-text-3" id="text-_partial-application">
-
 <p>
 Une fonction, quel que soit le nombre de paramètres avec lequel elle a été déclarée, ne prend qu'un seul paramètre et renvoie une autre fonction. Le type de <code>+</code>, par exemple, est : <code>Num a =&gt; Num a -&gt; Num a -&gt; Num a</code>, ce qui signifie que <code>+</code> prend un premier paramètre d'un type de type <code>Num</code>
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Lambdas</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-org059ff5d" class="outline-3">
+<h3 id="org059ff5d"><span class="section-number-3">4.4</span> Lambdas</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Les fonctions anonymes se notent:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000;">\</span>a b c <span style="color: #000000;">-&gt;</span> a <span style="color: #000000;">+</span> b <span style="color: #000000;">+</span> c
+</pre>
+</div>
+
 <div class="info">
 <p>
-Certaines fonctions du Prélude peuvent remplacer un lambda:
-<code>const x</code> prend un paramètre et renvoie toujours x: c'est
-l'équivalent de <code>\_ -&gt; x</code>.
+Le <a href="#Prelude">Prélude</a> fournit quelques fonctions qui peuvent remplacer des formes de lambdas très courantes: <code>const :: a -&gt; b -&gt; a</code> et <code>id :: a -&gt; a</code>.
 </p>
 
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Idiomes</h2>
-<div class="outline-text-2" id="text-4">
+
+
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-mollit anim id est laborum."
+Données et contrôle
 </p>
 </div>
-
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Composition</h3>
 </div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Récursivité</h3>
-<div class="outline-text-3" id="text-4-2">
-</div><div id="outline-container-récursivité-en-queue" class="outline-4">
-<h4 id="récursivité-en-queue"><a id="sec-4-2-1" name="sec-4-2-1"></a><span class="section-number-4">4.2.1</span> Récursivité en queue</h4>
-<div class="outline-text-4" id="text-récursivité-en-queue">
-</div>
-</div>
-<div id="outline-container-folds" class="outline-4">
-<h4 id="folds"><a id="sec-4-2-2" name="sec-4-2-2"></a><span class="section-number-4">4.2.2</span> Folds</h4>
-<div class="outline-text-4" id="text-folds">
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Données</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-lists" class="outline-3">
-<h3 id="lists"><a id="sec-5-1" name="sec-5-1"></a><span class="section-number-3">5.1</span> Listes</h3>
+<div id="outline-container-orgdceec50" class="outline-3">
+<h3 id="lists"><a id="orgdceec50"></a><span class="section-number-3">4.5</span> Listes</h3>
 <div class="outline-text-3" id="text-lists">
-
 <p>
 Cette fiche résume quelques unes des fonctions essentielles applicables
 à des listes.
 </p>
 
-<ul class="org-ul">
-<li><code>head</code>, <code>tail</code>.
-</li>
-<li><code>take</code>, <code>takeWhile</code>, <code>drop</code>, <code>dropWhile</code>
-</li>
-</ul>
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <tbody>
 <tr>
-<td class="left"><code>(++)</code>, <code>(&lt;&gt;)</code></td>
-<td class="left"><code>[a] -&gt; [a] -&gt; [a]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>(++)</code>, <code>(&lt;&gt;)</code></td>
+<td class="org-left"><code>[a] -&gt; [a] -&gt; [a]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>head</code>, <code>last</code></td>
-<td class="left"><code>[a] -&gt; a</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>head</code>, <code>last</code></td>
+<td class="org-left"><code>[a] -&gt; a</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>tail</code></td>
-<td class="left"><code>[a] -&gt; [a]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>tail</code></td>
+<td class="org-left"><code>[a] -&gt; [a]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>drop</code>, <code>take</code></td>
-<td class="left"><code>Int -&gt; [a] -&gt; [a]</code></td>
-<td class="left">Retient/retire \(n\) premiers éléments de la liste.</td>
+<td class="org-left"><code>drop</code>, <code>take</code></td>
+<td class="org-left"><code>Int -&gt; [a] -&gt; [a]</code></td>
+<td class="org-left">Retient/retire \(n\) premiers éléments de la liste.</td>
 </tr>
 
 <tr>
-<td class="left"><code>dropWhile</code>, <code>takeWhile</code></td>
-<td class="left"><code>(a -&gt; Bool) -&gt; [a] -&gt; [a]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>dropWhile</code>, <code>takeWhile</code></td>
+<td class="org-left"><code>(a -&gt; Bool) -&gt; [a] -&gt; [a]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>map</code>, <code>fmap</code></td>
-<td class="left"><code>(a -&gt; b) -&gt; [a] -&gt; [b]~</code></td>
-<td class="left">Applique une fonction sur chaque élément</td>
+<td class="org-left"><code>map</code>, <code>fmap</code></td>
+<td class="org-left"><code>(a -&gt; b) -&gt; [a] -&gt; [b]~</code></td>
+<td class="org-left">Applique une fonction sur chaque élément</td>
 </tr>
 
 <tr>
-<td class="left"><code>zip</code></td>
-<td class="left"><code>[a] -&gt; [b] -&gt; [(a, b)]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>zip</code></td>
+<td class="org-left"><code>[a] -&gt; [b] -&gt; [(a, b)]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>zip3</code></td>
-<td class="left"><code>[a] -&gt; [b] -&gt; [c] -&gt; [(a, b, c)]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>zip3</code></td>
+<td class="org-left"><code>[a] -&gt; [b] -&gt; [c] -&gt; [(a, b, c)]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>zipWith</code></td>
-<td class="left"><code>(a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>zipWith</code></td>
+<td class="org-left"><code>(a -&gt; b -&gt; c) -&gt; [a] -&gt; [b] -&gt; [c]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left"><code>zipWith3</code></td>
-<td class="left"><code>(a -&gt; b -&gt; c -&gt; d) -&gt; [a] -&gt; [b] -&gt; [c] -&gt; [d]</code></td>
-<td class="left">&#xa0;</td>
+<td class="org-left"><code>zipWith3</code></td>
+<td class="org-left"><code>(a -&gt; b -&gt; c -&gt; d) -&gt; [a] -&gt; [b] -&gt; [c] -&gt; [d]</code></td>
+<td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-Monoid" class="outline-3">
-<h3 id="Monoid"><a id="sec-5-2" name="sec-5-2"></a><span class="section-number-3">5.2</span> Monoïdes</h3>
+<div id="outline-container-org2f6a3b2" class="outline-3">
+<h3 id="Monoid"><a id="org2f6a3b2"></a><span class="section-number-3">4.6</span> Monoïdes</h3>
 <div class="outline-text-3" id="text-Monoid">
-
 <div class="org-src-container">
-
-<pre class="src src-haskell">class Monoid a where mempty :: a -- \^ Identity of 'mappend' mappend ::
-a -&gt; a -&gt; a -- \^ An associative operation mconcat :: [a] -&gt; a
-#+BEGIN_EXAMPLE
-	-- ^ Fold a list using the monoid.
-	-- For most types, the default definition for 'mconcat' will be
-	-- used, but the function is included in the class definition so
-	-- that an optimized version can be provided for specific types.
-	mconcat = foldr mappend mempty
-#+END_EXAMPLE
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Monoid</span> a <span style="color: #000000; font-weight: bold;">where</span>
+  mempty  <span style="color: #000000;">::</span> a
+  <span style="color: #AAAAAA;">-- ^ Identity of 'mappend'</span>
+  mappend <span style="color: #000000;">::</span> a <span style="color: #000000;">-&gt;</span> a <span style="color: #000000;">-&gt;</span> a
+  <span style="color: #AAAAAA;">-- ^ An associative operation</span>
+  mconcat <span style="color: #000000;">::</span> [a] <span style="color: #000000;">-&gt;</span> a
+  <span style="color: #AAAAAA;">-- ^ Fold a list using the monoid.</span>
+  <span style="color: #AAAAAA;">-- For most types, the default definition for 'mconcat' will be</span>
+  <span style="color: #AAAAAA;">-- used, but the function is included in the class definition so</span>
+  <span style="color: #AAAAAA;">-- that an optimized version can be provided for specific types.</span>
+  mconcat <span style="color: #000000;">=</span> foldr mappend mempty
 </pre>
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Control</h2>
-<div class="outline-text-2" id="text-6">
+
 <p>
-Cette section décrit les classes de types définies dans le Prelude au
-niveau du paquet <code>Control</code> et de ses sous-paquets. Il s'agit
-principalement des <a href="#Functor">foncteurs</a>, des
-<a href="#Applicative">foncteurs applicatifs</a>, des <a href="#Monad">monades</a>.
+<code>Data.Monoid</code> fournit aussi un synonyme infixe de mappend: <code>&lt;&gt;</code>.
 </p>
-
-<div class="warn">
-<p>
-La hiérarchie des types a changé dans <code>base</code> 4.8.0.0, faisant de Monad une instance Applicative.
-</p>
-
 </div>
 </div>
 
-<div id="outline-container-Functor" class="outline-3">
-<h3 id="Functor"><a id="sec-6-1" name="sec-6-1"></a><span class="section-number-3">6.1</span> Foncteurs</h3>
+<div id="outline-container-orgf289bbb" class="outline-3">
+<h3 id="Functor"><a id="orgf289bbb"></a><span class="section-number-3">4.7</span> Foncteurs</h3>
 <div class="outline-text-3" id="text-Functor">
-
 <p>
 Il s'agit d'une <a href="#typeclasses">classe de type</a>, définie comme suit:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">class Functor f where fmap :: (a -&gt; b) -&gt; f a -&gt; f b
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Functor</span> (f <span style="color: #000000;">::</span> <span style="color: #000000;">*</span> <span style="color: #000000;">-&gt;</span> <span style="color: #000000;">*</span>) <span style="color: #000000; font-weight: bold;">where</span>
+  fmap <span style="color: #000000;">::</span> (a <span style="color: #000000;">-&gt;</span> b) <span style="color: #000000;">-&gt;</span> f a <span style="color: #000000;">-&gt;</span> f b
+  (<span style="color: #000000;">&lt;$</span>) <span style="color: #000000;">::</span> a <span style="color: #000000;">-&gt;</span> f b <span style="color: #000000;">-&gt;</span> f a
 </pre>
 </div>
 
 <div class="law">
 <ol class="org-ol">
-<li><code>fmap id === id</code>. Mapper <code>id</code> sur un foncteur renvoie le
-</li>
+<li><code>fmap id === id</code>: Mapper <code>id</code> sur un foncteur renvoie le même foncteur. Autrement dit, <code>fmap</code> ne peut pas introduire d'autres modifications dans le foncteur que l'application de la fonction.</li>
 </ol>
-<p>
-même foncteur. Autrement dit, <code>fmap</code> ne peut pas introduire d'autres
-modifications dans le foncteur que l'application de la fonction.
-</p>
 <ol class="org-ol">
-<li><code>fmap (f . g)  ==  fmap f . fmap g</code>
-</li>
+<li><code>fmap (f . g)  ==  fmap f . fmap g</code></li>
 </ol>
 
 </div>
@@ -1823,14 +1979,13 @@ comparer à une boîte qui contient une valeur. La métaphore est un peu
 courte. Plus abstraitement, un foncteur est un type de
 <a href="#_kinds">sorte</a> <code>* -&gt; *</code> qui permet l'application d'une fonction sur
 les données du type encapsulée dans le foncteur.
-Ainsi <code>-&gt;</code> (la définition de fonction) est un foncteur. Par exemple:
+Ainsi <code>-&gt;</code> (la définition de fonction) a un foncteur. Par exemple:
 </p>
 
 <div class="org-src-container">
-
-<pre class="src src-haskell">a = (*) 2        -- Application partielle
-b = fmap (*2) a  -- fmap
-b 2              -- == 8
+<pre class="src src-haskell"><span style="background-color: #FFFFFF;">a</span> <span style="color: #000000;">=</span> (<span style="color: #000000;">*</span>) 2        <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Application partielle</span>
+<span style="background-color: #FFFFFF;">b</span> <span style="color: #000000;">=</span> fmap (<span style="color: #000000;">*</span>2) a  <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">fmap</span>
+<span style="background-color: #FFFFFF;">b</span> 2              <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">== 8</span>
 </pre>
 </div>
 
@@ -1843,10 +1998,9 @@ b 2              -- == 8
 </div>
 </div>
 
-<div id="outline-container-Applicative" class="outline-3">
-<h3 id="Applicative"><a id="sec-6-2" name="sec-6-2"></a><span class="section-number-3">6.2</span> Foncteurs applicatifs</h3>
+<div id="outline-container-orgc62534a" class="outline-3">
+<h3 id="Applicative"><a id="orgc62534a"></a><span class="section-number-3">4.8</span> Foncteurs applicatifs</h3>
 <div class="outline-text-3" id="text-Applicative">
-
 <p>
 Un foncteur applicatif est une structure intermédiaire entre un foncteur
 et une monade.
@@ -1857,56 +2011,53 @@ Il s'agit d'une <a href="#typeclasses">classe de type</a>, définie comme suit:
 </p>
 
 <div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Functor</span> f <span style="color: #000000;">=&gt;</span> <span style="color: #222222; text-decoration: underline;">Applicative</span> f <span style="color: #000000; font-weight: bold;">where</span>
+  <span style="color: #AAAAAA;">-- | Lift a value.</span>
+  pure <span style="color: #000000;">::</span> a <span style="color: #000000;">-&gt;</span> f a
 
-<pre class="src src-haskell">class Functor f =&gt; Applicative f where
-  -- | Lift a value.
-  pure :: a -&gt; f a
+  <span style="color: #AAAAAA;">-- | Sequential application.</span>
+  (<span style="color: #000000;">&lt;*&gt;</span>) <span style="color: #000000;">::</span> f (a <span style="color: #000000;">-&gt;</span> b) <span style="color: #000000;">-&gt;</span> f a <span style="color: #000000;">-&gt;</span> f b
 
-  -- | Sequential application.
-  (&lt;*&gt;) :: f (a -&gt; b) -&gt; f a -&gt; f b
-
-  -- | Sequence actions, discarding the value of the first argument.
-  (*&gt;) :: f a -&gt; f b -&gt; f b
-  a1 *&gt; a2 = (id &lt;$ a1) &lt;*&gt; a2
-  -- This is essentially the same as liftA2 (const id), but if the
-  -- Functor instance has an optimized (&lt;$), we want to use that instead.
-  -- | Sequence actions, discarding the value of the second argument.
-  (&lt;*) :: f a -&gt; f b -&gt; f a
-  (&lt;*) = liftA2 const
+  <span style="color: #AAAAAA;">-- | Sequence actions, discarding the value of the first argument.</span>
+  (<span style="color: #000000;">*&gt;</span>) <span style="color: #000000;">::</span> f a <span style="color: #000000;">-&gt;</span> f b <span style="color: #000000;">-&gt;</span> f b
+  a1 <span style="color: #000000;">*&gt;</span> a2 <span style="color: #000000;">=</span> (id <span style="color: #000000;">&lt;$</span> a1) <span style="color: #000000;">&lt;*&gt;</span> a2
+  <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">This is essentially the same as liftA2 (const id), but if the</span>
+  <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">Functor instance has an optimized (&lt;$), we want to use that instead.</span>
+  <span style="color: #AAAAAA;">-- | Sequence actions, discarding the value of the second argument.</span>
+  (<span style="color: #000000;">&lt;*</span>) <span style="color: #000000;">::</span> f a <span style="color: #000000;">-&gt;</span> f b <span style="color: #000000;">-&gt;</span> f a
+  (<span style="color: #000000;">&lt;*</span>) <span style="color: #000000;">=</span> liftA2 const
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-Monad" class="outline-3">
-<h3 id="Monad"><a id="sec-6-3" name="sec-6-3"></a><span class="section-number-3">6.3</span> Monades</h3>
+<div id="outline-container-org4b9cd92" class="outline-3">
+<h3 id="Monad"><a id="org4b9cd92"></a><span class="section-number-3">4.9</span> Monades</h3>
 <div class="outline-text-3" id="text-Monad">
-
 <p>
 Au plus simple, une monade est une classe de type définie comme suit:
 </p>
 
 <div class="org-src-container">
+<pre class="src src-haskell"><span style="color: #000000; font-weight: bold;">class</span> <span style="color: #222222; text-decoration: underline;">Applicative</span> m <span style="color: #000000;">=&gt;</span> <span style="color: #222222; text-decoration: underline;">Monad</span> m <span style="color: #000000; font-weight: bold;">where</span>
+  <span style="color: #AAAAAA;">-- | Sequentially compose two actions, passing any value produced</span>
+  <span style="color: #AAAAAA;">-- by the first as an argument tothe second.</span>
+  (<span style="color: #000000;">&gt;&gt;=</span>) <span style="color: #000000;">::</span> forall a b<span style="color: #000000;">.</span> m a <span style="color: #000000;">-&gt;</span> (a <span style="color: #000000;">-&gt;</span> m b) <span style="color: #000000;">-&gt;</span> m b
 
-<pre class="src src-haskell">class Applicative m =&gt; Monad m where
-  -- | Sequentially compose two actions, passing any value produced
-  -- by the first as an argument tothe second.
-  (&gt;&gt;=) :: forall a b. m a -&gt; (a -&gt; m b) -&gt; m b
-
-  -- | Sequentially compose two actions, discarding any value produced
-  -- by the first, like sequencing operators (such as the semicolon)
-  -- in imperative languages.
-  (&gt;&gt;)        :: forall a b. m a -&gt; m b -&gt; m b
-  m &gt;&gt; k = m &gt;&gt;= \_ -&gt; k -- See Note [Recursive bindings for Applicative/Monad]
-  {-# INLINE (&gt;&gt;) #-}
-  -- | Inject a value into the monadic type.
-  return      :: a -&gt; m a
-  return      = pure
-  -- | Fail with a message.  This operation is not part of the
-  -- mathematical definition of a monad, but is invoked on pattern-match
-  -- failure in a do expression.
-  fail        :: String -&gt; m a
-  fail s      = error s
+  <span style="color: #AAAAAA;">-- | Sequentially compose two actions, discarding any value produced</span>
+  <span style="color: #AAAAAA;">-- by the first, like sequencing operators (such as the semicolon)</span>
+  <span style="color: #AAAAAA;">-- in imperative languages.</span>
+  (<span style="color: #000000;">&gt;&gt;</span>)        <span style="color: #000000;">::</span> forall a b<span style="color: #000000;">.</span> m a <span style="color: #000000;">-&gt;</span> m b <span style="color: #000000;">-&gt;</span> m b
+  m <span style="color: #000000;">&gt;&gt;</span> k <span style="color: #000000;">=</span> m <span style="color: #000000;">&gt;&gt;=</span> <span style="color: #000000;">\</span><span style="color: #000000; font-weight: bold;">_</span> <span style="color: #000000;">-&gt;</span> k <span style="color: #888888; font-style: italic;">-- </span><span style="color: #888888; font-style: italic;">See Note [Recursive bindings for Applicative/Monad]</span>
+  <span style="color: #000000;">{-# INLINE (&gt;&gt;) #-}</span>
+  <span style="color: #AAAAAA;">-- | Inject a value into the monadic type.</span>
+  return      <span style="color: #000000;">::</span> a <span style="color: #000000;">-&gt;</span> m a
+  return      <span style="color: #000000;">=</span> pure
+  <span style="color: #AAAAAA;">-- | Fail with a message.  This operation is not part of the</span>
+  <span style="color: #AAAAAA;">-- mathematical definition of a monad, but is invoked on pattern-match</span>
+  <span style="color: #AAAAAA;">-- failure in a do expression.</span>
+  fail        <span style="color: #000000;">::</span> <span style="color: #222222; text-decoration: underline;">String</span> <span style="color: #000000;">-&gt;</span> m a
+  fail s      <span style="color: #000000;">=</span> error s
 </pre>
 </div>
 
@@ -1917,10 +2068,9 @@ Au plus simple, une monade est une classe de type définie comme suit:
 </div>
 </div>
 
-<div id="outline-container-IO" class="outline-2">
-<h2 id="IO"><a id="sec-7" name="sec-7"></a><span class="section-number-2">7</span> Entrées et sorties</h2>
+<div id="outline-container-orgc4998eb" class="outline-2">
+<h2 id="IO"><a id="orgc4998eb"></a><span class="section-number-2">5</span> Entrées et sorties</h2>
 <div class="outline-text-2" id="text-IO">
-
 <p>
 La gestion des entrées/sorties requiert un traitement spécifique dans un langage fonctionnel. Contrairement aux fonctions pures du langage, les fonctions d'E/S produisent des effets de bord, et violent le principe de transparence référentielle.
 </p>
@@ -1934,124 +2084,114 @@ Contrairement à ce qui se fait en général dans les bouquins sur Haskell, il v
 </p>
 </div>
 
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><span class="section-number-3">7.1</span> Fonctions d'entrée sortie de base</h3>
-<div class="outline-text-3" id="text-7-1">
-</div><div id="outline-container-sec-7-1-1" class="outline-4">
-<h4 id="sec-7-1-1"><span class="section-number-4">7.1.1</span> Fonctions d'entrée</h4>
-<div class="outline-text-4" id="text-7-1-1">
+<div id="outline-container-org7ab9833" class="outline-3">
+<h3 id="org7ab9833"><span class="section-number-3">5.1</span> Fonctions d'entrée sortie de base</h3>
+<div class="outline-text-3" id="text-5-1">
+</div><div id="outline-container-org7b261bb" class="outline-4">
+<h4 id="org7b261bb"><span class="section-number-4">5.1.1</span> Fonctions d'entrée</h4>
+<div class="outline-text-4" id="text-5-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left"><code>Prelude</code></th>
-<th scope="col" class="left"><code>h*</code></th>
-<th scope="col" class="left">Fonctions</th>
-<th scope="col" class="left">Description</th>
+<th scope="col" class="org-left"><code>Prelude</code></th>
+<th scope="col" class="org-left"><code>h*</code></th>
+<th scope="col" class="org-left">Fonctions</th>
+<th scope="col" class="org-left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left">✓</td>
-<td class="left">✓</td>
-<td class="left"><code>getChar :: IO Char</code></td>
-<td class="left">Lit un caractère.</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left"><code>getChar :: IO Char</code></td>
+<td class="org-left">Lit un caractère.</td>
 </tr>
 
 <tr>
-<td class="left">✓</td>
-<td class="left">✓</td>
-<td class="left"><code>getLine :: IO String</code></td>
-<td class="left">Lit une ligne.</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left"><code>getLine :: IO String</code></td>
+<td class="org-left">Lit une ligne.</td>
 </tr>
 
 <tr>
-<td class="left">✓</td>
-<td class="left">✓</td>
-<td class="left"><code>getContents :: IO String</code></td>
-<td class="left">Lit le contenu d'un fichier.</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left"><code>getContents :: IO String</code></td>
+<td class="org-left">Lit le contenu d'un fichier.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-fonctions-de-sortie" class="outline-4">
-<h4 id="fonctions-de-sortie"><a id="sec-7-1-2" name="sec-7-1-2"></a><span class="section-number-4">7.1.2</span> Fonctions de sortie</h4>
+<div id="outline-container-orgf647936" class="outline-4">
+<h4 id="fonctions-de-sortie"><a id="orgf647936"></a><span class="section-number-4">5.1.2</span> Fonctions de sortie</h4>
 <div class="outline-text-4" id="text-fonctions-de-sortie">
 </div>
 </div>
-<div id="outline-container-manipulation-de-fichiers-ou-de-répertoires" class="outline-4">
-<h4 id="manipulation-de-fichiers-ou-de-répertoires"><a id="sec-7-1-3" name="sec-7-1-3"></a><span class="section-number-4">7.1.3</span> Manipulation de fichiers ou de répertoires</h4>
+<div id="outline-container-orgb3ecf73" class="outline-4">
+<h4 id="manipulation-de-fichiers-ou-de-répertoires"><a id="orgb3ecf73"></a><span class="section-number-4">5.1.3</span> Manipulation de fichiers ou de répertoires</h4>
 <div class="outline-text-4" id="text-manipulation-de-fichiers-ou-de-répertoires">
 </div>
 </div>
 </div>
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><span class="section-number-3">7.2</span> Gestion des erreurs</h3>
-<div class="outline-text-3" id="text-7-2">
-</div><div id="outline-container-les-types-et" class="outline-4">
-<h4 id="les-types-et"><a id="sec-7-2-1" name="sec-7-2-1"></a><span class="section-number-4">7.2.1</span> Les types <code>Maybe</code> et <code>Either</code></h4>
+<div id="outline-container-org791d65d" class="outline-3">
+<h3 id="org791d65d"><span class="section-number-3">5.2</span> Gestion des erreurs</h3>
+<div class="outline-text-3" id="text-5-2">
+</div><div id="outline-container-org5198624" class="outline-4">
+<h4 id="les-types-et"><a id="org5198624"></a><span class="section-number-4">5.2.1</span> Les types <code>Maybe</code> et <code>Either</code></h4>
 <div class="outline-text-4" id="text-les-types-et">
 </div>
 </div>
-<div id="outline-container-exceptions" class="outline-4">
-<h4 id="exceptions"><a id="sec-7-2-2" name="sec-7-2-2"></a><span class="section-number-4">7.2.2</span> Exceptions</h4>
+<div id="outline-container-orga4a7320" class="outline-4">
+<h4 id="exceptions"><a id="orga4a7320"></a><span class="section-number-4">5.2.2</span> Exceptions</h4>
 <div class="outline-text-4" id="text-exceptions">
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Contenu à organiser</h2>
-<div class="outline-text-2" id="text-8">
-</div><div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><span class="section-number-3">8.1</span> TODOs</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-orgd36a803" class="outline-2">
+<h2 id="orgd36a803"><span class="section-number-2">6</span> Contenu à organiser</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgdc00681" class="outline-3">
+<h3 id="orgdc00681"><span class="section-number-3">6.1</span> <span class="todo TODO">TODO</span> s</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 À intégrer, en vrac:
 </p>
 <ul class="org-ul">
-<li>Idiome : Point-free style (RWH 120)
-</li>
-<li>Lexique : Liste de paires = association list (RWH 121)
-</li>
+<li>Idiome : Point-free style (RWH 120)</li>
+<li>Lexique : Liste de paires = association list (RWH 121)</li>
 <li>Extensions :
 <ul class="org-ul">
-<li>TypeSynonymInstances
-</li>
-<li>OverlappingInstances
-</li>
-</ul>
-</li>
-<li>monomorphisme (RWH 163, Haskell 98 4.5.5)
-</li>
-<li>IO
-</li>
-<li>Qu'est ce qu'une action (RWH 167, 184)
-</li>
-<li>Buffering (RWH 189)
-</li>
-<li>Data.ByteString, Data.ByteString.Lazy
-</li>
+<li>TypeSynonymInstances</li>
+<li>OverlappingInstances</li>
+</ul></li>
+<li>monomorphisme (RWH 163, Haskell 98 4.5.5)</li>
+<li>IO</li>
+<li>Qu'est ce qu'une action (RWH 167, 184)</li>
+<li>Buffering (RWH 189)</li>
+<li>Data.ByteString, Data.ByteString.Lazy</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><span class="section-number-3">8.2</span> Conventions</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-orgc0f08cb" class="outline-3">
+<h3 id="orgc0f08cb"><span class="section-number-3">6.2</span> Conventions</h3>
+<div class="outline-text-3" id="text-6-2">
 <div class="info">
 <p>
 Une information, pour préciser un point ou renvoyer vers d'autres sources.
@@ -2082,23 +2222,23 @@ Les lois sont des propriétés attendues des instances de classes de type que le
 </div>
 </div>
 
-<div id="outline-container-about" class="outline-3">
-<h3 id="about"><a id="sec-8-3" name="sec-8-3"></a><span class="section-number-3">8.3</span> À propos de ce document</h3>
+<div id="outline-container-org7175375" class="outline-3">
+<h3 id="about"><a id="org7175375"></a><span class="section-number-3">6.3</span> À propos de ce document</h3>
 <div class="outline-text-3" id="text-about">
 </div>
 
-<div id="outline-container-sec-8-3-1" class="outline-4">
-<h4 id="sec-8-3-1"><span class="section-number-4">8.3.1</span> Auteur et mainteneur</h4>
-<div class="outline-text-4" id="text-8-3-1">
+<div id="outline-container-orgf4643a2" class="outline-4">
+<h4 id="orgf4643a2"><span class="section-number-4">6.3.1</span> Auteur et mainteneur</h4>
+<div class="outline-text-4" id="text-6-3-1">
 <p>
-<a href="https://thb.lt">Thibault Polge</a> (<a href="mailto:thibault@thb.lt">thibault@thb.lt</a>)
+<a href="https://thb.lt/">Thibault Polge</a> (<a href="mailto:thibault@thb.lt">thibault@thb.lt</a>)
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-8-3-2" class="outline-4">
-<h4 id="sec-8-3-2"><span class="section-number-4">8.3.2</span> Outils</h4>
-<div class="outline-text-4" id="text-8-3-2">
+<div id="outline-container-orge937039" class="outline-4">
+<h4 id="orge937039"><span class="section-number-4">6.3.2</span> Outils</h4>
+<div class="outline-text-4" id="text-6-3-2">
 <p>
 Ce site est généré avec <a href="http://jaspervdj.be/hakyll/">Hakyll</a>, une librairie de génération de sites statiques écrite en Haskell.
 </p>
@@ -2117,12 +2257,11 @@ Les icônes des différentes boîtes proviennent de différentes séries compil�
 </div>
 </div>
 
-<div id="outline-container-licence" class="outline-4">
-<h4 id="licence"><a id="sec-8-3-3" name="sec-8-3-3"></a><span class="section-number-4">8.3.3</span> Licence</h4>
+<div id="outline-container-orgbd4cfd8" class="outline-4">
+<h4 id="licence"><a id="orgbd4cfd8"></a><span class="section-number-4">6.3.3</span> Licence</h4>
 <div class="outline-text-4" id="text-licence">
-
 <p>
-[[<img src="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/][[[https://i.creativecommons.org/l/by-nc-sa/2.0/fr/80x15.png" alt="80x15.png" />]]]]
+[[<img src="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/%5D%5B%5B%5Bhttps://i.creativecommons.org/l/by-nc-sa/2.0/fr/80x15.png" alt="80x15.png" />]]]]
 </p>
 
 
@@ -2132,17 +2271,15 @@ Pour l'instant, ce travail est mis à disposition sous la (relativement restrict
 </div>
 </div>
 </div>
-
-<div id="outline-container-sec-8-4" class="outline-3">
-<h3 id="sec-8-4"><span class="section-number-3">8.4</span> Bibliographie</h3>
-<div class="outline-text-3" id="text-8-4">
-<p>
-bibliography:bibliography.bib
-bibliographystyle:unsrtnat
-</p>
+<div id="outline-container-org990568e" class="outline-3">
+<h3 id="org990568e"><span class="section-number-3">6.4</span> Bibliographie</h3>
 </div>
 </div>
 </div>
+<div id="postamble" class="status">
+<p class="author">Author: Thibault Polge</p>
+<p class="date">Created: 2016-12-23 ven. 16:07</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

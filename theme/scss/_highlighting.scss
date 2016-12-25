@@ -3,7 +3,9 @@
 	font-family: $codeFont !important;
     }
     p code {
-	color: #000088;
+	color: #000000;
+	background: rgba(0,0,0,.05);
+	border: thin solid rgba(0,0,0,.1);
     }
     pre, div.sourceCode, table.sourceCode {
 	code {

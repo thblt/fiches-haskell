@@ -12,7 +12,7 @@
     margin: 1em 0;
     margin-left: 3em;
     min-height: 2em;
-    border: thin solid $midDarken;
+    border: thin solid black; //$midDarken;
     background-color: $bgColor;
     &:before {
 	display: block;
@@ -29,13 +29,19 @@
 }
 #contents {
     text-align: justify;
+
+    a {
+	color: #000088;
+    }
+
     .citation {
-	font-variant: small-caps;
+
     }
 
     em {
 	font-style: italic;
     }
+
     h1 {
 	font-size: 5em;
 	font-family: $blockTitleFont;
@@ -115,7 +121,7 @@
 	}
     }
     ul, ol {
-	margin-left: 2em;
+//	margin-left: 2em;
     }
     ul {
 	list-style-type: square;
