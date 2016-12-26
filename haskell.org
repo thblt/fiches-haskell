@@ -971,20 +971,29 @@ Le [[#Prelude][Prélude]] fournit quelques fonctions qui peuvent remplacer des f
   :CUSTOM_ID: lists
   :END:
 
-Cette fiche résume quelques unes des fonctions essentielles applicables
-à des listes.
+Cette fiche résume quelques unes des fonctions essentielles applicables à des listes.  La plupart sont dans le Prélude, les autres dans =Data.List=.
+*** Fonctions spécifiques aux listes
 
-| ~(++)~, ~(<>)~           | ~[a] -> [a] -> [a]~                              |                                                   |
-| ~head~, ~last~           | ~[a] -> a~                                       |                                                   |
-| ~tail~                   | ~[a] -> [a]~                                     |                                                   |
-| ~drop~, ~take~           | ~Int -> [a] -> [a]~                              | Retient/retire $n$ premiers éléments de la liste. |
-| ~dropWhile~, ~takeWhile~ | ~(a -> Bool) -> [a] -> [a]~                      |                                                   |
-| ~map~, ~fmap~            | ~(a -> b) -> [a] -> [b]~~                        | Applique une fonction sur chaque élément          |
-| ~zip~                    | ~[a] -> [b] -> [(a, b)]~                         |                                                   |
-| ~zip3~                   | ~[a] -> [b] -> [c] -> [(a, b, c)]~               |                                                   |
-| ~zipWith~                | ~(a -> b -> c) -> [a] -> [b] -> [c]~             |                                                   |
-| ~zipWith3~               | ~(a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]~ |                                                   |
-|                          |                                                  |                                                   |
+| ~(++)~, ~(<>)~           | ~[a] -> [a] -> [a]~                              |                                                                        |
+| ~head~, ~last~           | ~[a] -> a~                                       |                                                                        |
+| ~tail~                 | ~[a] -> [a]~                                     |    s                                                                   |
+| ~drop~, ~take~           | ~Int -> [a] -> [a]~                              |                                                                        |
+| ~dropWhile~, ~takeWhile~ | ~(a -> Bool) -> [a] -> [a]~                      |                                                                        |
+| ~span~                 | ~:: (a -> Bool) -> [a] -> ([a], [a])~            | Regroupe les éléments qui vérifient la fonction dans une liste séparée |
+| ~group~                | ~:: Eq a => [a] -> [[a]]~                            | Regroupe les éléments identiques                                       |
+| ~map~                  | ~(a -> b) -> [a] -> [b]~~                        | Applique une fonction sur chaque élément                               |
+| ~zip~                  | ~[a] -> [b] -> [(a, b)]~                         |                                                                        |
+| ~zip3~                 | ~[a] -> [b] -> [c] -> [(a, b, c)]~               |                                                                        |
+| ~zipWith~              | ~(a -> b -> c) -> [a] -> [b] -> [c]~             |                                                                        |
+| ~zipWith3~             | ~(a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]~ | Généralisé à n: ~zipWith4~, ~zipWith5~...                                  |
+
+*** Généralisées aux foncteurs
+
+| ~concatMap~ | ~(a -> [b]) -> [a] -> [b]~            |   |
+| ~fmap~      | ~Functor f => (a -> b) -> f a -> f b~ |   |
+
+* [Titre]
+
 ** Monoïdes
 :PROPERTIES:
 :CUSTOM_ID: Monoid
