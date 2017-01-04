@@ -1141,6 +1141,7 @@ Les monoïdes ont deux lois:
 #+begin_info
 Certains types ont plus d'un monoïde «naturel»: =Int= (addition et multiplication) et =Bool= (disjonction et conjonction ) par exemple.  Dans ce cas, on crée généralement un [[#newtype][synonyme =newtype=]] pour chaque monoïde.  =Data.Monoid= définit ainsi deux synonymes de =Int=, =Sum= et =Product=, et deux synonymes de =Bool=, =Any= et =All=.
 #+end_info
+
 ** Foncteurs
 :PROPERTIES:
 :CUSTOM_ID: Functor
@@ -1217,10 +1218,9 @@ Un =Traversable= est un [[#Functor][foncteur]] [[#Foldable][foldable]] qui peut 
 :CUSTOM_ID: Applicative
 :END:
 
-Un foncteur applicatif est une structure intermédiaire entre un foncteur
-et une monade.
+Un foncteur applicatif est une structure intermédiaire entre un foncteur et une monade.
 
-Il s'agit d'une [[#typeclasses][classe de type]], définie comme suit:
+La [[#typeclasses][classe de type]] est définie comme suit:
 
 #+BEGIN_SRC haskell
 class Functor f => Applicative f where
@@ -1244,8 +1244,6 @@ class Functor f => Applicative f where
 :PROPERTIES:
 :CUSTOM_ID: Monad
 :END:
-
-Au plus simple, une monade est une classe de type définie comme suit:
 
 #+BEGIN_SRC haskell
 class Applicative m => Monad m where
