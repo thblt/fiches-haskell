@@ -1117,9 +1117,9 @@ En Haskell, =Monoid= est une [[#_typeclasses][classe de type]] définie de la fa
 
 *** Lois des monoïdes
 
-Les monoïdes ont trois lois:
+Les monoïdes ont deux lois:
 
- 1. Deux lois d'identité:
+ 1. Loi d'identité:
 
     #+begin_src haskell
       x <> mempty = x
@@ -1130,7 +1130,7 @@ Les monoïdes ont trois lois:
 
     (Attention, ça n'implique pas qu'un monoïde est /nécessairement/ commutatif!  Beaucoup le sont, mais =String= est un monoïde avec ~mempty = ""~ et ~mappend = (++)~, et ~++~ n'est évidemment pas commutatif.)
 
- 2. Une loi d'associativité
+ 2. Loi d'associativité:
 
     #+begin_src haskell
       (x <> y) <> z = x <> (y <> z)
