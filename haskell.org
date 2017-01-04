@@ -1238,7 +1238,6 @@ class Functor f => Applicative f where
   -- | Sequence actions, discarding the value of the second argument.
   (<*) :: f a -> f b -> f a
   (<*) = liftA2 const
-
 #+END_SRC
 
 ** Monades
@@ -1278,9 +1277,6 @@ class Applicative m => Monad m where
 ** Quickcheck
 
 TODO
-
-**
-
 
 * Entrées et sorties
 :PROPERTIES:
