@@ -534,10 +534,11 @@ data BTree a = Node a (BTree a) (BTree a) | Empty deriving Show
 
 Haskell permet de définir des synonymes pour des types existants. Les synonymes de type permettent d'augmenter la lisibilité du code ou de masquer des détails d'implémentation.  Contrairement aux types définis avec [[#data][~data~]], les informations des synonymes ne sont pas conservées à la compilation.
 
-*** ~type~
+*** type
   :PROPERTIES:
-  :CUSTOM_ID: section
+  :CUSTOM_ID: type
   :END:
+
 ~type~ crée un synonyme d'un type existant. Le synonyme et le type
 auquel ils renvoient sont interchangeables.
 
@@ -564,7 +565,10 @@ data Book2 = Authors Title Year ISBN
 type Weird = (Int -> String) -> (Int -> Int) -> [Int] -> [(Int, String, Int)]
 #+END_SRC
 
-*** ~newtype~
+*** newtype
+  :PROPERTIES:
+  :CUSTOM_ID: newtype
+  :END:
 
 Le mot-clé ~newtype~ permet de dupliquer un type, et crée un type distinct de l'original. Les synonymes créés avec ~newtype~ ne sont pas substituables avec le type dont ils sont synonymes. De plus, il n'appartiennent pas automatiquement aux [[#typeclasses][types de classe]] de ce dernier.  Leur syntaxe est très proche de celle de ~data~:
 
@@ -603,7 +607,7 @@ newtype MyType = MyType Int
 
 ** Classes de type
 :PROPERTIES:
-:CUSTOM_ID: typeclasses
+:CUSTOM_ID: _typeclasses
 :END:
 
 Les classes de type ne sont pas des classes au sens que ce terme possède
@@ -615,14 +619,20 @@ classe fournit une implémentation.
 class Parsable a where
   parse :: String -> a
 #+END_SRC
+
 Une implémentation par défaut peut être fournie.  La classe de type =Eq= par exemple est définie comme:
+
 #+BEGIN_SRC haskell
 class Eq a where
   (==), (/=) :: a -> a -> Bool
   x /= y     =  not (x == y)
   x == y     =  not (x /= y)
 #+END_SRC
+
 *** Dériver une classe de type
+
+Version triviale:
+
 #+BEGIN_SRC haskell
 data CanardLapin = { canard :: Bool, lapin :: Bool }
 instance Show CanardLapin where
@@ -630,10 +640,31 @@ instance Show CanardLapin where
   show (CanardLapin False True) = "Seulement un lapin"
   show _ = "Un canard lapin!"
 #+END_SRC
+
+Plus marrant: dériver un type /higher-kinded/ en fonction de son paramètre:
+
+#+begin_src haskell
+  {-# LANGUAGE FlexibleInstances #-}
+
+  class Magique a where
+    magie :: a -> a
+
+  data CanardLapin' = Canard | Lapin
+
+  instance Functor f, Magique m => Magique (f m) where
+    magie = fmap magie
+
+  instance Magique CanardLapin' where
+    magie Canard = Lapin
+    magie Lapin = Canard
+#+end_src
+
+
 #+begin_warn
 À certaines classes de type sont associées des lois (lois des [[#Functor][foncteurs]], des [[#Monad][monades]], /etc./) que le compilateur ne peut pas nécessairement contrôler. Il est donc possible de construire des instances pathologiques de classes de type sans recevoir d'avertissement du compilateur.
 Autrement dit, le système des classes de types est *en partie formel, en partie contractuel*. Il convient de vérifier les dimensions contractuelles dans la documentation de la classe de type.  Il est aussi possible, dans une certaine mesure, d'automatiser la vérification de conformité.
 #+end_warn
+
 *** Dérivation automatique
 Les types crées avec ~data~ et ~newtype~ peuvent dériver automatiquement certaines classes avec le mot clé ~deriving~:
 
@@ -652,7 +683,6 @@ La dérivation automatique est implémentée au niveau du compilateur, et ne con
 Les Kinds sont aux types ce que les types sont aux valeurs. Autrement
 dit, c'est le type d'un constructeur de type.
 Un type ordinaire a @TODO
-
 
 * Fonctions
 :PROPERTIES:
@@ -992,29 +1022,125 @@ Cette fiche résume quelques unes des fonctions essentielles applicables à des 
 | ~concatMap~ | ~(a -> [b]) -> [a] -> [b]~            |   |
 | ~fmap~      | ~Functor f => (a -> b) -> f a -> f b~ |   |
 
-* [Titre]
+* Traits
+
+
+** Foldable
+
+Un =Foldable= est un conteneur dont les éléments peuvent être «repliés» en une valeur unique.  Informellement, c'est un type qui implémente =foldr=, mais la définition est beaucoup plus dense:
+
+#+begin_src haskell
+  class Foldable t where
+      {-# MINIMAL foldMap | foldr #-} -- Ce pragma signifie que foldMap ou
+                                      -- foldr suffisent à définir une instance.
+      fold :: Monoid m => t m -> m
+      fold = foldMap id
+
+      foldMap :: Monoid m => (a -> m) -> t a -> m
+      foldMap f = foldr (mappend . f) mempty
+
+      foldr :: (a -> b -> b) -> b -> t a -> b
+      foldr f z t = appEndo (foldMap (Endo #. f) t) z
+
+      foldr' :: (a -> b -> b) -> b -> t a -> b
+      foldr' f z0 xs = foldl f' id xs z0
+        where f' k x z = k $! f x z
+
+      foldl :: (b -> a -> b) -> b -> t a -> b
+      foldl f z t = appEndo (getDual (foldMap (Dual . Endo . flip f) t)) z
+
+      foldl' :: (b -> a -> b) -> b -> t a -> b
+      foldl' f z0 xs = foldr f' id xs z0
+
+      foldr1 :: (a -> a -> a) -> t a -> a
+      foldr1 f xs = fromMaybe (errorWithoutStackTrace "foldr1: empty structure")
+                      (foldr mf Nothing xs)
+        where
+          mf x m = Just (case m of
+                           Nothing -> x
+                           Just y  -> f x y)
+      foldl1 :: (a -> a -> a) -> t a -> a
+      foldl1 f xs = fromMaybe (errorWithoutStackTrace "foldl1: empty structure")
+                      (foldl mf Nothing xs)
+        where
+          mf m y = Just (case m of
+                            Nothing -> y
+                           Just x  -> f x y)
+
+      toList :: t a -> [a]
+      {-# INLINE toList #-}
+      toList t = build (\ c n -> foldr c n t)
+
+      null :: t a -> Bool
+      null = foldr (\_ _ -> False) True
+
+      length :: t a -> Int
+      length = foldl' (\c _ -> c+1) 0
+
+      elem :: Eq a => a -> t a -> Bool
+      elem = any . (==)
+
+      maximum :: forall a . Ord a => t a -> a
+      maximum = fromMaybe (errorWithoutStackTrace "maximum: empty structure") .
+         getMax . foldMap (Max #. (Just :: a -> Maybe a))
+
+      minimum :: forall a . Ord a => t a -> a
+      minimum = fromMaybe (errorWithoutStackTrace "minimum: empty structure") .
+         getMin . foldMap (Min #. (Just :: a -> Maybe a))
+
+      sum :: Num a => t a -> a
+      sum = getSum #. foldMap Sum
+
+      product :: Num a => t a -> a
+      product = getProduct #. foldMap Product
+#+end_src
 
 ** Monoïdes
 :PROPERTIES:
 :CUSTOM_ID: Monoid
 :END:
 
+Mathématiquement, un monoïde est une structure algébrique (un ensemble et une ou plusieurs lois de composition) pourvue d'une opération binaire associative (c'est-à-dire telle que ~a `op` (b `op` c) = (a `op` b) `op` c~) et d'un élément neutre (ici, `x` tel que `op a x = op x a = a`).
+
+En Haskell, =Monoid= est une [[#_typeclasses][classe de type]] définie de la façon suivante:
+
 #+BEGIN_SRC haskell
   class Monoid a where
-    mempty  :: a
-    -- ^ Identity of 'mappend'
-    mappend :: a -> a -> a
-    -- ^ An associative operation
-    mconcat :: [a] -> a
-    -- ^ Fold a list using the monoid.
-    -- For most types, the default definition for 'mconcat' will be
-    -- used, but the function is included in the class definition so
-    -- that an optimized version can be provided for specific types.
+    mempty  :: a           -- Élément neutre
+    mappend :: a -> a -> a -- Opération associative
+    mconcat :: [a] -> a    -- Plie une liste selon le monoïde
     mconcat = foldr mappend mempty
+
+  -- Data.Monoid
+  x <> y = mappend x y -- Synonyme infixe
  #+END_SRC
 
-=Data.Monoid= fournit aussi un synonyme infixe de mappend: ~<>~.
+*** Lois des monoïdes
 
+Les monoïdes ont trois lois:
+
+ 1. Deux lois d'identité:
+
+    #+begin_src haskell
+      x <> mempty = x
+      mempty <> x = x
+    #+end_src
+
+    L'application de mappend sur ~mempty~ et une valeur quelconque =x= retourne toujours =x=, quel que soit l'ordre des paramètres.
+
+    (Attention, ça n'implique pas qu'un monoïde est /nécessairement/ commutatif!  Beaucoup le sont, mais =String= est un monoïde avec ~mempty = ""~ et ~mappend = (++)~, et ~++~ n'est évidemment pas commutatif.)
+
+ 2. Une loi d'associativité
+
+    #+begin_src haskell
+      (x <> y) <> z = x <> (y <> z)
+    #+end_src
+
+    Informellement: une série d'applications de `mappend` renvoie le même résultat quel que soit l'ordre d'application.
+
+#+begin_info
+Certains types ont plus d'un monoïde «naturel»: =Int= (addition et multiplication) et =Bool= (disjonction et conjonction ) par exemple.  Dans ce cas, on crée généralement un [[#newtype][synonyme =newtype=]] pour chaque monoïde.  =Data.Monoid= définit ainsi deux synonymes de =Int=, =Sum= et =Product=, et deux synonymes de =Bool=, =Any= et =All=.
+#+end_info
 ** Foncteurs
 :PROPERTIES:
 :CUSTOM_ID: Functor
@@ -1050,6 +1176,41 @@ Ainsi =->= (la définition de fonction) a un foncteur. Par exemple:
 #+begin_info
 ~fmap~ est une généralisation de ~map~, et peut donc toujours le remplacer.
 #+end_info
+
+** Traversable
+
+Un =Traversable= est un [[#Functor][foncteur]] [[#Foldable][foldable]] qui peut être traversé «de gauche à droite».
+
+#+begin_src haskell
+  class (Functor t, Foldable t) => Traversable t where
+      {-# MINIMAL traverse | sequenceA #-}
+
+      -- | Map each element of a structure to an action, evaluate these actions
+      -- from left to right, and collect the results. For a version that ignores
+      -- the results see 'Data.Foldable.traverse_'.
+      traverse :: Applicative f => (a -> f b) -> t a -> f (t b)
+      traverse f = sequenceA . fmap f
+
+      -- | Evaluate each action in the structure from left to right, and
+      -- and collect the results. For a version that ignores the results
+      -- see 'Data.Foldable.sequenceA_'.
+      sequenceA :: Applicative f => t (f a) -> f (t a)
+      sequenceA = traverse id
+
+      -- | Map each element of a structure to a monadic action, evaluate
+      -- these actions from left to right, and collect the results. For
+      -- a version that ignores the results see 'Data.Foldable.mapM_'.
+      mapM :: Monad m => (a -> m b) -> t a -> m (t b)
+      mapM = traverse
+
+      -- | Evaluate each monadic action in the structure from left to
+      -- right, and collect the results. For a version that ignores the
+      -- results see 'Data.Foldable.sequence_'.
+      sequence :: Monad m => t (m a) -> m (t a)
+      sequence = sequenceA
+#+end_src
+
+**** Lois des Traversable
 
 ** Foncteurs applicatifs
 :PROPERTIES:
@@ -1111,6 +1272,15 @@ class Applicative m => Monad m where
 #+END_SRC
 
 @TODO Déf propre, exemples, >>, >>=
+
+* Test
+
+** Quickcheck
+
+TODO
+
+**
+
 
 * Entrées et sorties
 :PROPERTIES:
