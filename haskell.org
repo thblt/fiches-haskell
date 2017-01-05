@@ -4,7 +4,7 @@ Ce document est destiné à devenir, à terme, une série complète de fiches su
 
 Elles n’ont pas la prétention d’être un support d’apprentissage autonome, et présupposent une connaissance, même élémentaire, du langage. Elles ont vocation à présenter, de manière extrêmement synthétique, pour mémoire ou référence, l’essentiel de Haskell, et pas à se substituer à un apprentissage sérieux.
 
-J’ai décidé de préparer ces fiches pour combler un manque dans la documentation sur Haskell.  Les livres dont je dispose sur le langage sont soit trop superficiels, soit insuffisamment systématiques. Certains présentent une version superficelle du langage, d’autres, les plus élaborés, souffrent au contraire du syndrome de l’enseignant-passionné-mais-pas-méthodique : ils ne cessent de s’interrompre et de proposer des apartés hors de propos qui mobilisent soudainement des notions qui ne seront explicitées que plusieurs chapitres plus loin.  (Ce qui précède est devenu nettement moins depuis la sortie [[http://haskellbook.com/][moins vrai]].
+J’ai décidé de préparer ces fiches pour combler un manque dans la documentation sur Haskell.  Les livres dont je dispose sur le langage sont soit trop superficiels, soit insuffisamment systématiques. Certains présentent une version superficelle du langage, d’autres, les plus élaborés, souffrent au contraire du syndrome de l’enseignant-passionné-mais-pas-méthodique : ils ne cessent de s’interrompre et de proposer des apartés hors de propos qui mobilisent soudainement des notions qui ne seront explicitées que plusieurs chapitres plus loin.  (Ce qui précède est devenu nettement moins vrai avec [[http://haskellbook.com/][le livre d'Allen et Moronuki]]).
 
 Ces fiches tentent donc une présentation plus rigoureusement systématique, mais sans prétention pédagogique. L’ordre d’exposition n'y est absolument pas linéaire, et l'organisation tente d'être plus logique que pédagogique.
 
@@ -1023,7 +1023,6 @@ Cette fiche résume quelques unes des fonctions essentielles applicables à des 
 | ~fmap~      | ~Functor f => (a -> b) -> f a -> f b~ |   |
 
 * Traits
-
 
 ** Foldable
 
