@@ -583,29 +583,46 @@ newtype MyType = MyType Int
    - ne conserve pas les informations du type après la compilation. Dans le programme compilé, ~MyType~ ci-dessus est traité comme un
    simple ~Int~:
 
- - Contrairement à ~type~, il ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme.  *Alors que ~type~ sert à faciliter la lecture, ~newtype~ est plutôt utilisé pour masquer l'implémentation*.  Il permet notamment de masquer un type sous-jacent sans la perte de performances liée à l'usage de ~data~, par exemple: ~newtype ResourceHandle = ResourceHandle Int16~.  Comme il est possible à un module de [[#module][n'exporter que le type mais pas le constructeur]], un programme peut recevoir et transmettre des données de type ~ResourceHandle~ sans connaître leur type réel.
+ - Contrairement à ~type~,
 
- - Il permet aussi, sans perte de performances, de fournir *des instances différentes d'une unique [[#typeclasses][classe de type]]* pour un type donné:
+   - il ne maintient pas la substituabilité du nouveau type et du type dont il est un synonyme.  *Alors que ~type~ sert à faciliter la lecture, ~newtype~ est plutôt utilisé pour masquer l'implémentation*.  Il permet notamment de masquer un type sous-jacent sans la perte de performances liée à l'usage de ~data~, par exemple: ~newtype ResourceHandle = ResourceHandle Int16~.  Comme il est possible à un module de [[#module][n'exporter que le type mais pas le constructeur]], un programme peut recevoir et transmettre des données de type ~ResourceHandle~ sans connaître leur type réel.
 
-    #+BEGIN_SRC haskell
-      -- Data.Monoid
+   - Il permet aussi, sans perte de performances, de fournir *des instances différentes d'une unique [[#typeclasses][classe de type]]* pour un type donné:
 
-      -- Booléen selon la conjonction
-      newtype All = All { getAll :: Bool }
-        deriving (Eq, Ord, Read, Show, Bounded)
-      instance Monoid All where
-        mempty = All True
-        mappend (All x) (All y) = All (x && y)
+     #+BEGIN_SRC haskell
+       -- Data.Monoid
 
-      -- Booléen selon la disjonction
-      newtype Any = Any { getAny :: Bool }
-        deriving (Eq, Ord, Read, Show, Bounded)
-      instance Monoid Any where
-        mempty = Any False
-        mappend (Any x) (Any y) = Any (x || y)
-    #+END_SRC
+       -- Booléen selon la conjonction
+       newtype All = All { getAll :: Bool }
+         deriving (Eq, Ord, Read, Show, Bounded)
+       instance Monoid All where
+         mempty = All True
+         mappend (All x) (All y) = All (x && y)
 
- - `newtype` [[https://stackoverflow.com/questions/2649305/why-is-there-data-and-newtype-in-haskell][est strict]].
+       -- Booléen selon la disjonction
+       newtype Any = Any { getAny :: Bool }
+         deriving (Eq, Ord, Read, Show, Bounded)
+       instance Monoid Any where
+         mempty = Any False
+         mappend (Any x) (Any y) = Any (x || y)
+     #+END_SRC
+
+ - Enfin, `newtype` [[https://stackoverflow.com/questions/2649305/why-is-there-data-and-newtype-in-haskell][est strict]]:
+
+   #+begin_src haskell
+     -- ghci
+     data D = D Int
+     newtype N = N Int
+     let d = D undefined
+     let n = n undefined
+
+     -- <interactive>:4:9: error:
+     --   • Occurs check: cannot construct the infinite type: t1 ~ t -> t1
+     --   • In the expression: n undefined
+     --     In an equation for ‘n’: n = n undefined
+     --   • Relevant bindings include
+     --       n :: t -> t1 (bound at <interactive>:4:5)
+   #+end_src
 
 ** Classes de type
 :PROPERTIES:
