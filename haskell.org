@@ -607,7 +607,7 @@ newtype MyType = MyType Int
          mappend (Any x) (Any y) = Any (x || y)
      #+END_SRC
 
- - Enfin, `newtype` [[https://stackoverflow.com/questions/2649305/why-is-there-data-and-newtype-in-haskell][est strict]].
+ - Enfin, =newtype= [[https://stackoverflow.com/questions/2649305/why-is-there-data-and-newtype-in-haskell][est strict]].
 
 ** Classes de type
 :PROPERTIES:
