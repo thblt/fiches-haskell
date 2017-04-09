@@ -194,7 +194,8 @@ Un module a le même nom que le fichier .hs qui le contient, et
 module a la syntaxe suivante:
 
 #+BEGIN_SRC haskell
--- MyModule.hs module Mod ( x, y, z ) where -- code
+  -- MyModule.hs
+  module Mod ( x, y, z ) where -- code
 #+END_SRC
 
 Cette déclaration exporte les identifiants x, y et z du code qui la
